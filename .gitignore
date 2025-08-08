@@ -1,0 +1,28 @@
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Data & Logs
+data/
+logs/
+*.log
+
+# PM2
+.pm2/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Deployment
+*.tar.gz

@@ -1,0 +1,246 @@
+const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@discordjs/voice');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const ytdl = require('@distube/ytdl-core');
+
+// Lưu trữ thông tin music cho mỗi guild
+const musicData = new Map();
+
+// Format duration từ seconds thành HH:MM:SS
+function formatDuration(seconds) {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    
+    if (hrs > 0) {
+        return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    } else {
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+}
+
+// Khởi tạo dữ liệu music cho guild
+function initGuildMusicData(guildId) {
+    if (!musicData.has(guildId)) {
+        musicData.set(guildId, {
+            queue: [],
+            isPlaying: false,
+            currentSong: null,
+            player: null,
+            connection: null,
+            textChannel: null,
+            volume: 50, // Mặc định 50%
+            loopMode: 'off', // 'off', 'track', 'queue'
+            autoplay: false,
+            audioResource: null
+        });
+    }
+    return musicData.get(guildId);
+}
+
+// Phát nhạc
+async function playMusic(guildData) {
+    if (guildData.queue.length === 0) {
+        guildData.isPlaying = false;
+        guildData.currentSong = null;
+        return;
+    }
+
+    const song = guildData.queue[0];
+    guildData.currentSong = song;
+    guildData.isPlaying = true;
+
+    try {
+        // Kiểm tra URL trước khi stream
+        if (!song.url || song.url === 'undefined') {
+            console.error('URL không hợp lệ:', song);
+            guildData.queue.shift();
+            playMusic(guildData);
+            return;
+        }
+
+        console.log('Đang phát:', song.title, 'URL:', song.url);
+        
+        let stream;
+        let inputType = 'webm/opus';
+        
+        // YouTube video streaming
+        stream = ytdl(song.url, {
+            filter: 'audioonly',
+            quality: 'highestaudio',
+            highWaterMark: 1 << 25,
+            requestOptions: {
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                }
+            }
+        });
+
+        const resource = createAudioResource(stream, {
+            inputType: inputType,
+            inlineVolume: true
+        });
+        
+        // Áp dụng volume setting
+        if (resource.volume) {
+            resource.volume.setVolume(guildData.volume / 100);
+        }
+        
+        guildData.audioResource = resource;
+        guildData.player.play(resource);
+
+        // Lưu vào lịch sử
+        const { addToHistory } = require('../commands/history');
+        if (song.requester) {
+            const userId = song.requester;
+            await addToHistory(userId, song);
+        }
+
+        // Hiển thị thông tin bài hát
+        const embed = new EmbedBuilder()
+            .setColor('#00ff00')
+            .setTitle('🎵 Đang phát')
+            .setDescription(`**${song.title}**`)
+            .addFields(
+                { name: 'Thời lượng', value: song.duration || 'N/A', inline: true },
+                { name: 'Yêu cầu bởi', value: song.requester, inline: true },
+                { name: 'Kênh', value: song.channel || 'N/A', inline: true }
+            )
+            .setThumbnail(song.thumbnail);
+
+        // Tạo buttons điều khiển
+        const controlButtons = new ActionRowBuilder()
+            .addComponents(
+                new ButtonBuilder()
+                    .setCustomId('pause_music')
+                    .setLabel('⏸️ Tạm dừng')
+                    .setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder()
+                    .setCustomId('resume_music')
+                    .setLabel('▶️ Tiếp tục')
+                    .setStyle(ButtonStyle.Success),
+                new ButtonBuilder()
+                    .setCustomId('skip_music')
+                    .setLabel('⏭️ Bỏ qua')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId('show_queue')
+                    .setLabel('📋 danh sách')
+                    .setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder()
+                    .setCustomId('stop_music')
+                    .setLabel('⏹️ Dừng')
+                    .setStyle(ButtonStyle.Danger)
+            );
+
+        // Tạo hàng buttons thứ hai cho lyrics
+        const secondRowButtons = new ActionRowBuilder()
+            .addComponents(
+                new ButtonBuilder()
+                    .setCustomId('show_lyrics')
+                    .setLabel('🎤 Lời bài hát')
+                    .setStyle(ButtonStyle.Secondary)
+            );
+
+        if (guildData.textChannel) {
+            guildData.textChannel.send({ 
+                embeds: [embed], 
+                components: [controlButtons, secondRowButtons] 
+            });
+        }
+    } catch (error) {
+        console.error('Lỗi khi phát nhạc:', error);
+        guildData.queue.shift(); // Bỏ qua bài hát lỗi
+        playMusic(guildData); // Phát bài tiếp theo
+    }
+}
+
+// Tạo kết nối voice và player
+function createMusicConnection(member, guildData) {
+    if (!guildData.connection) {
+        guildData.connection = joinVoiceChannel({
+            channelId: member.voice.channel.id,
+            guildId: member.guild.id,
+            adapterCreator: member.guild.voiceAdapterCreator,
+        });
+
+        guildData.player = createAudioPlayer();
+        guildData.connection.subscribe(guildData.player);
+
+        // Xử lý sự kiện player
+        guildData.player.on('idle', async () => {
+            await handleSongEnd(guildData);
+        });
+
+        guildData.player.on('error', error => {
+            console.error('Lỗi audio player:', error);
+            guildData.queue.shift();
+            playMusic(guildData);
+        });
+    }
+}
+
+// Xử lý khi bài hát kết thúc
+async function handleSongEnd(guildData) {
+    const currentSong = guildData.currentSong;
+    
+    switch (guildData.loopMode) {
+        case 'track':
+            // Lặp lại bài hiện tại
+            playMusic(guildData);
+            return;
+            
+        case 'queue':
+            // Chuyển bài đầu xuống cuối queue
+            const song = guildData.queue.shift();
+            guildData.queue.push(song);
+            playMusic(guildData);
+            return;
+            
+        case 'off':
+        default:
+            // Bỏ bài đã phát
+            guildData.queue.shift();
+            
+            // Nếu hết bài và autoplay bật, tìm bài liên quan
+            if (guildData.queue.length === 0 && guildData.autoplay && currentSong) {
+                await handleAutoplay(guildData, currentSong);
+            } else {
+                playMusic(guildData);
+            }
+            return;
+    }
+}
+
+// Xử lý autoplay
+async function handleAutoplay(guildData, lastSong) {
+    try {
+        const { searchYoutube } = require('./youtubeUtils');
+        
+        // Tìm kiếm bài hát liên quan dựa trên title
+        const searchQuery = lastSong.title.split(' ').slice(0, 3).join(' '); // Lấy 3 từ đầu
+        const relatedSong = await searchYoutube(searchQuery + ' music');
+        
+        if (relatedSong && relatedSong.url !== lastSong.url) {
+            relatedSong.requester = 'Autoplay';
+            guildData.queue.push(relatedSong);
+            
+            if (guildData.textChannel) {
+                guildData.textChannel.send(`🎵 **Autoplay**: Đã thêm *${relatedSong.title}*`);
+            }
+        }
+        
+        playMusic(guildData);
+    } catch (error) {
+        console.error('Lỗi autoplay:', error);
+        playMusic(guildData);
+    }
+}
+
+module.exports = {
+    musicData,
+    formatDuration,
+    initGuildMusicData,
+    playMusic,
+    createMusicConnection,
+    handleSongEnd
+};

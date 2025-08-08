@@ -1,0 +1,40 @@
+{
+  "name": "discord-music-bot",
+  "version": "1.0.0",
+  "description": "Bot Discord phát nhạc với các tính năng nâng cao",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "npm install",
+    "pm2": "pm2 start ecosystem.config.js",
+    "docker": "docker-compose up -d",
+    "docker-logs": "docker-compose logs -f"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "music",
+    "youtube"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/voice": "^0.16.1",
+    "@distube/ytdl-core": "^4.16.12",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "ffmpeg-static": "^5.2.0",
+    "genius-lyrics": "^4.4.7",
+    "libsodium-wrappers": "^0.7.11",
+    "youtube-sr": "^4.3.11"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
