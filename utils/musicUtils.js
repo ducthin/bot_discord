@@ -61,9 +61,14 @@ async function playMusic(guildData) {
         console.log('Đang phát:', song.title, 'URL:', song.url);
         
         let stream;
-        let inputType = 'webm/opus';
+        let inputType = 'arbitrary';
         
-        // YouTube video streaming
+        // Validate YouTube URL
+        if (!ytdl.validateURL(song.url)) {
+            throw new Error('Invalid YouTube URL');
+        }
+        
+        // YouTube video streaming with error handling
         stream = ytdl(song.url, {
             filter: 'audioonly',
             quality: 'highestaudio',
@@ -73,6 +78,14 @@ async function playMusic(guildData) {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
                 }
             }
+        });
+
+        // Handle stream errors
+        stream.on('error', (error) => {
+            console.error('Stream error:', error);
+            guildData.queue.shift();
+            playMusic(guildData);
+            return;
         });
 
         const resource = createAudioResource(stream, {
