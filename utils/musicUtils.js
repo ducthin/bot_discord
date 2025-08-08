@@ -142,10 +142,12 @@ async function playMusic(guildData) {
             );
 
         if (guildData.textChannel) {
-            guildData.textChannel.send({ 
+            const message = await guildData.textChannel.send({ 
                 embeds: [embed], 
                 components: [controlButtons, secondRowButtons] 
             });
+            // Lưu message để có thể update buttons sau
+            guildData.currentMessage = message;
         }
     } catch (error) {
         console.error('Lỗi khi phát nhạc:', error);
@@ -179,9 +181,36 @@ function createMusicConnection(member, guildData) {
     }
 }
 
+// Xóa buttons của bài hát đã phát xong
+async function removeButtons(guildData, songTitle) {
+    if (guildData.currentMessage) {
+        try {
+            // Tạo embed mới với trạng thái "Đã hoàn thành" và không có buttons
+            const completedEmbed = new EmbedBuilder()
+                .setColor('#808080') // Màu xám cho bài đã hoàn thành
+                .setTitle('✅ Đã hoàn thành')
+                .setDescription(`**${songTitle}**`)
+                .setFooter({ text: 'Bài hát đã phát xong' });
+
+            // Cập nhật message với embed mới và không có components (buttons)
+            await guildData.currentMessage.edit({ 
+                embeds: [completedEmbed], 
+                components: [] // Xóa tất cả buttons
+            });
+        } catch (error) {
+            console.error('Lỗi khi xóa buttons:', error);
+        }
+    }
+}
+
 // Xử lý khi bài hát kết thúc
 async function handleSongEnd(guildData) {
     const currentSong = guildData.currentSong;
+    
+    // Xóa buttons của bài vừa phát xong
+    if (currentSong) {
+        await removeButtons(guildData, currentSong.title);
+    }
     
     switch (guildData.loopMode) {
         case 'track':
@@ -242,5 +271,6 @@ module.exports = {
     initGuildMusicData,
     playMusic,
     createMusicConnection,
-    handleSongEnd
+    handleSongEnd,
+    removeButtons
 };

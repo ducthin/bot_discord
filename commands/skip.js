@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { initGuildMusicData } = require('../utils/musicUtils');
+const { initGuildMusicData, removeButtons } = require('../utils/musicUtils');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,6 +11,11 @@ module.exports = {
         
         if (!guildData.player || guildData.queue.length === 0) {
             return interaction.reply('❌ Không có nhạc nào để bỏ qua!');
+        }
+        
+        // Xóa buttons của bài hiện tại
+        if (guildData.currentSong) {
+            await removeButtons(guildData, guildData.currentSong.title);
         }
         
         guildData.player.stop();

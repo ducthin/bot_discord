@@ -32,7 +32,17 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildVoiceStates
-    ]
+    ],
+    // Thêm timeout và retry options
+    ws: {
+        version: 10,
+        compress: true,
+    },
+    // Thêm DNS fallback
+    rest: {
+        timeout: 30000,
+        retries: 3
+    }
 });
 
 // Load tất cả commands
@@ -83,7 +93,7 @@ client.on('interactionCreate', async interaction => {
     
     // Xử lý button interactions
     if (interaction.isButton()) {
-        const { initGuildMusicData, playMusic } = require('./utils/musicUtils');
+        const { initGuildMusicData, playMusic, removeButtons } = require('./utils/musicUtils');
         const guildData = initGuildMusicData(interaction.guild.id);
         
         try {
@@ -108,6 +118,10 @@ client.on('interactionCreate', async interaction => {
                     if (!guildData.player || guildData.queue.length === 0) {
                         return interaction.reply({ content: '❌ Không có nhạc nào để bỏ qua!', flags: MessageFlags.Ephemeral });
                     }
+                    // Xóa buttons của bài hiện tại
+                    if (guildData.currentSong) {
+                        await removeButtons(guildData, guildData.currentSong.title);
+                    }
                     guildData.player.stop();
                     interaction.reply({ content: '⏭️ Đã bỏ qua bài hát!', flags: MessageFlags.Ephemeral });
                     break;
@@ -115,6 +129,10 @@ client.on('interactionCreate', async interaction => {
                 case 'stop_music':
                     if (!guildData.player) {
                         return interaction.reply({ content: '❌ Không có nhạc nào đang phát!', flags: MessageFlags.Ephemeral });
+                    }
+                    // Xóa buttons của bài hiện tại
+                    if (guildData.currentSong) {
+                        await removeButtons(guildData, guildData.currentSong.title);
                     }
                     guildData.queue = [];
                     guildData.player.stop();
@@ -180,4 +198,45 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
-client.login(process.env.DISCORD_TOKEN);
+// Error handling cho connection issues
+client.on('error', (error) => {
+    console.error('Discord client error:', error);
+    if (error.code === 'ENOTFOUND') {
+        console.log('🔄 Trying to reconnect in 5 seconds...');
+        setTimeout(() => {
+            client.login(process.env.DISCORD_TOKEN).catch(console.error);
+        }, 5000);
+    }
+});
+
+client.on('shardError', (error) => {
+    console.error('A websocket connection encountered an error:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.log('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+// DNS fallback function
+async function connectWithRetry() {
+    const maxRetries = 3;
+    for (let i = 0; i < maxRetries; i++) {
+        try {
+            console.log(`🔄 Attempting to connect to Discord... (${i + 1}/${maxRetries})`);
+            await client.login(process.env.DISCORD_TOKEN);
+            console.log('✅ Successfully connected to Discord!');
+            break;
+        } catch (error) {
+            console.error(`❌ Connection attempt ${i + 1} failed:`, error.message);
+            if (i === maxRetries - 1) {
+                console.error('🚫 All connection attempts failed. Please check your internet connection and Discord token.');
+                process.exit(1);
+            }
+            console.log(`⏳ Waiting 5 seconds before retry...`);
+            await new Promise(resolve => setTimeout(resolve, 5000));
+        }
+    }
+}
+
+// Start connection with retry
+connectWithRetry();
