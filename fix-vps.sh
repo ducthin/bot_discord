@@ -24,7 +24,7 @@ npm install --legacy-peer-deps
 
 # Install opus libraries specifically
 echo "🎵 Installing audio encoding libraries..."
-npm install @discordjs/opus opusscript --legacy-peer-deps
+npm install @discordjs/opus opusscript play-dl --legacy-peer-deps
 
 # Verify installation
 echo "✅ Verifying installation..."
@@ -48,6 +48,13 @@ try {
     console.log('✅ ytdl-core installed successfully'); 
 } catch(e) { 
     console.log('❌ ytdl-core failed:', e.message); 
+}
+
+try { 
+    require('play-dl'); 
+    console.log('✅ play-dl installed successfully'); 
+} catch(e) { 
+    console.log('❌ play-dl failed:', e.message); 
 }
 "
 

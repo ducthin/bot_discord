@@ -2,6 +2,46 @@ const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@d
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const ytdl = require('ytdl-core');
 
+// Fallback audio streaming function
+async function createAudioStream(url) {
+    try {
+        // First try with ytdl-core
+        if (ytdl.validateURL(url)) {
+            console.log('Trying ytdl-core for:', url);
+            
+            // Test if we can get basic info first
+            await ytdl.getBasicInfo(url);
+            
+            const stream = ytdl(url, {
+                filter: 'audioonly',
+                quality: 'highestaudio',
+                highWaterMark: 1 << 25,
+                requestOptions: {
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                    }
+                }
+            });
+
+            return { stream, inputType: 'arbitrary' };
+        }
+    } catch (error) {
+        console.log('ytdl-core failed, trying alternative method:', error.message);
+    }
+
+    // If ytdl-core fails, try play-dl as fallback
+    try {
+        const playDL = require('play-dl');
+        console.log('Trying play-dl for:', url);
+        
+        const stream = await playDL.stream(url, { quality: 2 });
+        return { stream: stream.stream, inputType: 'opus' };
+    } catch (error) {
+        console.error('All streaming methods failed:', error.message);
+        throw new Error('Unable to stream audio from this source');
+    }
+}
+
 // Lưu trữ thông tin music cho mỗi guild
 const musicData = new Map();
 
@@ -60,25 +100,8 @@ async function playMusic(guildData) {
 
         console.log('Đang phát:', song.title, 'URL:', song.url);
         
-        let stream;
-        let inputType = 'arbitrary';
-        
-        // Validate YouTube URL
-        if (!ytdl.validateURL(song.url)) {
-            throw new Error('Invalid YouTube URL');
-        }
-        
-        // YouTube video streaming with error handling
-        stream = ytdl(song.url, {
-            filter: 'audioonly',
-            quality: 'highestaudio',
-            highWaterMark: 1 << 25,
-            requestOptions: {
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-                }
-            }
-        });
+        // Use the new fallback streaming function
+        const { stream, inputType } = await createAudioStream(song.url);
 
         // Handle stream errors
         stream.on('error', (error) => {
