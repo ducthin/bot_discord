@@ -1,25 +1,7 @@
-const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@discordjs/voice');
+const { joinVoiceChannel, createAudioPlayer, createAudioResource, StreamType } = require('@discordjs/voice');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const ytdl = require('ytdl-core');
-
-// Temporary maintenance mode for YouTube streaming issues
-async function createAudioStream(url) {
-    console.log('🚧 Bot đang trong chế độ bảo trì streaming');
-    
-    // Thông báo cho user biết tình trạng hiện tại
-    throw new Error(`🚧 **Tính năng phát nhạc đang tạm thời bảo trì**
-
-❌ **Vấn đề:** YouTube đang chặn tất cả bot music
-⏰ **Thời gian:** Có thể kéo dài vài ngày  
-🔧 **Nguyên nhân:** YouTube cập nhật chống bot
-
-**Giải pháp tạm thời:**
-1. Sử dụng bot music khác
-2. Phát nhạc trực tiếp từ YouTube
-3. Đợi cập nhật từ developer
-
-Xin lỗi vì sự bất tiện! 🙏`);
-}
+const ytdl = require('@distube/ytdl-core');
+const ffmpegPath = require('ffmpeg-static');
 
 // Lưu trữ thông tin music cho mỗi guild
 const musicData = new Map();
@@ -34,6 +16,34 @@ function formatDuration(seconds) {
         return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     } else {
         return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+}
+
+// Create audio stream for playing music using @distube/ytdl-core
+async function createAudioStream(url) {
+    try {
+        console.log('Creating audio stream for:', url);
+        
+        // Use @distube/ytdl-core which is more reliable than regular ytdl-core
+        if (ytdl.validateURL(url)) {
+            const stream = ytdl(url, {
+                filter: 'audioonly',
+                quality: 'highestaudio',
+                highWaterMark: 1 << 25,
+                requestOptions: {
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                    }
+                }
+            });
+            console.log('✅ Using @distube/ytdl-core stream');
+            return { stream, inputType: StreamType.Arbitrary };
+        }
+        
+        throw new Error('Invalid YouTube URL');
+    } catch (error) {
+        console.error('❌ Error creating audio stream:', error.message);
+        throw new Error(`Failed to create audio stream: ${error.message}`);
     }
 }
 
@@ -79,7 +89,7 @@ async function playMusic(guildData) {
 
         console.log('Đang phát:', song.title, 'URL:', song.url);
         
-        // Use the new fallback streaming function
+        // Create audio stream
         const { stream, inputType } = await createAudioStream(song.url);
 
         const resource = createAudioResource(stream, {
@@ -157,7 +167,19 @@ async function playMusic(guildData) {
             guildData.currentMessage = message;
         }
     } catch (error) {
-        console.error('Lỗi khi phát nhạc:', error);
+        console.error('❌ Lỗi khi phát nhạc:', error.message);
+        
+        // Send error message to channel
+        if (guildData.textChannel) {
+            const errorEmbed = new EmbedBuilder()
+                .setColor('#ff0000')
+                .setTitle('❌ Lỗi phát nhạc')
+                .setDescription(`Không thể phát **${song.title}**\nLý do: ${error.message}`)
+                .setFooter({ text: 'Đang chuyển sang bài tiếp theo...' });
+            
+            guildData.textChannel.send({ embeds: [errorEmbed] });
+        }
+        
         guildData.queue.shift(); // Bỏ qua bài hát lỗi
         playMusic(guildData); // Phát bài tiếp theo
     }
@@ -279,5 +301,6 @@ module.exports = {
     playMusic,
     createMusicConnection,
     handleSongEnd,
-    removeButtons
+    removeButtons,
+    createAudioStream
 };

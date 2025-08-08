@@ -1,5 +1,5 @@
 const youtube = require('youtube-sr').default;
-const ytdl = require('ytdl-core');
+const ytdl = require('@distube/ytdl-core');
 const { formatDuration } = require('./musicUtils');
 
 // Tìm kiếm video trên YouTube
@@ -25,20 +25,7 @@ async function searchYoutube(query) {
 // Lấy thông tin video từ URL
 async function getVideoInfo(url) {
     try {
-        // Validate URL first
-        if (!ytdl.validateURL(url)) {
-            console.error('Invalid YouTube URL:', url);
-            return null;
-        }
-
-        const info = await ytdl.getInfo(url, {
-            requestOptions: {
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-                }
-            }
-        });
-        
+        const info = await ytdl.getInfo(url);
         return {
             title: info.videoDetails.title,
             url: url,
