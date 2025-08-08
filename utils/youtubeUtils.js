@@ -1,5 +1,5 @@
 const youtube = require('youtube-sr').default;
-const ytdl = require('@distube/ytdl-core');
+const ytdl = require('ytdl-core');
 const { formatDuration } = require('./musicUtils');
 
 // Tìm kiếm video trên YouTube

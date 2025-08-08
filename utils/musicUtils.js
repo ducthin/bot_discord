@@ -1,6 +1,6 @@
 const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@discordjs/voice');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const ytdl = require('@distube/ytdl-core');
+const ytdl = require('ytdl-core');
 
 // Lưu trữ thông tin music cho mỗi guild
 const musicData = new Map();
