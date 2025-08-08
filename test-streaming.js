@@ -18,13 +18,38 @@ async function testStreaming() {
             const info = await ytdl.getBasicInfo(testUrl);
             console.log('✅ Basic info retrieved:', info.videoDetails.title);
             
-            // Test stream creation (don't actually stream)
+            // Test actual streaming (this is where it usually fails)
+            console.log('Testing actual stream creation...');
             const stream = ytdl(testUrl, {
                 filter: 'audioonly',
-                quality: 'highestaudio'
+                quality: 'highestaudio',
+                requestOptions: {
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                    }
+                }
             });
-            console.log('✅ Stream created successfully');
-            stream.destroy(); // Clean up
+            
+            // Wait a moment to see if stream errors
+            await new Promise((resolve, reject) => {
+                const timeout = setTimeout(() => {
+                    stream.destroy();
+                    resolve();
+                }, 2000);
+                
+                stream.on('error', (error) => {
+                    clearTimeout(timeout);
+                    reject(error);
+                });
+                
+                stream.on('info', () => {
+                    clearTimeout(timeout);
+                    stream.destroy();
+                    resolve();
+                });
+            });
+            
+            console.log('✅ ytdl-core stream test passed');
         } else {
             console.log('❌ URL validation failed');
         }

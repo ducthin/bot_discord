@@ -4,8 +4,8 @@ const ytdl = require('ytdl-core');
 
 // Fallback audio streaming function
 async function createAudioStream(url) {
+    // First try with ytdl-core
     try {
-        // First try with ytdl-core
         if (ytdl.validateURL(url)) {
             console.log('Trying ytdl-core for:', url);
             
@@ -23,7 +23,31 @@ async function createAudioStream(url) {
                 }
             });
 
-            return { stream, inputType: 'arbitrary' };
+            // Return a promise that resolves when stream is ready or rejects on error
+            return new Promise((resolve, reject) => {
+                const timeout = setTimeout(() => {
+                    reject(new Error('ytdl-core stream timeout'));
+                }, 5000);
+
+                stream.on('error', (error) => {
+                    clearTimeout(timeout);
+                    console.log('ytdl-core stream error:', error.message);
+                    reject(error);
+                });
+
+                stream.on('info', () => {
+                    clearTimeout(timeout);
+                    resolve({ stream, inputType: 'arbitrary' });
+                });
+
+                // Also resolve if data starts flowing
+                stream.once('readable', () => {
+                    clearTimeout(timeout);
+                    resolve({ stream, inputType: 'arbitrary' });
+                });
+            });
+        } else {
+            throw new Error('Invalid YouTube URL');
         }
     } catch (error) {
         console.log('ytdl-core failed, trying alternative method:', error.message);
@@ -102,14 +126,6 @@ async function playMusic(guildData) {
         
         // Use the new fallback streaming function
         const { stream, inputType } = await createAudioStream(song.url);
-
-        // Handle stream errors
-        stream.on('error', (error) => {
-            console.error('Stream error:', error);
-            guildData.queue.shift();
-            playMusic(guildData);
-            return;
-        });
 
         const resource = createAudioResource(stream, {
             inputType: inputType,
