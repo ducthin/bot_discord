@@ -2,68 +2,23 @@ const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@d
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const ytdl = require('ytdl-core');
 
-// Fallback audio streaming function
+// Temporary maintenance mode for YouTube streaming issues
 async function createAudioStream(url) {
-    // First try with ytdl-core
-    try {
-        if (ytdl.validateURL(url)) {
-            console.log('Trying ytdl-core for:', url);
-            
-            // Test if we can get basic info first
-            await ytdl.getBasicInfo(url);
-            
-            const stream = ytdl(url, {
-                filter: 'audioonly',
-                quality: 'highestaudio',
-                highWaterMark: 1 << 25,
-                requestOptions: {
-                    headers: {
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-                    }
-                }
-            });
+    console.log('🚧 Bot đang trong chế độ bảo trì streaming');
+    
+    // Thông báo cho user biết tình trạng hiện tại
+    throw new Error(`🚧 **Tính năng phát nhạc đang tạm thời bảo trì**
 
-            // Return a promise that resolves when stream is ready or rejects on error
-            return new Promise((resolve, reject) => {
-                const timeout = setTimeout(() => {
-                    reject(new Error('ytdl-core stream timeout'));
-                }, 5000);
+❌ **Vấn đề:** YouTube đang chặn tất cả bot music
+⏰ **Thời gian:** Có thể kéo dài vài ngày  
+🔧 **Nguyên nhân:** YouTube cập nhật chống bot
 
-                stream.on('error', (error) => {
-                    clearTimeout(timeout);
-                    console.log('ytdl-core stream error:', error.message);
-                    reject(error);
-                });
+**Giải pháp tạm thời:**
+1. Sử dụng bot music khác
+2. Phát nhạc trực tiếp từ YouTube
+3. Đợi cập nhật từ developer
 
-                stream.on('info', () => {
-                    clearTimeout(timeout);
-                    resolve({ stream, inputType: 'arbitrary' });
-                });
-
-                // Also resolve if data starts flowing
-                stream.once('readable', () => {
-                    clearTimeout(timeout);
-                    resolve({ stream, inputType: 'arbitrary' });
-                });
-            });
-        } else {
-            throw new Error('Invalid YouTube URL');
-        }
-    } catch (error) {
-        console.log('ytdl-core failed, trying alternative method:', error.message);
-    }
-
-    // If ytdl-core fails, try play-dl as fallback
-    try {
-        const playDL = require('play-dl');
-        console.log('Trying play-dl for:', url);
-        
-        const stream = await playDL.stream(url, { quality: 2 });
-        return { stream: stream.stream, inputType: 'opus' };
-    } catch (error) {
-        console.error('All streaming methods failed:', error.message);
-        throw new Error('Unable to stream audio from this source');
-    }
+Xin lỗi vì sự bất tiện! 🙏`);
 }
 
 // Lưu trữ thông tin music cho mỗi guild

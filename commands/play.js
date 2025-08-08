@@ -13,6 +13,24 @@ module.exports = {
         ),
 
     async execute(interaction) {
+        // Temporary maintenance mode message
+        const maintenanceEmbed = new EmbedBuilder()
+            .setColor('#FF6B35')
+            .setTitle('🚧 Tính năng đang bảo trì')
+            .setDescription(`**Bot music hiện đang tạm thời ngừng hoạt động**`)
+            .addFields(
+                { name: '❌ Vấn đề', value: 'YouTube đang chặn tất cả bot music', inline: false },
+                { name: '⏰ Thời gian', value: 'Có thể kéo dài vài ngày', inline: true },
+                { name: '🔧 Nguyên nhân', value: 'YouTube cập nhật chống bot', inline: true },
+                { name: '💡 Giải pháp tạm thời', value: '• Sử dụng bot music khác\n• Phát nhạc trực tiếp từ YouTube\n• Đợi cập nhật từ developer', inline: false }
+            )
+            .setFooter({ text: 'Xin lỗi vì sự bất tiện! Bot sẽ hoạt động trở lại khi YouTube cho phép.' })
+            .setTimestamp();
+
+        return interaction.reply({ embeds: [maintenanceEmbed] });
+
+        // Original code (commented out during maintenance)
+        /*
         const { guild, member, channel } = interaction;
         
         if (!member.voice.channel) {
@@ -75,5 +93,6 @@ module.exports = {
             .setThumbnail(songInfo.thumbnail);
 
         interaction.followUp({ embeds: [embed] });
+        */
     }
 };
