@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { getMusicData } = require('../utils/musicUtils');
+const { initGuildMusicData } = require('../utils/musicUtils');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,7 +12,7 @@ module.exports = {
 
     async execute(interaction) {
         const position = interaction.options.getInteger('position');
-        const guildData = getMusicData(interaction.guildId);
+        const guildData = initGuildMusicData(interaction.guildId);
 
         if (!interaction.member.voice.channel) {
             return interaction.reply({

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js');
-const { getMusicData } = require('../utils/musicUtils');
+const { initGuildMusicData } = require('../utils/musicUtils');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,7 +11,7 @@ module.exports = {
                 .setRequired(false)),
 
     async execute(interaction) {
-        const guildData = getMusicData(interaction.guildId);
+        const guildData = initGuildMusicData(interaction.guildId);
         const position = interaction.options.getInteger('position');
 
         if (!guildData.queue || guildData.queue.length === 0) {

@@ -36,7 +36,7 @@ app.get('/health', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`🌐 Health check server running on port ${PORT}`);
 });
@@ -274,6 +274,202 @@ client.on('interactionCreate', async interaction => {
                         console.error('Lỗi khi lấy lyrics:', error);
                         interaction.editReply({ content: '❌ Đã xảy ra lỗi khi tìm lời bài hát!' });
                     }
+                    break;
+
+                // Quick Select buttons
+                case 'select_song_0':
+                case 'select_song_1':
+                case 'select_song_2':
+                case 'select_song_3':
+                case 'select_song_4':
+                    const songIndex = parseInt(interaction.customId.split('_')[2]);
+                    
+                    if (!guildData.queue || guildData.queue.length <= songIndex) {
+                        return interaction.reply({ content: '❌ Bài hát không tồn tại!', flags: MessageFlags.Ephemeral });
+                    }
+
+                    if (songIndex === 0) {
+                        return interaction.reply({ content: '❌ Bài này đang được phát!', flags: MessageFlags.Ephemeral });
+                    }
+
+                    const selectedSong = guildData.queue[songIndex];
+                    // Di chuyển bài được chọn lên đầu queue (sau bài đang phát)
+                    guildData.queue.splice(songIndex, 1);
+                    guildData.queue.splice(1, 0, selectedSong);
+
+                    const selectEmbed = new EmbedBuilder()
+                        .setColor('#00ff00')
+                        .setTitle('✅ Đã chọn bài tiếp theo')
+                        .setDescription(`**${selectedSong.title}** sẽ phát sau bài hiện tại`)
+                        .setThumbnail(selectedSong.thumbnail);
+
+                    await interaction.reply({ embeds: [selectEmbed], flags: MessageFlags.Ephemeral });
+                    break;
+
+                // Control panel buttons
+                case 'music_pause':
+                    if (!guildData.player) {
+                        return interaction.reply({ content: '❌ Không có nhạc nào đang phát!', flags: MessageFlags.Ephemeral });
+                    }
+                    guildData.player.pause();
+                    guildData.isPlaying = false;
+                    interaction.reply({ content: '⏸️ Đã tạm dừng nhạc!', flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'music_resume':
+                    if (!guildData.player) {
+                        return interaction.reply({ content: '❌ Không có nhạc nào để tiếp tục!', flags: MessageFlags.Ephemeral });
+                    }
+                    guildData.player.unpause();
+                    guildData.isPlaying = true;
+                    interaction.reply({ content: '▶️ Đã tiếp tục phát nhạc!', flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'music_skip':
+                    if (!guildData.player || guildData.queue.length === 0) {
+                        return interaction.reply({ content: '❌ Không có nhạc nào để bỏ qua!', flags: MessageFlags.Ephemeral });
+                    }
+                    guildData.player.stop();
+                    interaction.reply({ content: '⏭️ Đã bỏ qua bài hát!', flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'music_stop':
+                    if (!guildData.player) {
+                        return interaction.reply({ content: '❌ Không có nhạc nào đang phát!', flags: MessageFlags.Ephemeral });
+                    }
+                    guildData.queue = [];
+                    guildData.player.stop();
+                    guildData.isPlaying = false;
+                    interaction.reply({ content: '⏹️ Đã dừng nhạc và xóa queue!', flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'music_shuffle':
+                    if (!guildData.queue || guildData.queue.length <= 2) {
+                        return interaction.reply({ content: '❌ Cần ít nhất 3 bài để trộn!', flags: MessageFlags.Ephemeral });
+                    }
+                    
+                    // Giữ bài đang phát, trộn phần còn lại
+                    const currentSong = guildData.queue.shift();
+                    for (let i = guildData.queue.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [guildData.queue[i], guildData.queue[j]] = [guildData.queue[j], guildData.queue[i]];
+                    }
+                    guildData.queue.unshift(currentSong);
+                    
+                    interaction.reply({ content: '🔀 Đã trộn danh sách phát!', flags: MessageFlags.Ephemeral });
+                    break;
+
+                // Volume controls
+                case 'volume_down':
+                    guildData.volume = Math.max(0, (guildData.volume || 50) - 10);
+                    if (guildData.resource) {
+                        guildData.resource.volume.setVolume(guildData.volume / 100);
+                    }
+                    interaction.reply({ content: `🔉 Âm lượng: ${guildData.volume}%`, flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'volume_up':
+                    guildData.volume = Math.min(100, (guildData.volume || 50) + 10);
+                    if (guildData.resource) {
+                        guildData.resource.volume.setVolume(guildData.volume / 100);
+                    }
+                    interaction.reply({ content: `🔊 Âm lượng: ${guildData.volume}%`, flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'volume_mute':
+                    guildData.volume = 0;
+                    if (guildData.resource) {
+                        guildData.resource.volume.setVolume(0);
+                    }
+                    interaction.reply({ content: '🔇 Đã tắt tiếng!', flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'volume_max':
+                    guildData.volume = 100;
+                    if (guildData.resource) {
+                        guildData.resource.volume.setVolume(1);
+                    }
+                    interaction.reply({ content: '📢 Âm lượng tối đa!', flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'volume_reset':
+                    guildData.volume = 50;
+                    if (guildData.resource) {
+                        guildData.resource.volume.setVolume(0.5);
+                    }
+                    interaction.reply({ content: '🔄 Đã reset âm lượng về 50%!', flags: MessageFlags.Ephemeral });
+                    break;
+
+                // Queue management
+                case 'show_full_queue':
+                    if (guildData.queue.length === 0) {
+                        return interaction.reply({ content: '📭 Queue đang trống!', flags: MessageFlags.Ephemeral });
+                    }
+
+                    const fullQueueList = guildData.queue.slice(0, 25).map((song, index) => {
+                        const status = index === 0 ? '🎵 ' : `${index + 1}. `;
+                        return `${status}**${song.title}**`;
+                    }).join('\n');
+
+                    const fullQueueEmbed = new EmbedBuilder()
+                        .setColor('#0099ff')
+                        .setTitle('📋 Toàn bộ Queue')
+                        .setDescription(fullQueueList)
+                        .setFooter({ text: `Hiển thị ${Math.min(25, guildData.queue.length)}/${guildData.queue.length} bài` });
+
+                    interaction.reply({ embeds: [fullQueueEmbed], flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'show_nowplaying':
+                    if (!guildData.currentSong) {
+                        return interaction.reply({ content: '❌ Không có bài nào đang phát!', flags: MessageFlags.Ephemeral });
+                    }
+
+                    const nowPlayingEmbed = new EmbedBuilder()
+                        .setColor('#ff6600')
+                        .setTitle('🎵 Đang phát')
+                        .setDescription(`**${guildData.currentSong.title}**`)
+                        .addFields(
+                            { name: '⏱️ Thời lượng', value: guildData.currentSong.duration || 'Không xác định', inline: true },
+                            { name: '👤 Yêu cầu bởi', value: `<@${guildData.currentSong.requestedBy}>`, inline: true },
+                            { name: '🔊 Âm lượng', value: `${guildData.volume || 50}%`, inline: true }
+                        )
+                        .setThumbnail(guildData.currentSong.thumbnail);
+
+                    interaction.reply({ embeds: [nowPlayingEmbed], flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'loop_toggle':
+                    guildData.loop = !guildData.loop;
+                    const loopStatus = guildData.loop ? 'BẬT' : 'TẮT';
+                    const loopEmoji = guildData.loop ? '🔁' : '▶️';
+                    interaction.reply({ content: `${loopEmoji} Đã ${loopStatus} chế độ lặp!`, flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'quick_select':
+                    // Gọi lại quick select command
+                    const quickSelectCommand = require('./commands/quickselect');
+                    await quickSelectCommand.execute(interaction);
+                    break;
+
+                case 'clear_queue':
+                    if (guildData.queue.length <= 1) {
+                        return interaction.reply({ content: '❌ Queue đã trống hoặc chỉ có bài đang phát!', flags: MessageFlags.Ephemeral });
+                    }
+                    
+                    const removedCount = guildData.queue.length - 1;
+                    guildData.queue = guildData.queue.slice(0, 1); // Giữ lại bài đang phát
+                    interaction.reply({ content: `🗑️ Đã xóa ${removedCount} bài khỏi queue!`, flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'leave_voice':
+                    if (guildData.connection) {
+                        guildData.connection.destroy();
+                        guildData.connection = null;
+                        guildData.player = null;
+                        guildData.isPlaying = false;
+                    }
+                    interaction.reply({ content: '👋 Đã rời khỏi voice channel!', flags: MessageFlags.Ephemeral });
                     break;
 
                 default:
