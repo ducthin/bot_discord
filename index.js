@@ -104,6 +104,68 @@ client.on('interactionCreate', async interaction => {
         }
     }
     
+    // Xử lý String Select Menu interactions
+    if (interaction.isStringSelectMenu()) {
+        const { initGuildMusicData, playMusic } = require('./utils/musicUtils');
+        const guildData = initGuildMusicData(interaction.guild.id);
+        
+        try {
+            switch (interaction.customId) {
+                case 'select_song':
+                    if (!guildData.queue || guildData.queue.length === 0) {
+                        return interaction.reply({ content: '❌ Queue hiện tại đang trống!', flags: MessageFlags.Ephemeral });
+                    }
+
+                    const selectedIndex = parseInt(interaction.values[0]);
+                    const selectedSong = guildData.queue[selectedIndex];
+                    
+                    if (!selectedSong) {
+                        return interaction.reply({ content: '❌ Bài hát không tồn tại!', flags: MessageFlags.Ephemeral });
+                    }
+
+                    // Di chuyển bài được chọn lên đầu queue
+                    guildData.queue.splice(selectedIndex, 1);
+                    guildData.queue.unshift(selectedSong);
+
+                    const embed = new EmbedBuilder()
+                        .setColor('#00ff00')
+                        .setTitle('🎵 Đã chọn bài để phát tiếp theo')
+                        .setDescription(`**${selectedSong.title}**`)
+                        .addFields(
+                            { name: 'Vị trí cũ', value: `#${selectedIndex + 1}`, inline: true },
+                            { name: 'Vị trí mới', value: '#1 (Tiếp theo)', inline: true }
+                        )
+                        .setThumbnail(selectedSong.thumbnail);
+
+                    await interaction.update({ 
+                        embeds: [embed], 
+                        components: [] // Xóa select menu
+                    });
+
+                    // Nếu không đang phát, bắt đầu phát ngay
+                    if (!guildData.isPlaying) {
+                        const { createMusicConnection } = require('./utils/musicUtils');
+                        createMusicConnection(interaction.member, guildData);
+                        playMusic(guildData);
+                    }
+                    break;
+
+                default:
+                    interaction.reply({ content: '❌ Select menu không hợp lệ!', flags: MessageFlags.Ephemeral });
+            }
+        } catch (error) {
+            console.error('Lỗi khi xử lý select menu:', error);
+            
+            if (interaction.isRepliable() && !interaction.replied && !interaction.deferred) {
+                try {
+                    await interaction.reply({ content: '❌ Đã xảy ra lỗi!', flags: MessageFlags.Ephemeral });
+                } catch (replyError) {
+                    console.log('⚠️ Không thể reply interaction:', replyError.message);
+                }
+            }
+        }
+    }
+    
     // Xử lý button interactions
     if (interaction.isButton()) {
         // Kiểm tra nếu interaction đã expired hoặc invalid

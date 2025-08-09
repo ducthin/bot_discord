@@ -13,18 +13,25 @@ module.exports = {
             return interaction.reply('📭 danh sách trống!');
         }
 
-        const queueList = guildData.queue.slice(0, 10).map((song, index) => {
-            const status = index === 0 ? '🎵 ' : `${index + 1}. `;
-            return `${status}**${song.title}** - ${song.duration}`;
+        const queueList = guildData.queue.slice(0, 15).map((song, index) => {
+            if (index === 0) {
+                return `▶️ **Đang phát:** ${song.title} - ${song.duration}`;
+            } else {
+                return `\`${index.toString().padStart(2, ' ')}\` **${song.title}** - ${song.duration}`;
+            }
         }).join('\n');
 
         const queueEmbed = new EmbedBuilder()
             .setColor('#0099ff')
             .setTitle('🎵 Danh sách phát')
             .setDescription(queueList)
-            .setFooter({ text: `Tổng cộng ${guildData.queue.length} bài hát` });
+            .addFields(
+                { name: 'Tổng số bài', value: `${guildData.queue.length} bài`, inline: true },
+                { name: 'Đang phát', value: guildData.isPlaying ? '✅ Có' : '❌ Không', inline: true }
+            )
+            .setFooter({ text: 'Sử dụng /select hoặc /skipto để chọn bài' });
 
-        // Tạo buttons điều khiển
+        // Tạo buttons điều khiển với thêm select button
         const controlButtons = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
@@ -40,8 +47,8 @@ module.exports = {
                     .setLabel('⏭️ Bỏ qua')
                     .setStyle(ButtonStyle.Primary),
                 new ButtonBuilder()
-                    .setCustomId('show_queue')
-                    .setLabel('📋 danh sách')
+                    .setCustomId('shuffle_music')
+                    .setLabel('� Trộn bài')
                     .setStyle(ButtonStyle.Secondary),
                 new ButtonBuilder()
                     .setCustomId('stop_music')
