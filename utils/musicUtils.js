@@ -63,7 +63,7 @@ async function playMusic(guildData) {
         console.log('Đang phát:', song.title, 'URL:', song.url);
         console.log('Creating audio stream for:', song.url);
         
-        // YouTube video streaming with timeout settings
+        // YouTube video streaming with improved DNS handling
         const stream = ytdl(song.url, {
             filter: 'audioonly',
             quality: 'highestaudio',
@@ -72,8 +72,12 @@ async function playMusic(guildData) {
                 headers: {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
                 },
-                timeout: 30000 // 30 second timeout
-            }
+                timeout: 30000, // 30 second timeout
+                family: 4 // Force IPv4 to avoid DNS issues
+            },
+            // Thêm options để giảm DNS errors
+            format: 'mp4',
+            begin: '0s'
         });
         
         console.log('✅ Using @distube/ytdl-core stream');
@@ -99,19 +103,19 @@ async function playMusic(guildData) {
                 console.log('🔄 Lỗi timeout, thử lại sau 3 giây...');
                 setTimeout(() => {
                     if (guildData.queue.length > 0) {
-                        playNext(guildId);
+                        handleSongEnd(guildData);
                     }
                 }, 3000);
             } else if (error.message.includes('ECONNRESET') || error.message.includes('ENOTFOUND')) {
                 console.log('🔄 Lỗi kết nối mạng, thử lại sau 5 giây...');
                 setTimeout(() => {
                     if (guildData.queue.length > 0) {
-                        playNext(guildId);
+                        handleSongEnd(guildData);
                     }
                 }, 5000);
             } else {
                 // Lỗi khác, chuyển bài tiếp theo
-                playNext(guildId);
+                handleSongEnd(guildData);
             }
         });
         
