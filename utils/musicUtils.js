@@ -1,7 +1,6 @@
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, StreamType } = require('@discordjs/voice');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const ytdl = require('@distube/ytdl-core');
-const ffmpegPath = require('ffmpeg-static');
 
 // Lưu trữ thông tin music cho mỗi guild
 const musicData = new Map();
@@ -16,34 +15,6 @@ function formatDuration(seconds) {
         return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     } else {
         return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    }
-}
-
-// Create audio stream for playing music using @distube/ytdl-core
-async function createAudioStream(url) {
-    try {
-        console.log('Creating audio stream for:', url);
-        
-        // Use @distube/ytdl-core which is more reliable than regular ytdl-core
-        if (ytdl.validateURL(url)) {
-            const stream = ytdl(url, {
-                filter: 'audioonly',
-                quality: 'highestaudio',
-                highWaterMark: 1 << 25,
-                requestOptions: {
-                    headers: {
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-                    }
-                }
-            });
-            console.log('✅ Using @distube/ytdl-core stream');
-            return { stream, inputType: StreamType.Arbitrary };
-        }
-        
-        throw new Error('Invalid YouTube URL');
-    } catch (error) {
-        console.error('❌ Error creating audio stream:', error.message);
-        throw new Error(`Failed to create audio stream: ${error.message}`);
     }
 }
 
@@ -89,11 +60,20 @@ async function playMusic(guildData) {
 
         console.log('Đang phát:', song.title, 'URL:', song.url);
         
-        // Create audio stream
-        const { stream, inputType } = await createAudioStream(song.url);
+        // YouTube video streaming
+        const stream = ytdl(song.url, {
+            filter: 'audioonly',
+            quality: 'highestaudio',
+            highWaterMark: 1 << 25,
+            requestOptions: {
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                }
+            }
+        });
 
         const resource = createAudioResource(stream, {
-            inputType: inputType,
+            inputType: StreamType.Arbitrary,
             inlineVolume: true
         });
         
@@ -159,27 +139,13 @@ async function playMusic(guildData) {
             );
 
         if (guildData.textChannel) {
-            const message = await guildData.textChannel.send({ 
+            guildData.textChannel.send({ 
                 embeds: [embed], 
                 components: [controlButtons, secondRowButtons] 
             });
-            // Lưu message để có thể update buttons sau
-            guildData.currentMessage = message;
         }
     } catch (error) {
-        console.error('❌ Lỗi khi phát nhạc:', error.message);
-        
-        // Send error message to channel
-        if (guildData.textChannel) {
-            const errorEmbed = new EmbedBuilder()
-                .setColor('#ff0000')
-                .setTitle('❌ Lỗi phát nhạc')
-                .setDescription(`Không thể phát **${song.title}**\nLý do: ${error.message}`)
-                .setFooter({ text: 'Đang chuyển sang bài tiếp theo...' });
-            
-            guildData.textChannel.send({ embeds: [errorEmbed] });
-        }
-        
+        console.error('Lỗi khi phát nhạc:', error);
         guildData.queue.shift(); // Bỏ qua bài hát lỗi
         playMusic(guildData); // Phát bài tiếp theo
     }
@@ -219,13 +185,16 @@ async function removeButtons(guildData, songTitle) {
                 .setColor('#808080') // Màu xám cho bài đã hoàn thành
                 .setTitle('✅ Đã hoàn thành')
                 .setDescription(`**${songTitle}**`)
-                .setFooter({ text: 'Bài hát đã phát xong' });
+                .setFooter({ text: 'Bài hát đã phát xong' })
+                .setTimestamp();
 
             // Cập nhật message với embed mới và không có components (buttons)
             await guildData.currentMessage.edit({ 
                 embeds: [completedEmbed], 
                 components: [] // Xóa tất cả buttons
             });
+            
+            console.log(`✅ Đã xóa buttons cho bài: ${songTitle}`);
         } catch (error) {
             console.error('Lỗi khi xóa buttons:', error);
         }
@@ -301,6 +270,5 @@ module.exports = {
     playMusic,
     createMusicConnection,
     handleSongEnd,
-    removeButtons,
-    createAudioStream
+    removeButtons
 };
