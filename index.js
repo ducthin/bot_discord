@@ -472,8 +472,231 @@ client.on('interactionCreate', async interaction => {
                     interaction.reply({ content: '👋 Đã rời khỏi voice channel!', flags: MessageFlags.Ephemeral });
                     break;
 
+                // Recommendation buttons
+                case 'recommend_add_all':
+                    if (!guildData.recommendations || guildData.recommendations.length === 0) {
+                        return interaction.reply({ content: '❌ Không có gợi ý nào để thêm!', flags: MessageFlags.Ephemeral });
+                    }
+                    
+                    // Thêm tất cả gợi ý vào queue
+                    for (const song of guildData.recommendations) {
+                        song.requestedBy = interaction.user.id;
+                        guildData.queue.push(song);
+                    }
+                    
+                    interaction.reply({ 
+                        content: `✅ Đã thêm ${guildData.recommendations.length} bài gợi ý vào queue!`, 
+                        flags: MessageFlags.Ephemeral 
+                    });
+                    
+                    // Bắt đầu phát nếu chưa phát
+                    if (!guildData.isPlaying) {
+                        const { createMusicConnection } = require('./utils/musicUtils');
+                        createMusicConnection(interaction.member, guildData);
+                        playMusic(guildData);
+                    }
+                    break;
+
+                case 'recommend_refresh':
+                    const recommendCommand = require('./commands/recommend');
+                    await recommendCommand.execute(interaction);
+                    break;
+
+                case 'recommend_close':
+                    guildData.recommendations = null;
+                    await interaction.update({ content: '❌ Đã đóng gợi ý nhạc.', embeds: [], components: [] });
+                    break;
+
+                // Music Quiz buttons
+                case 'quiz_start':
+                    if (!guildData.musicQuiz) {
+                        return interaction.reply({ content: '❌ Quiz đã kết thúc!', flags: MessageFlags.Ephemeral });
+                    }
+                    
+                    const quizCommand = require('./commands/musicquiz');
+                    await quizCommand.showQuestion(interaction, guildData);
+                    break;
+
+                case 'quiz_answer_0':
+                case 'quiz_answer_1':
+                case 'quiz_answer_2':
+                case 'quiz_answer_3':
+                    if (!guildData.musicQuiz || !guildData.musicQuiz.isActive) {
+                        return interaction.reply({ content: '❌ Quiz đã kết thúc!', flags: MessageFlags.Ephemeral });
+                    }
+
+                    const answerIndex = parseInt(interaction.customId.split('_')[2]);
+                    const quiz = guildData.musicQuiz;
+                    const question = quiz.currentQuestion;
+                    
+                    if (!question) {
+                        return interaction.reply({ content: '❌ Không có câu hỏi nào!', flags: MessageFlags.Ephemeral });
+                    }
+
+                    const isCorrect = answerIndex === question.correctIndex;
+                    const userId = interaction.user.id;
+                    
+                    if (!quiz.score[userId]) {
+                        quiz.score[userId] = 0;
+                    }
+                    
+                    if (isCorrect) {
+                        quiz.score[userId] += 10;
+                        await interaction.reply({ 
+                            content: `✅ Đúng rồi! +10 điểm! Tổng: ${quiz.score[userId]} điểm`, 
+                            flags: MessageFlags.Ephemeral 
+                        });
+                    } else {
+                        await interaction.reply({ 
+                            content: `❌ Sai rồi! Đáp án đúng là: ${question.answers[question.correctIndex].title}`, 
+                            flags: MessageFlags.Ephemeral 
+                        });
+                    }
+
+                    // Chuyển câu tiếp theo
+                    setTimeout(() => {
+                        quiz.currentRound++;
+                        const quizCmd = require('./commands/musicquiz');
+                        quizCmd.showQuestion(interaction, guildData);
+                    }, 2000);
+                    break;
+
+                case 'quiz_skip':
+                    if (guildData.musicQuiz) {
+                        guildData.musicQuiz.currentRound++;
+                        const quizCmd = require('./commands/musicquiz');
+                        await quizCmd.showQuestion(interaction, guildData);
+                    }
+                    break;
+
+                case 'quiz_stop':
+                    if (guildData.musicQuiz) {
+                        const quizCmd = require('./commands/musicquiz');
+                        await quizCmd.endQuiz(interaction, guildData);
+                    }
+                    break;
+
+                case 'quiz_cancel':
+                    delete guildData.musicQuiz;
+                    await interaction.update({ content: '❌ Đã hủy music quiz.', embeds: [], components: [] });
+                    break;
+
+                // Karaoke buttons
+                case 'karaoke_start':
+                    if (!guildData.karaokeData) {
+                        return interaction.reply({ content: '❌ Karaoke chưa được khởi tạo!', flags: MessageFlags.Ephemeral });
+                    }
+                    
+                    // Bắt đầu hiển thị lyrics
+                    guildData.karaokeData.interval = setInterval(async () => {
+                        if (guildData.karaokeData.currentLine < guildData.karaokeData.lyrics.length) {
+                            const currentLine = guildData.karaokeData.lyrics[guildData.karaokeData.currentLine];
+                            
+                            try {
+                                await interaction.followUp({ 
+                                    content: `🎤 ${currentLine}`, 
+                                    flags: MessageFlags.Ephemeral 
+                                });
+                            } catch (error) {
+                                console.log('Karaoke error:', error.message);
+                            }
+                            
+                            guildData.karaokeData.currentLine++;
+                        } else {
+                            clearInterval(guildData.karaokeData.interval);
+                        }
+                    }, 3000); // Mỗi 3 giây 1 dòng
+                    
+                    interaction.reply({ content: '🎤 Karaoke đã bắt đầu!', flags: MessageFlags.Ephemeral });
+                    break;
+
+                case 'karaoke_pause':
+                    if (guildData.karaokeData?.interval) {
+                        clearInterval(guildData.karaokeData.interval);
+                        guildData.karaokeData.interval = null;
+                        interaction.reply({ content: '⏸️ Karaoke đã tạm dừng!', flags: MessageFlags.Ephemeral });
+                    }
+                    break;
+
+                case 'karaoke_next_line':
+                    if (guildData.karaokeData) {
+                        guildData.karaokeData.currentLine++;
+                        const line = guildData.karaokeData.lyrics[guildData.karaokeData.currentLine];
+                        interaction.reply({ 
+                            content: line ? `🎤 ${line}` : '🎵 Kết thúc!', 
+                            flags: MessageFlags.Ephemeral 
+                        });
+                    }
+                    break;
+
+                case 'karaoke_prev_line':
+                    if (guildData.karaokeData) {
+                        guildData.karaokeData.currentLine = Math.max(0, guildData.karaokeData.currentLine - 1);
+                        const line = guildData.karaokeData.lyrics[guildData.karaokeData.currentLine];
+                        interaction.reply({ 
+                            content: line ? `🎤 ${line}` : '🎵 Đầu bài!', 
+                            flags: MessageFlags.Ephemeral 
+                        });
+                    }
+                    break;
+
+                case 'karaoke_stop':
+                    if (guildData.karaokeData?.interval) {
+                        clearInterval(guildData.karaokeData.interval);
+                    }
+                    guildData.karaokeMode = false;
+                    guildData.karaokeData = null;
+                    await interaction.update({ content: '⏹️ Karaoke đã dừng.', embeds: [], components: [] });
+                    break;
+
+                // Visualizer buttons
+                case 'visualizer_pause':
+                case 'visualizer_style':
+                case 'visualizer_speed':
+                case 'visualizer_stop':
+                    const visualizerCommand = require('./commands/visualizer');
+                    await visualizerCommand.handleVisualizerButton(interaction, interaction.customId, guildData);
+                    break;
+
+                // Stats buttons
+                case 'stats_personal':
+                case 'stats_server':
+                case 'stats_top_songs':
+                case 'stats_top_users':
+                    const statsCommand = require('./commands/stats');
+                    const statsType = interaction.customId.split('_')[1];
+                    await statsCommand.execute({
+                        ...interaction,
+                        options: {
+                            getString: () => statsType
+                        }
+                    });
+                    break;
+
+                // Recommend play buttons
                 default:
-                    interaction.reply({ content: '❌ Button không hợp lệ!', flags: MessageFlags.Ephemeral });
+                    if (interaction.customId.startsWith('recommend_play_')) {
+                        const songIndex = parseInt(interaction.customId.split('_')[2]);
+                        
+                        if (guildData.recommendations && guildData.recommendations[songIndex]) {
+                            const song = guildData.recommendations[songIndex];
+                            song.requestedBy = interaction.user.id;
+                            guildData.queue.push(song);
+                            
+                            interaction.reply({ 
+                                content: `✅ Đã thêm "${song.title}" vào queue!`, 
+                                flags: MessageFlags.Ephemeral 
+                            });
+                            
+                            if (!guildData.isPlaying) {
+                                const { createMusicConnection } = require('./utils/musicUtils');
+                                createMusicConnection(interaction.member, guildData);
+                                playMusic(guildData);
+                            }
+                        }
+                    } else {
+                        interaction.reply({ content: '❌ Button không hợp lệ!', flags: MessageFlags.Ephemeral });
+                    }
             }
         } catch (error) {
             console.error('Lỗi khi xử lý button:', error);
