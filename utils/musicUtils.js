@@ -63,7 +63,7 @@ async function playMusic(guildData) {
         console.log('Đang phát:', song.title, 'URL:', song.url);
         console.log('Creating audio stream for:', song.url);
         
-        // YouTube video streaming with improved DNS handling
+        // YouTube video streaming with improved error handling
         const stream = ytdl(song.url, {
             filter: 'audioonly',
             quality: 'highestaudio',
@@ -72,12 +72,11 @@ async function playMusic(guildData) {
                 headers: {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
                 },
-                timeout: 30000, // 30 second timeout
-                family: 4 // Force IPv4 to avoid DNS issues
+                timeout: 15000, // Giảm timeout xuống 15 giây
+                family: 4 // Force IPv4
             },
-            // Thêm options để giảm DNS errors
-            format: 'mp4',
-            begin: '0s'
+            // Đơn giản hóa options để tránh timeout issues
+            range: { start: 0, end: 1024 * 1024 * 50 } // 50MB chunks
         });
         
         console.log('✅ Using @distube/ytdl-core stream');
@@ -94,30 +93,33 @@ async function playMusic(guildData) {
         
         guildData.audioResource = resource;
         
-        // Set up error handling cho audio player
-        guildData.player.on('error', (error) => {
-            console.error('Lỗi audio player:', error);
-            
-            // Xử lý các loại lỗi khác nhau
-            if (error.message.includes('ETIMEDOUT') || error.message.includes('timeout')) {
-                console.log('🔄 Lỗi timeout, thử lại sau 3 giây...');
-                setTimeout(() => {
-                    if (guildData.queue.length > 0) {
-                        handleSongEnd(guildData);
-                    }
-                }, 3000);
-            } else if (error.message.includes('ECONNRESET') || error.message.includes('ENOTFOUND')) {
-                console.log('🔄 Lỗi kết nối mạng, thử lại sau 5 giây...');
-                setTimeout(() => {
-                    if (guildData.queue.length > 0) {
-                        handleSongEnd(guildData);
-                    }
-                }, 5000);
-            } else {
-                // Lỗi khác, chuyển bài tiếp theo
-                handleSongEnd(guildData);
-            }
-        });
+        // Set up error handling cho audio player (chỉ một lần)
+        if (!guildData.player.listenerCount('error')) {
+            guildData.player.on('error', (error) => {
+                console.error('Lỗi audio player:', error);
+                
+                // Không clear queue, chỉ skip bài hiện tại
+                if (error.message.includes('ETIMEDOUT') || error.message.includes('timeout') || 
+                    error.message.includes('ECONNRESET') || error.message.includes('ENOTFOUND')) {
+                    console.log('🔄 Lỗi kết nối, chuyển bài tiếp theo...');
+                    // Chỉ skip bài hiện tại, giữ nguyên queue
+                    setTimeout(() => {
+                        if (guildData.queue.length > 1) {
+                            guildData.queue.shift(); // Bỏ bài lỗi
+                            playMusic(guildData); // Phát bài tiếp theo
+                        }
+                    }, 2000);
+                } else {
+                    // Lỗi khác, chuyển bài tiếp theo
+                    setTimeout(() => {
+                        if (guildData.queue.length > 1) {
+                            guildData.queue.shift(); // Bỏ bài lỗi
+                            playMusic(guildData); // Phát bài tiếp theo
+                        }
+                    }, 1000);
+                }
+            });
+        }
         
         guildData.player.play(resource);
 
@@ -225,22 +227,29 @@ async function playMusic(guildData) {
             await removeButtons(guildData, guildData.currentSong.title);
         }
         
-        // Kiểm tra error count
-        if (guildData.errorCount >= 3) {
-            console.log('❌ Quá nhiều lỗi, dừng phát nhạc');
-            guildData.queue = [];
-            guildData.isPlaying = false;
-            guildData.currentSong = null;
+        // Retry logic cho các lỗi mạng (không tính vào error count nặng)
+        if (shouldRetry && guildData.errorCount < 5) {
+            console.log(`🔄 Thử lại sau 3 giây... (lần ${guildData.errorCount}/5)`);
+            setTimeout(() => {
+                if (guildData.queue.length > 0) {
+                    playMusic(guildData);
+                }
+            }, 3000);
             return;
         }
         
-        guildData.queue.shift(); // Bỏ qua bài hát lỗi
+        // Nếu quá nhiều lỗi cho một bài, skip bài đó nhưng GIỮ NGUYÊN QUEUE
+        if (guildData.errorCount >= 5) {
+            console.log('❌ Bài hát lỗi quá nhiều, skip sang bài tiếp theo');
+            guildData.queue.shift(); // Chỉ bỏ bài lỗi
+            guildData.errorCount = 0; // Reset error count
+        }
         
-        // Chờ 3 giây trước khi phát bài tiếp theo
+        // Chuyển sang bài tiếp theo (KHÔNG clear toàn bộ queue)
         if (guildData.queue.length > 0) {
             setTimeout(() => {
                 playMusic(guildData);
-            }, 3000);
+            }, 2000);
         } else {
             guildData.isPlaying = false;
             guildData.currentSong = null;
