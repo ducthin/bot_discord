@@ -31,7 +31,9 @@ function initGuildMusicData(guildId) {
             volume: 50, // Mặc định 50%
             loopMode: 'off', // 'off', 'track', 'queue'
             autoplay: false,
-            audioResource: null
+            audioResource: null,
+            errorCount: 0, // Đếm số lỗi liên tiếp
+            lastErrorTime: 0 // Thời gian lỗi cuối
         });
     }
     return musicData.get(guildId);
@@ -84,6 +86,9 @@ async function playMusic(guildData) {
         
         guildData.audioResource = resource;
         guildData.player.play(resource);
+
+        // Reset error count khi phát thành công
+        guildData.errorCount = 0;
 
         // Lưu vào lịch sử
         const { addToHistory } = require('../commands/history');
@@ -139,15 +144,57 @@ async function playMusic(guildData) {
             );
 
         if (guildData.textChannel) {
-            guildData.textChannel.send({ 
+            const message = await guildData.textChannel.send({ 
                 embeds: [embed], 
                 components: [controlButtons, secondRowButtons] 
             });
+            
+            // Lưu message reference để có thể xóa buttons sau
+            guildData.currentMessage = message;
         }
     } catch (error) {
-        console.error('Lỗi khi phát nhạc:', error);
+        console.error('❌ Lỗi khi phát nhạc:', error.message);
+        
+        // Tăng error count
+        guildData.errorCount = (guildData.errorCount || 0) + 1;
+        guildData.lastErrorTime = Date.now();
+        
+        // Send error message to channel
+        if (guildData.textChannel) {
+            const errorEmbed = new EmbedBuilder()
+                .setColor('#ff0000')
+                .setTitle('❌ Lỗi phát nhạc')
+                .setDescription(`Không thể phát **${song.title}**\nLý do: ${error.message}`)
+                .setFooter({ text: 'Đang chuyển sang bài tiếp theo...' });
+            
+            guildData.textChannel.send({ embeds: [errorEmbed] });
+        }
+        
+        // Xóa buttons nếu có
+        if (guildData.currentSong) {
+            await removeButtons(guildData, guildData.currentSong.title);
+        }
+        
+        // Kiểm tra error count
+        if (guildData.errorCount >= 3) {
+            console.log('❌ Quá nhiều lỗi, dừng phát nhạc');
+            guildData.queue = [];
+            guildData.isPlaying = false;
+            guildData.currentSong = null;
+            return;
+        }
+        
         guildData.queue.shift(); // Bỏ qua bài hát lỗi
-        playMusic(guildData); // Phát bài tiếp theo
+        
+        // Chờ 3 giây trước khi phát bài tiếp theo
+        if (guildData.queue.length > 0) {
+            setTimeout(() => {
+                playMusic(guildData);
+            }, 3000);
+        } else {
+            guildData.isPlaying = false;
+            guildData.currentSong = null;
+        }
     }
 }
 
@@ -168,36 +215,111 @@ function createMusicConnection(member, guildData) {
             await handleSongEnd(guildData);
         });
 
-        guildData.player.on('error', error => {
+        guildData.player.on('error', async error => {
             console.error('Lỗi audio player:', error);
+            
+            const currentTime = Date.now();
+            
+            // Kiểm tra nếu có quá nhiều lỗi liên tiếp trong thời gian ngắn
+            if (currentTime - guildData.lastErrorTime < 10000) { // 10 giây
+                guildData.errorCount++;
+            } else {
+                guildData.errorCount = 1; // Reset counter nếu đã lâu
+            }
+            
+            guildData.lastErrorTime = currentTime;
+            
+            // Nếu có quá nhiều lỗi liên tiếp, dừng bot để tránh spam
+            if (guildData.errorCount >= 3) {
+                console.log('❌ Quá nhiều lỗi liên tiếp, dừng phát nhạc');
+                
+                if (guildData.textChannel) {
+                    const errorEmbed = new EmbedBuilder()
+                        .setColor('#ff0000')
+                        .setTitle('❌ Lỗi hệ thống')
+                        .setDescription('Bot gặp quá nhiều lỗi liên tiếp. Có thể do:\n• Mạng không ổn định\n• YouTube đang chặn requests\n• Server quá tải')
+                        .addFields(
+                            { name: '🔧 Giải pháp', value: 'Hãy thử lại sau vài phút hoặc sử dụng lệnh `/stop` rồi `/play` lại', inline: false }
+                        )
+                        .setFooter({ text: 'Bot sẽ tự động reset sau 5 phút' });
+                    
+                    guildData.textChannel.send({ embeds: [errorEmbed] });
+                }
+                
+                // Clear queue và reset
+                guildData.queue = [];
+                guildData.isPlaying = false;
+                guildData.currentSong = null;
+                
+                // Reset error count sau 5 phút
+                setTimeout(() => {
+                    guildData.errorCount = 0;
+                    console.log('✅ Error count đã được reset cho guild:', guildData);
+                }, 300000); // 5 phút
+                
+                return;
+            }
+            
+            // Xóa buttons của bài hiện tại nếu có
+            if (guildData.currentSong) {
+                await removeButtons(guildData, guildData.currentSong.title);
+            }
+            
+            // Skip bài hiện tại và chờ 2 giây trước khi phát tiếp
             guildData.queue.shift();
-            playMusic(guildData);
+            
+            if (guildData.queue.length > 0) {
+                console.log('⏳ Chờ 2 giây trước khi phát bài tiếp theo...');
+                setTimeout(() => {
+                    playMusic(guildData);
+                }, 2000);
+            } else {
+                guildData.isPlaying = false;
+                guildData.currentSong = null;
+            }
         });
     }
 }
 
 // Xóa buttons của bài hát đã phát xong
 async function removeButtons(guildData, songTitle) {
-    if (guildData.currentMessage) {
-        try {
-            // Tạo embed mới với trạng thái "Đã hoàn thành" và không có buttons
-            const completedEmbed = new EmbedBuilder()
-                .setColor('#808080') // Màu xám cho bài đã hoàn thành
-                .setTitle('✅ Đã hoàn thành')
-                .setDescription(`**${songTitle}**`)
-                .setFooter({ text: 'Bài hát đã phát xong' })
-                .setTimestamp();
+    // Kiểm tra xem đã có currentMessage và chưa được xóa
+    if (!guildData.currentMessage) {
+        console.log('⚠️ Không có message nào để xóa buttons');
+        return;
+    }
+    
+    try {
+        // Tạo embed mới với trạng thái "Đã hoàn thành" và không có buttons
+        const completedEmbed = new EmbedBuilder()
+            .setColor('#808080') // Màu xám cho bài đã hoàn thành
+            .setTitle('✅ Đã hoàn thành')
+            .setDescription(`**${songTitle}**`)
+            .setFooter({ text: 'Bài hát đã phát xong' })
+            .setTimestamp();
 
-            // Cập nhật message với embed mới và không có components (buttons)
-            await guildData.currentMessage.edit({ 
-                embeds: [completedEmbed], 
-                components: [] // Xóa tất cả buttons
-            });
-            
-            console.log(`✅ Đã xóa buttons cho bài: ${songTitle}`);
-        } catch (error) {
-            console.error('Lỗi khi xóa buttons:', error);
+        // Cập nhật message với embed mới và không có components (buttons)
+        await guildData.currentMessage.edit({ 
+            embeds: [completedEmbed], 
+            components: [] // Xóa tất cả buttons
+        });
+        
+        console.log(`✅ Đã xóa buttons cho bài: ${songTitle}`);
+        
+    } catch (error) {
+        // Xử lý các lỗi phổ biến
+        if (error.code === 10008) {
+            console.log('⚠️ Message đã bị xóa, không thể update buttons');
+        } else if (error.code === 50001) {
+            console.log('⚠️ Không có quyền edit message');
+        } else if (error.code === 10062) {
+            console.log('⚠️ Message interaction đã expired');
+        } else {
+            console.error('❌ Lỗi khi xóa buttons:', error.message);
         }
+    } finally {
+        // Reset currentMessage reference sau khi xử lý (thành công hoặc lỗi)
+        guildData.currentMessage = null;
     }
 }
 
@@ -205,8 +327,8 @@ async function removeButtons(guildData, songTitle) {
 async function handleSongEnd(guildData) {
     const currentSong = guildData.currentSong;
     
-    // Xóa buttons của bài vừa phát xong
-    if (currentSong) {
+    // Xóa buttons của bài vừa phát xong (nếu chưa được xóa)
+    if (currentSong && guildData.currentMessage) {
         await removeButtons(guildData, currentSong.title);
     }
     

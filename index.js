@@ -93,6 +93,12 @@ client.on('interactionCreate', async interaction => {
     
     // Xử lý button interactions
     if (interaction.isButton()) {
+        // Kiểm tra nếu interaction đã expired hoặc invalid
+        if (!interaction.isRepliable()) {
+            console.log('⚠️ Button interaction đã expired, bỏ qua...');
+            return;
+        }
+        
         const { initGuildMusicData, playMusic, removeButtons } = require('./utils/musicUtils');
         const guildData = initGuildMusicData(interaction.guild.id);
         
@@ -118,11 +124,18 @@ client.on('interactionCreate', async interaction => {
                     if (!guildData.player || guildData.queue.length === 0) {
                         return interaction.reply({ content: '❌ Không có nhạc nào để bỏ qua!', flags: MessageFlags.Ephemeral });
                     }
-                    // Xóa buttons của bài hiện tại
-                    if (guildData.currentSong) {
-                        await removeButtons(guildData, guildData.currentSong.title);
+                    
+                    // Lưu thông tin bài hiện tại trước khi skip
+                    const currentSongTitle = guildData.currentSong ? guildData.currentSong.title : 'Unknown';
+                    
+                    // Xóa buttons ngay lập tức
+                    if (guildData.currentSong && guildData.currentMessage) {
+                        await removeButtons(guildData, currentSongTitle);
                     }
+                    
+                    // Dừng player (sẽ trigger handleSongEnd)
                     guildData.player.stop();
+                    
                     interaction.reply({ content: '⏭️ Đã bỏ qua bài hát!', flags: MessageFlags.Ephemeral });
                     break;
 
@@ -193,7 +206,15 @@ client.on('interactionCreate', async interaction => {
             }
         } catch (error) {
             console.error('Lỗi khi xử lý button:', error);
-            interaction.reply({ content: '❌ Đã xảy ra lỗi!', flags: MessageFlags.Ephemeral });
+            
+            // Kiểm tra nếu interaction vẫn có thể reply
+            if (interaction.isRepliable() && !interaction.replied && !interaction.deferred) {
+                try {
+                    await interaction.reply({ content: '❌ Đã xảy ra lỗi!', flags: MessageFlags.Ephemeral });
+                } catch (replyError) {
+                    console.log('⚠️ Không thể reply interaction (có thể đã expired):', replyError.message);
+                }
+            }
         }
     }
 });
