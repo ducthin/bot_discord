@@ -1,6 +1,19 @@
 const { Client, GatewayIntentBits, REST, Routes, EmbedBuilder, MessageFlags } = require('discord.js');
 const { loadCommands, getCommandsData } = require('./utils/commandLoader');
+const { checkDNSConnection } = require('./utils/youtubeUtils');
 require('dotenv').config();
+
+// Kiểm tra DNS ngay khi khởi động
+async function initializeDNS() {
+    console.log('🔍 Checking DNS connection...');
+    const dnsOk = await checkDNSConnection();
+    if (!dnsOk) {
+        console.log('⚠️ DNS issues detected, but continuing...');
+    }
+}
+
+// Gọi DNS check
+initializeDNS();
 
 // Health check server để tránh sleep trên Render
 const express = require('express');
