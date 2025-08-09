@@ -1,6 +1,7 @@
 const youtube = require('youtube-sr').default;
 const ytdl = require('@distube/ytdl-core');
 const { formatDuration } = require('./musicUtils');
+const { searchFallback } = require('./fallbackPlaylist');
 const dns = require('dns');
 
 // Set DNS servers as fallback
@@ -57,10 +58,10 @@ async function searchYoutube(query) {
     } catch (error) {
         console.error('❌ Lỗi tìm kiếm YouTube:', error.message);
         
-        // Fallback: Thử search với Google (nếu có thể)
-        if (error.message.includes('ENOTFOUND')) {
-            console.log('🔄 Thử fallback search...');
-            // Có thể implement fallback search method ở đây
+        // Fallback: Sử dụng playlist có sẵn khi DNS fails
+        if (error.message.includes('ENOTFOUND') || error.message.includes('fetch failed')) {
+            console.log('🎵 Sử dụng fallback playlist do lỗi DNS...');
+            return searchFallback(query);
         }
         
         return null;

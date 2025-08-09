@@ -63,23 +63,40 @@ async function playMusic(guildData) {
         console.log('Đang phát:', song.title, 'URL:', song.url);
         console.log('Creating audio stream for:', song.url);
         
-        // YouTube video streaming with improved error handling
-        const stream = ytdl(song.url, {
-            filter: 'audioonly',
-            quality: 'highestaudio',
-            highWaterMark: 1 << 25,
-            requestOptions: {
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-                },
-                timeout: 15000, // Giảm timeout xuống 15 giây
-                family: 4 // Force IPv4
-            },
-            // Đơn giản hóa options để tránh timeout issues
-            range: { start: 0, end: 1024 * 1024 * 50 } // 50MB chunks
-        });
+        // Thử strategy khác nhau tùy vào retry count
+        const retryCount = guildData.streamRetryCount || 0;
+        let streamConfig;
         
-        console.log('✅ Using @distube/ytdl-core stream');
+        if (retryCount === 0) {
+            // Lần đầu: config chuẩn
+            streamConfig = {
+                filter: 'audioonly',
+                quality: 'highestaudio',
+                highWaterMark: 1 << 25,
+                requestOptions: {
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                    },
+                    timeout: 15000,
+                    family: 4
+                }
+            };
+        } else {
+            // Retry: config đơn giản hơn
+            streamConfig = {
+                filter: 'audioonly',
+                quality: 'lowestaudio', // Thử quality thấp hơn
+                requestOptions: {
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                    },
+                    timeout: 10000
+                }
+            };
+        }
+        
+        const stream = ytdl(song.url, streamConfig);
+        console.log(`✅ Using @distube/ytdl-core stream (attempt ${retryCount + 1})`);
 
         const resource = createAudioResource(stream, {
             inputType: StreamType.Arbitrary,
@@ -98,11 +115,30 @@ async function playMusic(guildData) {
             guildData.player.on('error', (error) => {
                 console.error('Lỗi audio player:', error);
                 
-                // Không clear queue, chỉ skip bài hiện tại
-                if (error.message.includes('ETIMEDOUT') || error.message.includes('timeout') || 
-                    error.message.includes('ECONNRESET') || error.message.includes('ENOTFOUND')) {
+                // Xử lý các loại lỗi cụ thể
+                if (error.message.includes('Status code: 416')) {
+                    const retryCount = guildData.streamRetryCount || 0;
+                    if (retryCount < 2) {
+                        console.log(`🔄 Lỗi 416, retry lần ${retryCount + 1}/2...`);
+                        guildData.streamRetryCount = retryCount + 1;
+                        setTimeout(() => {
+                            if (guildData.queue.length > 0) {
+                                playMusic(guildData); // Retry với config khác
+                            }
+                        }, 1000);
+                    } else {
+                        console.log('❌ Retry 416 thất bại, skip bài...');
+                        guildData.streamRetryCount = 0;
+                        setTimeout(() => {
+                            if (guildData.queue.length > 1) {
+                                guildData.queue.shift();
+                                playMusic(guildData);
+                            }
+                        }, 1000);
+                    }
+                } else if (error.message.includes('ETIMEDOUT') || error.message.includes('timeout') || 
+                          error.message.includes('ECONNRESET') || error.message.includes('ENOTFOUND')) {
                     console.log('🔄 Lỗi kết nối, chuyển bài tiếp theo...');
-                    // Chỉ skip bài hiện tại, giữ nguyên queue
                     setTimeout(() => {
                         if (guildData.queue.length > 1) {
                             guildData.queue.shift(); // Bỏ bài lỗi
@@ -111,6 +147,7 @@ async function playMusic(guildData) {
                     }, 2000);
                 } else {
                     // Lỗi khác, chuyển bài tiếp theo
+                    console.log('🔄 Lỗi khác, skip bài...');
                     setTimeout(() => {
                         if (guildData.queue.length > 1) {
                             guildData.queue.shift(); // Bỏ bài lỗi
@@ -123,8 +160,9 @@ async function playMusic(guildData) {
         
         guildData.player.play(resource);
 
-        // Reset error count khi phát thành công
+        // Reset error count và retry count khi phát thành công
         guildData.errorCount = 0;
+        guildData.streamRetryCount = 0;
 
         // Lưu vào lịch sử
         const { addToHistory } = require('../commands/history');
