@@ -13,7 +13,8 @@
     "build": "npm install",
     "pm2": "pm2 start ecosystem.config.js",
     "docker": "docker-compose up -d",
-    "docker-logs": "docker-compose logs -f"
+    "docker-logs": "docker-compose logs -f",
+    "test": "jest"
   },
   "keywords": [
     "discord",
@@ -38,6 +39,7 @@
     "youtube-sr": "^4.3.11"
   },
   "devDependencies": {
+    "jest": "^30.0.5",
     "nodemon": "^3.0.2"
   }
 }

@@ -166,9 +166,8 @@ async function playMusic(guildData) {
 
         // Lưu vào lịch sử
         const { addToHistory } = require('../commands/history');
-        if (song.requester) {
-            const userId = song.requester;
-            await addToHistory(userId, song);
+        if (song.requesterId) {
+            await addToHistory(song.requesterId, song);
         }
 
         // Hiển thị thông tin bài hát

@@ -431,7 +431,7 @@ client.on('interactionCreate', async interaction => {
                         .setDescription(`**${guildData.currentSong.title}**`)
                         .addFields(
                             { name: '⏱️ Thời lượng', value: guildData.currentSong.duration || 'Không xác định', inline: true },
-                            { name: '👤 Yêu cầu bởi', value: `<@${guildData.currentSong.requestedBy}>`, inline: true },
+                            { name: '👤 Yêu cầu bởi', value: guildData.currentSong.requester, inline: true },
                             { name: '🔊 Âm lượng', value: `${guildData.volume || 50}%`, inline: true }
                         )
                         .setThumbnail(guildData.currentSong.thumbnail);

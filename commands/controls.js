@@ -106,7 +106,7 @@ module.exports = {
                 embed.addFields(
                     { name: '🎵 Đang phát', value: currentSong.title, inline: false },
                     { name: '⏱️ Thời lượng', value: currentSong.duration || 'Không xác định', inline: true },
-                    { name: '👤 Yêu cầu bởi', value: `<@${currentSong.requestedBy}>`, inline: true },
+                    { name: '👤 Yêu cầu bởi', value: currentSong.requester, inline: true },
                     { name: '🔊 Âm lượng', value: `${guildData.volume || 50}%`, inline: true }
                 );
             } else {

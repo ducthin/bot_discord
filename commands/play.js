@@ -52,7 +52,9 @@ module.exports = {
         console.log('Song info:', songInfo); // Debug log
 
         // Thêm thông tin requester
-        songInfo.requester = member.user.id;
+        songInfo.requester = member.user.username;
+        songInfo.requesterId = member.user.id;
+
 
         // Kết nối voice channel nếu chưa kết nối
         createMusicConnection(member, guildData);

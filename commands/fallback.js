@@ -38,6 +38,7 @@ module.exports = {
             const songsWithRequester = songs.map(song => ({
                 ...song,
                 requester: interaction.user.username,
+                requestedBy: interaction.user.id,
                 channel: member.voice.channel.name
             }));
 

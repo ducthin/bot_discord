@@ -22,7 +22,7 @@ module.exports = {
 
         const guildData = initGuildMusicData(guild.id);
         
-        if (!guildData.isPlaying || !guildData.audioPlayer) {
+        if (!guildData.isPlaying || !guildData.player) {
             return interaction.reply('❌ Không có nhạc nào đang phát!');
         }
 

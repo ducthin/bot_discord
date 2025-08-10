@@ -48,7 +48,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary),
                 new ButtonBuilder()
                     .setCustomId('shuffle_music')
-                    .setLabel('� Trộn bài')
+                    .setLabel('🔀 Trộn bài')
                     .setStyle(ButtonStyle.Secondary),
                 new ButtonBuilder()
                     .setCustomId('stop_music')

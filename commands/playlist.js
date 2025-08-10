@@ -54,7 +54,8 @@ module.exports = {
             // Thêm thông tin requester cho tất cả videos
             const videosWithRequester = playlistData.videos.map(video => ({
                 ...video,
-                requester: member.user.username
+                requester: member.user.username,
+                requesterId: member.user.id
             }));
 
             // Kết nối voice channel nếu chưa kết nối
