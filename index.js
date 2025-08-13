@@ -1,6 +1,7 @@
 const { Client, GatewayIntentBits, REST, Routes, EmbedBuilder, MessageFlags } = require('discord.js');
 const { loadCommands, getCommandsData } = require('./utils/commandLoader');
 const { checkDNSConnection } = require('./utils/youtubeUtils');
+const { isGuildAllowed, logGuildInfo } = require('./utils/guildUtils');
 require('dotenv').config();
 
 // Kiểm tra DNS ngay khi khởi động
@@ -64,22 +65,55 @@ const commands = loadCommands();
 client.once('ready', async () => {
     console.log(`🎵 ${client.user.tag} đã sẵn sàng phát nhạc!`);
     
-    // Đăng ký slash commands
+    // Đăng ký slash commands cho nhiều guild
     const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
     
     try {
         console.log('Đang đăng ký slash commands...');
-        await rest.put(
-            Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
-            { body: getCommandsData() }
-        );
-        console.log('Đã đăng ký slash commands thành công!');
+        
+        // Lấy danh sách guild IDs
+        const guildIds = process.env.GUILD_IDS 
+            ? process.env.GUILD_IDS.split(',').map(id => id.trim())
+            : [process.env.GUILD_ID];
+        
+        // Đăng ký commands cho từng guild
+        for (const guildId of guildIds) {
+            if (guildId) {
+                try {
+                    await rest.put(
+                        Routes.applicationGuildCommands(process.env.CLIENT_ID, guildId),
+                        { body: getCommandsData() }
+                    );
+                    console.log(`✅ Đã đăng ký commands cho guild: ${guildId}`);
+                } catch (guildError) {
+                    console.error(`❌ Lỗi đăng ký commands cho guild ${guildId}:`, guildError.message);
+                }
+            }
+        }
+        
+        console.log('🎉 Hoàn thành đăng ký slash commands!');
+        
+        // Hiển thị thông tin guilds
+        setTimeout(() => logGuildInfo(client), 2000);
+        
     } catch (error) {
         console.error('Lỗi đăng ký commands:', error);
     }
 });
 
 client.on('interactionCreate', async interaction => {
+    // Kiểm tra guild permission
+    if (!isGuildAllowed(interaction.guildId)) {
+        console.log(`⚠️ Interaction từ guild không được phép: ${interaction.guildId}`);
+        if (interaction.isRepliable()) {
+            return interaction.reply({
+                content: '❌ Bot không được phép hoạt động trên server này!',
+                ephemeral: true
+            });
+        }
+        return;
+    }
+
     // Xử lý slash commands
     if (interaction.isChatInputCommand()) {
         const command = commands.get(interaction.commandName);
