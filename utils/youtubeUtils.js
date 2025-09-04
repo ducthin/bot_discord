@@ -28,12 +28,12 @@ async function retryWithBackoff(fn, maxRetries = 3, baseDelay = 1000) {
 }
 
 // Tìm kiếm video trên YouTube với retry
-async function searchYoutube(query) {
+async function searchYoutube(query, limit = 1) {
     try {
         return await retryWithBackoff(async () => {
             console.log(`🔍 Searching YouTube for: "${query}"`);
             const results = await youtube.search(query, { 
-                limit: 1, 
+                limit: limit, 
                 type: 'video',
                 requestOptions: {
                     timeout: 15000,
@@ -44,14 +44,26 @@ async function searchYoutube(query) {
             });
             
             if (results.length > 0) {
-                const video = results[0];
-                console.log(`✅ Found: ${video.title}`);
-                return {
+                console.log(`✅ Found: ${results[0].title}`);
+                
+                // Nếu limit = 1, trả về object đơn (tương thích cũ)
+                if (limit === 1) {
+                    const video = results[0];
+                    return {
+                        title: video.title,
+                        url: video.url,
+                        duration: video.durationFormatted,
+                        thumbnail: video.thumbnail?.url || null
+                    };
+                }
+                
+                // Nếu limit > 1, trả về array
+                return results.map(video => ({
                     title: video.title,
                     url: video.url,
                     duration: video.durationFormatted,
                     thumbnail: video.thumbnail?.url || null
-                };
+                }));
             }
             return null;
         }, 3, 2000);

@@ -661,7 +661,92 @@ client.on('interactionCreate', async interaction => {
                                 playMusic(guildData);
                             }
                         }
-                    } else {
+                    }
+                    // Trending buttons
+                    else if (interaction.customId.startsWith('trending_')) {
+                        switch (interaction.customId) {
+                            case 'trending_play_now':
+                                if (!guildData.isPlaying && guildData.queue.length > 0) {
+                                    const { createMusicConnection } = require('./utils/musicUtils');
+                                    createMusicConnection(interaction.member, guildData);
+                                    playMusic(guildData);
+                                }
+                                interaction.reply({ content: '▶️ Đã bắt đầu phát nhạc trending!', flags: MessageFlags.Ephemeral });
+                                break;
+
+                            case 'trending_shuffle':
+                                if (guildData.queue.length > 1) {
+                                    // Trộn queue (giữ bài đang phát)
+                                    const current = guildData.queue.shift();
+                                    for (let i = guildData.queue.length - 1; i > 0; i--) {
+                                        const j = Math.floor(Math.random() * (i + 1));
+                                        [guildData.queue[i], guildData.queue[j]] = [guildData.queue[j], guildData.queue[i]];
+                                    }
+                                    guildData.queue.unshift(current);
+                                    interaction.reply({ content: '🔀 Đã trộn danh sách trending!', flags: MessageFlags.Ephemeral });
+                                } else {
+                                    interaction.reply({ content: '❌ Cần ít nhất 2 bài để trộn!', flags: MessageFlags.Ephemeral });
+                                }
+                                break;
+
+                            case 'trending_more':
+                                const trendingCommand = require('./commands/trending');
+                                // Re-execute với 10 bài thêm
+                                const newInteraction = {
+                                    ...interaction,
+                                    options: {
+                                        getString: (name) => name === 'region' ? 'VN' : null,
+                                        getInteger: (name) => name === 'count' ? 10 : null
+                                    }
+                                };
+                                await trendingCommand.execute(newInteraction);
+                                break;
+
+                            case 'trending_refresh':
+                                const refreshCommand = require('./commands/trending');
+                                await refreshCommand.execute(interaction);
+                                break;
+                        }
+                    }
+                    // Auto-trending region buttons
+                    else if (interaction.customId.startsWith('autotrending_')) {
+                        const region = interaction.customId.split('_')[1];
+                        
+                        if (region === 'off') {
+                            guildData.autoTrending = { enabled: false };
+                            await interaction.update({ 
+                                content: '❌ Đã tắt auto-trending.', 
+                                embeds: [], 
+                                components: [] 
+                            });
+                        } else {
+                            const regionMap = {
+                                'vn': 'VN',
+                                'kr': 'KR', 
+                                'us': 'US',
+                                'global': 'GLOBAL',
+                                'asia': 'ASIA'
+                            };
+                            
+                            const selectedRegion = regionMap[region] || 'VN';
+                            guildData.autoTrending = {
+                                enabled: true,
+                                region: selectedRegion,
+                                lastFetch: null,
+                                count: 0
+                            };
+                            
+                            const autoTrendingCommand = require('./commands/autotrending');
+                            const regionName = autoTrendingCommand.getRegionDisplayName(selectedRegion);
+                            
+                            await interaction.update({ 
+                                content: `✅ Đã chọn auto-trending: ${regionName}`, 
+                                embeds: [], 
+                                components: [] 
+                            });
+                        }
+                    }
+                    else {
                         interaction.reply({ content: '❌ Button không hợp lệ!', flags: MessageFlags.Ephemeral });
                     }
             }
