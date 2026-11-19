@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { musicData } = require('../utils/musicUtils');
+const { musicData, disconnectMusic } = require('../utils/musicUtils');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,8 +11,7 @@ module.exports = {
         const guildData = musicData.get(guild.id);
         
         if (guildData && guildData.connection) {
-            guildData.connection.destroy();
-            musicData.delete(guild.id);
+            await disconnectMusic(guildData);
             interaction.reply('👋 Đã rời voice channel!');
         } else {
             interaction.reply('❌ Bot không trong voice channel nào!');

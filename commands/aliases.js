@@ -19,16 +19,8 @@ const historyCommand = require('./history.js');
 const aliases = [
     {
         name: 'p',
-        description: 'Viết tắt của /play - Phát nhạc từ YouTube',
-        originalCommand: playCommand,
-        options: [
-            {
-                name: 'query',
-                description: 'Tên bài hát hoặc URL YouTube',
-                type: 3, // STRING
-                required: true
-            }
-        ]
+        description: 'Viết tắt của /play - Phát bài hát, playlist hoặc YouTube Mix',
+        originalCommand: playCommand
     },
     {
         name: 'q',
@@ -78,28 +70,12 @@ const aliases = [
     {
         name: 'v',
         description: 'Viết tắt của /volume - Điều chỉnh âm lượng',
-        originalCommand: volumeCommand,
-        options: [
-            {
-                name: 'level',
-                description: 'Mức âm lượng (0-100)',
-                type: 4, // INTEGER
-                required: true
-            }
-        ]
+        originalCommand: volumeCommand
     },
     {
         name: 'lp',
         description: 'Viết tắt của /loop - Bật/tắt lặp lại',
-        originalCommand: loopCommand,
-        options: [
-            {
-                name: 'mode',
-                description: 'Chế độ lặp lại',
-                type: 3, // STRING
-                required: true
-            }
-        ]
+        originalCommand: loopCommand
     },
     {
         name: 'his',
@@ -116,24 +92,8 @@ aliases.forEach(alias => {
         .setName(alias.name)
         .setDescription(alias.description);
     
-    // Thêm options nếu có
-    if (alias.options) {
-        alias.options.forEach(option => {
-            if (option.type === 4) { // INTEGER
-                builder.addIntegerOption(opt => 
-                    opt.setName(option.name)
-                       .setDescription(option.description)
-                       .setRequired(option.required || false)
-                );
-            } else { // STRING
-                builder.addStringOption(opt => 
-                    opt.setName(option.name)
-                       .setDescription(option.description)
-                       .setRequired(option.required || false)
-                );
-            }
-        });
-    }
+    // Reuse subcommands, choices and validation limits from the full command.
+    builder.options.push(...alias.originalCommand.data.options);
     
     aliasCommands[alias.name] = {
         data: builder,

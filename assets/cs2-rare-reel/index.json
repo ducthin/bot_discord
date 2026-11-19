@@ -1,0 +1,18 @@
+{
+  "default": "default_rare_item.png",
+  "cases": {
+    "crate-4017": "crate_community_3_rare_item.png",
+    "crate-4018": "crate_community_4_rare_item.png",
+    "crate-4091": "crate_community_8_rare_item.png",
+    "crate-4138": "crate_community_9_rare_item.png",
+    "crate-4187": "crate_community_11_rare_item.png",
+    "crate-4669": "crate_community_24_rare_item.png",
+    "crate-4904": "crate_community_33_rare_item.png",
+    "crate-7003": "crate_community_33_rare_item.png",
+    "crate-7007": "crate_community_35_rare_item.png"
+  },
+  "sources": {
+    "gameSchema": "https://github.com/SteamDatabase/GameTracking-CS2/blob/82e2b9d62cc97f1358c68a220a4a392c9e41c509/game/csgo/pak01_dir/scripts/items/items_game.txt",
+    "iconSource": "https://github.com/ByMykel/counter-strike-image-tracker/tree/90d040d9380989bbcf207724a2bcee6199dcdaf6/static/panorama/images/econ/weapon_cases"
+  }
+}

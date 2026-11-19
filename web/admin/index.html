@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11131b">
+  <title>Bot Studio · Bảng điều khiển</title>
+  <meta name="description" content="Bảng điều khiển riêng cho bot Discord: trạng thái, âm nhạc, Battle và cấu hình máy chủ.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%238f86ff'/%3E%3Cpath d='M18 24h28v22H18zM25 18h14M32 14v10' stroke='%2311131b' stroke-width='5' fill='none'/%3E%3Ccircle cx='25' cy='34' r='3' fill='%2311131b'/%3E%3Ccircle cx='39' cy='34' r='3' fill='%2311131b'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/admin/admin.css">
+  <script src="/admin/admin.js" defer></script>
+</head>
+<body>
+  <svg aria-hidden="true" class="icon-library"><defs>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 8l12-2"/><ellipse cx="6" cy="18" rx="3" ry="3"/><ellipse cx="18" cy="16" rx="3" ry="3"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 3 9 5v9l-9 5-9-5V8l9-5Z M3 8l9 5 9-5M12 13v9M7 5.8l9 5"/></symbol>
+    <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="9" cy="6" rx="6" ry="3"/><path d="M3 6v5c0 4 12 4 12 0V6M3 11v5c0 4 12 4 12 0M15 9c8-2 9 5 3 6M15 14c8-2 9 5 3 6"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="m9 3-.6 3-2.6 1L3 6l-2 3 2.2 2v3L1 16l2 3 2.8-1 2.6 1 .6 3h4l.6-3 2.6-1 2.8 1 2-3-2.2-2v-3L21 9l-2-3-2.8 1-2.6-1L13 3Z" transform="translate(1 -1) scale(.95)"/><circle cx="11.5" cy="11.5" r="3"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 10a8 8 0 1 0-2 8M20 4v6h-6"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 4H4v16h5m5-4 4-4-4-4m-6 4h10"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-skip" viewBox="0 0 24 24"><path d="m5 5 10 7-10 7V5ZM19 5v14"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z M8 12l3 3 5-6"/></symbol>
+  </defs></svg>
+
+  <section id="login-screen" class="login-screen" hidden>
+    <div class="login-art" aria-hidden="true"><div class="orb orb-one"></div><div class="orb orb-two"></div><div class="art-ring"></div><div class="art-core"><svg><use href="#i-grid"/></svg></div><span class="art-label">MỌI THỨ TRONG TẦM TAY</span></div>
+    <main class="login-card">
+      <a class="brand login-brand" href="/admin/"><span class="brand-mark"><svg><use href="#i-grid"/></svg></span><span>bot<span class="brand-light">studio</span><i></i></span></a>
+      <span class="eyebrow">KHÔNG GIAN QUẢN TRỊ</span>
+      <h1>Chào mừng trở lại.</h1>
+      <p class="muted">Một nơi để theo dõi và điều khiển bot Discord của bạn.</p>
+      <form id="login-form">
+        <label for="password">Mật khẩu quản trị</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="256" placeholder="Nhập mật khẩu của bạn" autofocus>
+        <p id="login-error" class="form-error" role="alert" hidden></p>
+        <button class="button primary login-button" type="submit">Vào bảng điều khiển <svg><use href="#i-arrow"/></svg></button>
+      </form>
+      <div class="login-note"><svg><use href="#i-shield"/></svg><span>Trang quản trị riêng · Chỉ dành cho chủ bot</span></div>
+    </main>
+  </section>
+
+  <div id="app" class="app" hidden>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/admin/"><span class="brand-mark"><svg><use href="#i-grid"/></svg></span><span>bot<span class="brand-light">studio</span><i></i></span></a>
+      <span class="nav-label">KHÔNG GIAN LÀM VIỆC</span>
+      <nav aria-label="Điều hướng chính">
+        <button class="nav-item active" data-page="overview"><svg><use href="#i-grid"/></svg>Tổng quan<span class="nav-active-dot"></span></button>
+        <button class="nav-item" data-page="music"><svg><use href="#i-music"/></svg>Âm nhạc</button>
+        <button class="nav-item" data-page="battles"><svg><use href="#i-box"/></svg>Case Battle<span class="nav-badge" id="nav-battle-count">0</span></button>
+        <button class="nav-item" data-page="catalogue"><svg><use href="#i-box"/></svg>Danh mục hòm</button>
+        <button class="nav-item" data-page="economy"><svg><use href="#i-coins"/></svg>Ví & trò chơi</button>
+        <button class="nav-item" data-page="settings"><svg><use href="#i-settings"/></svg>Cấu hình</button>
+        <button class="nav-item" data-page="activity"><svg><use href="#i-activity"/></svg>Nhật ký thao tác</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-status"><span class="live-dot" id="sidebar-dot"></span><div><strong id="sidebar-status">Đang kết nối</strong><small>Chạy cùng VPS với bot</small></div></div>
+        <button class="logout-button" id="logout-button"><svg><use href="#i-logout"/></svg>Đăng xuất</button>
+      </div>
+    </aside>
+    <div class="main-wrap">
+      <header class="topbar">
+        <div class="breadcrumb"><button class="icon-button menu-button" id="menu-button" aria-label="Mở menu" aria-expanded="false"><svg><use href="#i-menu"/></svg></button><span>Bảng điều khiển</span><span class="breadcrumb-slash">/</span><strong id="breadcrumb-current">Tổng quan</strong></div>
+        <div class="topbar-actions"><span id="refresh-status" class="refresh-status">Đang tải dữ liệu…</span><button class="icon-button" id="refresh-button" aria-label="Làm mới dữ liệu"><svg><use href="#i-refresh"/></svg></button><div class="admin-avatar" title="Chủ bot">A</div></div>
+      </header>
+      <main class="workspace">
+        <div class="page-heading"><div><span class="eyebrow" id="page-eyebrow">TRẠNG THÁI HỆ THỐNG</span><h1 id="page-title">Tổng quan</h1><p class="muted" id="page-description">Bot đang hoạt động thế nào? Mọi thứ ở ngay đây.</p></div><label class="guild-picker"><span class="guild-picker-icon" id="guild-initial">D</span><select id="guild-select" aria-label="Chọn máy chủ"><option value="">Đang tải máy chủ…</option></select><svg><use href="#i-chevron"/></svg></label></div>
+        <div id="connection-banner" class="banner" role="status" hidden></div>
+        <div id="preview-banner" class="banner preview-banner" role="status" hidden>BẢN XEM THỬ · Dữ liệu minh họa. Các thao tác chỉ tác động môi trường xem thử, không điều khiển bot thật.</div>
+
+        <section class="page-section" id="page-overview">
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><span>Kết nối Discord</span><span class="stat-icon mint"><svg><use href="#i-activity"/></svg></span></div><div class="stat-value" id="stat-status">—</div><div class="stat-foot"><span class="live-dot" id="status-dot"></span><span id="stat-bot-name">Đang tải</span></div></article>
+            <article class="stat-card"><div class="stat-top"><span>Độ trễ</span><span class="stat-icon purple"><svg><use href="#i-activity"/></svg></span></div><div class="stat-value"><span id="stat-ping">—</span><small>ms</small></div><div class="stat-foot">Kết nối tới Discord Gateway</div></article>
+            <article class="stat-card"><div class="stat-top"><span>Thời gian hoạt động</span><span class="stat-icon peach"><svg><use href="#i-refresh"/></svg></span></div><div class="stat-value compact" id="stat-uptime">—</div><div class="stat-foot">Kể từ lần khởi động gần nhất</div></article>
+            <article class="stat-card"><div class="stat-top"><span>Bộ nhớ đang dùng</span><span class="stat-icon blue"><svg><use href="#i-grid"/></svg></span></div><div class="stat-value"><span id="stat-memory">—</span><small>MB</small></div><div class="stat-foot">Tiến trình bot và trang quản trị</div></article>
+          </div>
+          <div class="overview-grid">
+            <article class="panel music-preview"><div class="panel-heading"><h2><span class="section-dot purple-dot"></span>Đang phát</h2><button class="text-button" data-go="music">Điều khiển <svg><use href="#i-arrow"/></svg></button></div><div id="music-overview-content" class="music-overview-content"></div></article>
+            <article class="panel quick-panel"><div class="panel-heading"><h2>Truy cập nhanh</h2><span class="subtle">Máy chủ hiện tại</span></div><button class="quick-action" data-go="battles"><span class="quick-icon purple"><svg><use href="#i-box"/></svg></span><span><strong>Quản lý Case Battle</strong><small>Xem phòng chờ và trận đang quay</small></span><svg><use href="#i-arrow"/></svg></button><button class="quick-action" data-go="economy"><span class="quick-icon peach"><svg><use href="#i-coins"/></svg></span><span><strong>Ví & Tiệm Bánh</strong><small>Cấp xu và thiết lập bàn tự động</small></span><svg><use href="#i-arrow"/></svg></button><button class="quick-action" data-go="settings"><span class="quick-icon mint"><svg><use href="#i-settings"/></svg></span><span><strong>Cấu hình máy chủ</strong><small>Thông tin và các kênh hoạt động</small></span><svg><use href="#i-arrow"/></svg></button></article>
+          </div>
+          <article class="panel"><div class="panel-heading"><h2>Hoạt động gần đây</h2><button class="text-button" data-go="activity">Xem tất cả <svg><use href="#i-arrow"/></svg></button></div><div id="recent-activity"></div></article>
+        </section>
+
+        <section class="page-section" id="page-music" hidden><div class="music-layout"><article class="panel now-playing-panel"><div class="panel-heading"><h2>Trình phát</h2><span class="badge" id="music-state">Chưa phát</span></div><div class="record-art" aria-hidden="true"><div class="record-groove"></div><svg><use href="#i-music"/></svg></div><h2 class="track-title" id="track-title">Chưa có bài hát</h2><p class="muted centered" id="track-description">Thêm nhạc từ Discord để bắt đầu phiên nghe.</p><div class="playback-controls"><button class="icon-button playback-button" id="music-pause" aria-label="Tạm dừng"><svg><use href="#i-pause"/></svg></button><button class="icon-button playback-button main-play" id="music-resume" aria-label="Tiếp tục phát"><svg><use href="#i-play"/></svg></button><button class="icon-button playback-button" id="music-skip" aria-label="Bỏ qua bài hát"><svg><use href="#i-skip"/></svg></button><button class="icon-button playback-button" id="music-stop" aria-label="Dừng phát và xóa hàng đợi"><svg><use href="#i-stop"/></svg></button></div><form id="volume-form" class="volume-form"><label for="music-volume">Âm lượng <output id="volume-value">50%</output></label><div class="inline-form"><input id="music-volume" type="range" min="0" max="100" value="50"><button class="button secondary small" type="submit">Lưu</button></div></form><label class="field-label" for="music-loop">Lặp lại</label><select id="music-loop"><option value="off">Tắt</option><option value="track">Lặp bài hiện tại</option><option value="queue">Lặp hàng đợi</option></select><div class="music-options"><label class="toggle-row" for="music-autoplay"><span><strong>Tự phát tiếp</strong><small>Tìm bài mới khi hết hàng đợi</small></span><input id="music-autoplay" type="checkbox" role="switch"><span class="toggle-track"></span></label></div><button class="button secondary small disconnect-button" id="music-disconnect" type="button">Rời phòng thoại</button></article><article class="panel queue-panel"><div class="panel-heading"><h2>Hàng đợi</h2><span class="count-label" id="queue-count">0 bài</span></div><div class="queue-tools"><button class="button secondary small" id="music-shuffle" type="button">Trộn hàng đợi</button></div><div id="queue-list"></div></article></div></section>
+
+        <section class="page-section" id="page-battles" hidden><div class="info-strip"><span class="quick-icon purple"><svg><use href="#i-box"/></svg></span><div><strong><span id="case-count">—</span> hòm trong danh mục</strong><p>Xem trạng thái trận; hủy phòng chờ khi cần. Các trận đã bắt đầu tiếp tục quyết toán theo luật đã khóa.</p></div><span class="pill">Kết quả tự xóa · 1 phút</span></div><article class="panel"><div class="panel-heading"><h2>Phòng Battle</h2><span class="count-label" id="battle-count">0 phòng</span></div><div id="battle-list"></div></article></section>
+
+        <section class="page-section" id="page-catalogue" hidden><div class="catalogue-toolbar"><div class="catalogue-search"><label class="sr-only" for="catalogue-search">Tìm hòm</label><input id="catalogue-search" type="search" placeholder="Tìm hòm, Howl, AWP…" maxlength="80"></div><label class="sr-only" for="catalogue-group">Nhóm hòm</label><select id="catalogue-group"><option value="all">Tất cả nhóm</option></select><button class="button secondary" id="prices-refresh"><svg><use href="#i-refresh"/></svg>Đồng bộ giá</button></div><div class="catalogue-summary"><span id="catalogue-summary">Đang tải danh mục…</span><span class="subtle" id="catalogue-price-status"></span></div><div class="catalogue-grid" id="catalogue-grid"></div></section>
+
+        <section class="page-section" id="page-economy" hidden><div class="two-column"><article class="panel"><div class="panel-heading"><h2>Cấp xu cho thành viên</h2><span class="quick-icon peach"><svg><use href="#i-coins"/></svg></span></div><p class="panel-intro">Cộng xu vào ví trên máy chủ đang chọn. Mỗi lần cấp được ghi vào nhật ký quản trị.</p><form id="coins-form" class="stack-form"><label for="coins-member-search">Thành viên nhận xu</label><div class="member-picker" id="coins-member-picker"><input id="coins-user" name="userId" type="hidden"><div class="member-search-wrap"><input id="coins-member-search" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="coins-member-options" aria-describedby="coins-member-help" autocomplete="off" placeholder="Tìm theo tên hoặc ID Discord…" maxlength="100"><span aria-hidden="true">⌕</span></div><div id="coins-member-dropdown" class="member-dropdown" hidden><div id="coins-member-options" role="listbox" aria-label="Thành viên trong máy chủ"></div><p id="coins-member-status" class="member-search-status" role="status"></p></div><div id="coins-member-selected" class="member-selected" hidden></div><p id="coins-member-help" class="member-help">Chọn đúng người nhận. Tên hiển thị và ID giúp bạn phân biệt các thành viên.</p></div><label for="coins-amount">Số xu cần cộng</label><input id="coins-amount" name="amount" inputmode="decimal" required placeholder="Ví dụ: 1,000,000" maxlength="40"><label for="coins-reason">Ghi chú</label><input id="coins-reason" name="reason" required placeholder="Lý do cấp xu" maxlength="160"><button class="button primary" type="submit">Cấp xu <svg><use href="#i-arrow"/></svg></button></form></article><article class="panel"><div class="panel-heading"><h2>Tiệm Bánh Mây</h2><span class="badge" id="taixiu-status">Chưa thiết lập</span></div><p class="panel-intro">Chọn kênh để đặt bàn tự động hoặc tắt bàn trên máy chủ này.</p><form id="game-settings-form" class="stack-form"><label for="game-channel">Kênh đặt bàn</label><select id="game-channel"><option value="">Chọn kênh chữ…</option></select><label class="toggle-row" for="game-enabled"><span><strong>Bàn tự động</strong><small>Hiển thị bàn chơi trong kênh đã chọn</small></span><input id="game-enabled" type="checkbox" role="switch"><span class="toggle-track"></span></label><button class="button primary" type="submit">Lưu thiết lập</button></form><div class="note-box"><svg><use href="#i-shield"/></svg><p>Việc tắt bàn không hủy phần thưởng đã lưu hoặc thay đổi số dư của người chơi.</p></div></article></div><article class="panel wallet-panel"><div class="panel-heading"><h2>Ví thành viên</h2><span class="subtle">Các ví đang có dữ liệu</span></div><div id="wallet-list"></div></article></section>
+
+        <section class="page-section" id="page-settings" hidden><div class="two-column"><article class="panel"><div class="panel-heading"><h2>Máy chủ Discord</h2><span class="badge success">Đã kết nối</span></div><div id="guild-details"></div></article><article class="panel"><div class="panel-heading"><h2>Thông tin vận hành</h2></div><div id="system-details"></div><div class="note-box"><svg><use href="#i-shield"/></svg><p>Đăng nhập này có quyền quản trị bot. Luôn đăng xuất khi sử dụng máy tính dùng chung.</p></div></article></div></section>
+
+        <section class="page-section" id="page-activity" hidden><article class="panel"><div class="panel-heading"><h2>Nhật ký quản trị</h2><span class="subtle">Các thao tác qua trang web</span></div><div id="activity-list"></div></article></section>
+        <footer class="workspace-footer"><span>BOT STUDIO <span class="footer-divider">/</span> Không gian của bạn, trong tầm tay.</span><span id="footer-bot">Discord control center</span></footer>
+      </main>
+    </div>
+  </div>
+  <div id="initial-loading" class="initial-loading"><span class="loader"></span><p>Đang kết nối Bot Studio…</p></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="confirm-dialog"><form method="dialog"><span class="dialog-icon"><svg><use href="#i-shield"/></svg></span><h2 id="confirm-title">Xác nhận thao tác</h2><p id="confirm-message"></p><div class="dialog-actions"><button class="button secondary" value="cancel">Quay lại</button><button id="confirm-accept" class="button primary" value="confirm">Xác nhận</button></div></form></dialog>
+</body>
+</html>

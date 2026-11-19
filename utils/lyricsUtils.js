@@ -26,7 +26,7 @@ async function getLyrics(songTitle, artist = '') {
         const songs = await genius.songs.search(searchQuery);
         
         if (!songs || songs.length === 0) {
-            return null;
+            return { success: false, message: 'Không tìm thấy bài hát nào trên Genius.' };
         }
         
         // Lấy bài hát đầu tiên
@@ -36,19 +36,26 @@ async function getLyrics(songTitle, artist = '') {
         const lyrics = await song.lyrics();
         
         if (!lyrics) {
-            return null;
+            return { success: false, message: 'Bài hát này chưa có lời hoặc không thể lấy lời.' };
         }
         
-        // Chỉ lấy 5000 ký tự đầu để hiển thị (tránh vi phạm bản quyền)
-        const truncatedLyrics = lyrics.length > 5000
-            ? lyrics.substring(0, 5000) + '...\n\n[Xem đầy đủ tại Genius.com]'
+        // Đoạn xem trước phải vừa giới hạn 1024 ký tự của một embed field.
+        const truncatedLyrics = lyrics.length > 1000
+            ? lyrics.substring(0, 1000) + '…'
             : lyrics;
         
-        return truncatedLyrics;
+        return {
+            success: true,
+            title: song.title,
+            artist: song.artist.name,
+            lyrics: truncatedLyrics,
+            thumbnail: song.thumbnail,
+            url: song.url
+        };
         
     } catch (error) {
         console.error('Lỗi khi lấy lyrics:', error);
-        return null;
+        return { success: false, message: `Lỗi hệ thống: ${error.message}` };
     }
 }
 

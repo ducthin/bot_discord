@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="name">
+<title id="name">Vịt Báo Đời</title>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#123f65"/><stop offset="1" stop-color="#171626"/></linearGradient></defs>
+<rect width="128" height="128" rx="28" fill="url(#bg)"/>
+<circle cx="65" cy="66" r="51" fill="#f6d03f" opacity=".08"/>
+<circle cx="16" cy="21" r="3" fill="#f6d03f" opacity=".6"/>
+<circle cx="111" cy="109" r="4" fill="#f6d03f" opacity=".3"/>
+
+<path d="M35 79q-16 12-15 25h87q2-24-21-31" fill="#ffe75e" stroke="#c6a12f" stroke-width="3"/>
+<ellipse cx="63" cy="57" rx="32" ry="33" fill="#ffea72"/>
+<path d="M58 23q12-18 18-1m-3 1q15-12 15 0" fill="none" stroke="#ffea72" stroke-width="7" stroke-linecap="round"/>
+<path d="M31 49h29l-3 16H37Zm35 0h29l-4 16H70Z" fill="#172330"/>
+<path d="M59 52h9" stroke="#172330" stroke-width="5"/>
+<path d="M52 71q17-9 34 3-15 17-34 7Z" fill="#ff9b3e" stroke="#c56b35" stroke-width="3"/>
+<path d="M31 94l17-5m48 4-10 8" stroke="#d0a73c" stroke-width="4" stroke-linecap="round"/>
+
+</svg>

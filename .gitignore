@@ -1,7 +1,7 @@
 # Node
 node_modules/
+.runtime/
 npm-debug.log*
-package-lock.json
 
 # Environment variables
 .env
@@ -12,6 +12,8 @@ package-lock.json
 data/
 logs/
 *.log
+scratch_*
+coverage/
 
 # PM2
 .pm2/

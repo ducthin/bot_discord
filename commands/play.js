@@ -1,15 +1,26 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { initGuildMusicData, playMusic, createMusicConnection } = require('../utils/musicUtils');
-const { searchYoutube, getVideoInfo, isValidYouTubeUrl, isPlaylistUrl, getPlaylistVideos } = require('../utils/youtubeUtils');
+const { initGuildMusicData, playMusic, createMusicConnection, enqueueSongs } = require('../utils/musicUtils');
+const { searchYoutube, getVideoInfo, isValidYouTubeUrl, isPlaylistUrl, MAX_PLAYLIST_TRACKS } = require('../utils/youtubeUtils');
+const playlistCommand = require('./playlist');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('play')
-        .setDescription('Phát nhạc từ YouTube')
+        .setDescription('Phát bài hát, playlist hoặc Mix từ YouTube')
         .addStringOption(option =>
             option.setName('query')
-                .setDescription('Tên bài hát hoặc URL YouTube')
+                .setDescription('Tên bài hát, link video, playlist hoặc YouTube Mix')
                 .setRequired(true)
+        )
+        .addIntegerOption(option =>
+            option.setName('limit')
+                .setDescription(`Số bài tối đa khi phát playlist (mặc định: ${MAX_PLAYLIST_TRACKS})`)
+                .setMinValue(1)
+                .setMaxValue(MAX_PLAYLIST_TRACKS)
+        )
+        .addBooleanOption(option =>
+            option.setName('next')
+                .setDescription('Đưa bài hoặc playlist lên ngay sau bài đang phát')
         ),
 
     async execute(interaction) {
@@ -19,21 +30,27 @@ module.exports = {
             return interaction.reply('❌ Bạn cần vào voice channel trước!');
         }
 
-        await interaction.deferReply();
+        const query = interaction.options.getString('query');
+        const playNext = interaction.options.getBoolean('next') ?? false;
+
+        // Validate query
+        if (query.length > 500) {
+            return interaction.reply('❌ Từ khóa quá dài! Tối đa 500 ký tự.');
+        }
+
+        if (isPlaylistUrl(query)) {
+            const limit = interaction.options.getInteger('limit') ?? MAX_PLAYLIST_TRACKS;
+            return playlistCommand.execute(interaction, query, limit, playNext);
+        }
 
         const guildData = initGuildMusicData(guild.id);
-        guildData.textChannel = channel;
+        const queueEpoch = guildData.queueEpoch;
+        await interaction.deferReply();
 
-        const query = interaction.options.getString('query');
         let songInfo;
 
         // Kiểm tra xem có phải YouTube URL hay không
         if (isValidYouTubeUrl(query)) {
-            // Kiểm tra có phải playlist không
-            if (isPlaylistUrl(query)) {
-                return interaction.editReply('🎵 Phát hiện playlist! Sử dụng lệnh `/playlist` để phát toàn bộ playlist, hoặc copy URL video cụ thể để phát 1 bài.');
-            }
-            
             songInfo = await getVideoInfo(query);
             if (!songInfo) {
                 return interaction.editReply('❌ Không thể lấy thông tin video!');
@@ -45,21 +62,17 @@ module.exports = {
             }
         }
 
-        if (!songInfo.requester) {
-            songInfo.requester = member.user.username;
-        }
-
-        console.log('Song info:', songInfo); // Debug log
+        if (queueEpoch !== guildData.queueEpoch) return interaction.editReply('⏹️ Yêu cầu đã hủy vì hàng đợi vừa được dừng.');
 
         // Thêm thông tin requester
         songInfo.requester = member.user.username;
         songInfo.requesterId = member.user.id;
 
-
         // Kết nối voice channel nếu chưa kết nối
         createMusicConnection(member, guildData);
+        guildData.textChannel = channel;
 
-        guildData.queue.push(songInfo);
+        const position = enqueueSongs(guildData, [songInfo], playNext);
 
         if (!guildData.isPlaying) {
             playMusic(guildData);
@@ -67,15 +80,15 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor('#0099ff')
-            .setTitle('✅ Đã thêm vào queue')
+            .setTitle(playNext ? '⏭️ Đã đưa bài lên phát tiếp' : '✅ Đã thêm vào queue')
             .setDescription(`**${songInfo.title}**`)
             .addFields(
-                { name: 'Vị trí trong queue', value: `${guildData.queue.length}`, inline: true },
-                { name: 'Thời lượng', value: songInfo.duration, inline: true },
+                { name: 'Vị trí trong queue', value: `${position}`, inline: true },
+                { name: 'Thời lượng', value: songInfo.duration || 'Không xác định', inline: true },
                 { name: 'Người yêu cầu', value: member.user.username, inline: true }
             )
-            .setThumbnail(songInfo.thumbnail);
+            .setThumbnail(songInfo.thumbnail || null);
 
-        interaction.followUp({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] });
     }
 };

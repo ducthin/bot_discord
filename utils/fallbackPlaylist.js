@@ -53,20 +53,4 @@ function searchFallback(query) {
     return { ...fallbackSongs[0] };
 }
 
-// Lấy playlist ngẫu nhiên
-function getRandomPlaylist(count = 5) {
-    const shuffled = [...fallbackSongs].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, Math.min(count, fallbackSongs.length));
-}
-
-// Lấy tất cả bài hát
-function getAllSongs() {
-    return [...fallbackSongs];
-}
-
-module.exports = {
-    searchFallback,
-    getRandomPlaylist,
-    getAllSongs,
-    fallbackSongs
-};
+module.exports = { searchFallback };

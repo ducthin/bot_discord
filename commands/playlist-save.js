@@ -1,8 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const fs = require('fs').promises;
-const path = require('path');
-
-const PLAYLISTS_DIR = path.join(__dirname, '../data/playlists');
+const playlists = require('../utils/playlistStore');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -53,32 +50,32 @@ module.exports = {
         }
 
         const userId = member.user.id;
-        const userPlaylistsDir = path.join(PLAYLISTS_DIR, userId);
 
-        // Tạo thư mục nếu chưa có
-        try {
-            await fs.mkdir(userPlaylistsDir, { recursive: true });
-        } catch (error) {
-            // Thư mục đã tồn tại
+        if (subcommand !== 'list') {
+            try {
+                playlists.validatePlaylistName(interaction.options.getString('name'));
+            } catch (error) {
+                return interaction.reply({ content: error.message, ephemeral: true });
+            }
         }
 
         switch (subcommand) {
             case 'save':
-                await this.savePlaylist(interaction, userPlaylistsDir);
+                await this.savePlaylist(interaction, userId);
                 break;
             case 'load':
-                await this.loadPlaylist(interaction, userPlaylistsDir);
+                await this.loadPlaylist(interaction, userId);
                 break;
             case 'list':
-                await this.listPlaylists(interaction, userPlaylistsDir);
+                await this.listPlaylists(interaction, userId);
                 break;
             case 'delete':
-                await this.deletePlaylist(interaction, userPlaylistsDir);
+                await this.deletePlaylist(interaction, userId);
                 break;
         }
     },
 
-    async savePlaylist(interaction, userPlaylistsDir) {
+    async savePlaylist(interaction, userId) {
         const { initGuildMusicData } = require('../utils/musicUtils');
         const guildData = initGuildMusicData(interaction.guild.id);
         
@@ -87,37 +84,45 @@ module.exports = {
         }
 
         const playlistName = interaction.options.getString('name');
-        const playlistPath = path.join(userPlaylistsDir, `${playlistName}.json`);
 
         const playlistData = {
             name: playlistName,
-            songs: guildData.queue,
+            songs: guildData.queue.map(song => ({
+                title: song.title,
+                url: song.url,
+                duration: song.duration,
+                thumbnail: song.thumbnail
+            })),
             createdAt: new Date().toISOString(),
             totalSongs: guildData.queue.length
         };
 
         try {
-            await fs.writeFile(playlistPath, JSON.stringify(playlistData, null, 2));
-            interaction.reply(`💾 Đã lưu playlist "${playlistName}" với ${guildData.queue.length} bài hát!`);
+            await playlists.save(userId, playlistName, playlistData);
+            interaction.reply(`💾 Đã lưu playlist **"${playlistName}"** với ${guildData.queue.length} bài hát!`);
         } catch (error) {
             console.error('Lỗi khi lưu playlist:', error);
             interaction.reply('❌ Lỗi khi lưu playlist!');
         }
     },
 
-    async loadPlaylist(interaction, userPlaylistsDir) {
+    async loadPlaylist(interaction, userId) {
         const playlistName = interaction.options.getString('name');
-        const playlistPath = path.join(userPlaylistsDir, `${playlistName}.json`);
 
         try {
-            const data = await fs.readFile(playlistPath, 'utf8');
-            const playlistData = JSON.parse(data);
+            const playlistData = await playlists.load(userId, playlistName);
+            if (!playlistData) return interaction.reply(`❌ Không tìm thấy playlist "${playlistName}"!`);
 
-            const { initGuildMusicData, playMusic } = require('../utils/musicUtils');
+            const { initGuildMusicData, playMusic, createMusicConnection } = require('../utils/musicUtils');
             const guildData = initGuildMusicData(interaction.guild.id);
 
+            createMusicConnection(interaction.member, guildData);
+            guildData.textChannel = interaction.channel;
+
             // Thêm các bài hát vào queue
-            guildData.queue.push(...playlistData.songs);
+            guildData.queue.push(...playlistData.songs.map(song => ({
+                ...song, requester: interaction.member.user?.username, requesterId: interaction.member.user?.id
+            })));
 
             const embed = new EmbedBuilder()
                 .setColor('#00ff00')
@@ -145,25 +150,15 @@ module.exports = {
         }
     },
 
-    async listPlaylists(interaction, userPlaylistsDir) {
+    async listPlaylists(interaction, userId) {
         try {
-            const files = await fs.readdir(userPlaylistsDir);
-            const playlists = files.filter(file => file.endsWith('.json'));
+            const saved = await playlists.list(userId);
 
-            if (playlists.length === 0) {
+            if (saved.length === 0) {
                 return interaction.reply('📂 Bạn chưa có playlist nào được lưu!');
             }
 
-            const playlistInfo = [];
-            for (const file of playlists) {
-                try {
-                    const data = await fs.readFile(path.join(userPlaylistsDir, file), 'utf8');
-                    const playlist = JSON.parse(data);
-                    playlistInfo.push(`**${playlist.name}** - ${playlist.totalSongs} bài hát`);
-                } catch (error) {
-                    // Skip invalid files
-                }
-            }
+            const playlistInfo = saved.map(playlist => `**${playlist.name}** - ${playlist.totalSongs} bài hát`);
 
             const embed = new EmbedBuilder()
                 .setColor('#0099ff')
@@ -174,16 +169,17 @@ module.exports = {
             interaction.reply({ embeds: [embed] });
 
         } catch (error) {
-            interaction.reply('📂 Bạn chưa có playlist nào được lưu!');
+            console.error('Lỗi khi đọc danh sách playlist:', error.message);
+            return interaction.reply('❌ Lỗi khi đọc danh sách playlist!');
         }
     },
 
-    async deletePlaylist(interaction, userPlaylistsDir) {
+    async deletePlaylist(interaction, userId) {
         const playlistName = interaction.options.getString('name');
-        const playlistPath = path.join(userPlaylistsDir, `${playlistName}.json`);
 
         try {
-            await fs.unlink(playlistPath);
+            const removed = await playlists.remove(userId, playlistName);
+            if (!removed) return interaction.reply(`❌ Không tìm thấy playlist "${playlistName}"!`);
             interaction.reply(`🗑️ Đã xóa playlist "${playlistName}"!`);
         } catch (error) {
             if (error.code === 'ENOENT') {

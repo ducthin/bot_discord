@@ -4,16 +4,16 @@
   "description": "Bot Discord phát nhạc với các tính năng nâng cao",
   "main": "index.js",
   "engines": {
-    "node": ">=18.0.0",
+    "node": ">=22.12.0",
     "npm": ">=8.0.0"
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "build": "npm install",
-    "pm2": "pm2 start ecosystem.config.js",
-    "docker": "docker-compose up -d",
-    "docker-logs": "docker-compose logs -f",
+    "build:play": "node scripts/build-play.mjs",
+    "db:init": "node scripts/database.js init",
+    "db:check": "node scripts/database.js check",
+    "db:reset": "node scripts/database.js reset",
+    "dev": "nodemon --config .nodemonrc index.js",
     "test": "jest"
   },
   "keywords": [
@@ -25,20 +25,23 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/opus": "^0.9.0",
-    "@discordjs/voice": "^0.17.0",
-    "@distube/ytdl-core": "^4.16.12",
+    "@discordjs/opus": "^0.10.0",
+    "@discordjs/voice": "^0.19.2",
+    "@snazzah/davey": "^0.1.11",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2",
     "ffmpeg-static": "^5.2.0",
     "genius-lyrics": "^4.4.7",
     "libsodium-wrappers": "^0.7.11",
-    "node-opus": "^0.3.3",
     "opusscript": "^0.0.8",
-    "youtube-sr": "^4.3.11"
+    "pg": "^8.23.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "yt-dlp-exec": "^1.0.2",
+    "yt-search": "^2.10.4"
   },
   "devDependencies": {
+    "esbuild": "^0.25.12",
     "jest": "^30.0.5",
     "nodemon": "^3.0.2"
   }

@@ -1,0 +1,2952 @@
+{
+  "source": {
+    "project": "ByMykel/CSGO-API",
+    "revision": "c52da3543f4cb57958d1e5c1847e6b692c02af4c",
+    "scope": "Mil-Spec and higher weapon finishes from selected collections; standalone Contraband Howl."
+  },
+  "collections": [
+    {
+      "id": "collection-set-cobblestone",
+      "name": "The Cobblestone Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_cobblestone.7f470f4ad76920182d29cafc4a7fcbbb5de0e3ec.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-994f496c1e81",
+          "skin-bb430e7deeba"
+        ],
+        [
+          "skin-eb5c3a076134",
+          "skin-dcb95b6f2246"
+        ],
+        [
+          "skin-7678cc4af1fb"
+        ],
+        [
+          "skin-4f8d99d09ded"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-norse",
+      "name": "The Norse Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_norse.d91172d71b95efb4e334d194cf6b0a5ab9621e8c.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-80d93cecc826",
+          "skin-f489d119026b",
+          "skin-1322679348a3",
+          "skin-4c2dd0cc0324"
+        ],
+        [
+          "skin-24b4ae2fefde",
+          "skin-3efd2f4af3ac",
+          "skin-791ee8bfc7fa"
+        ],
+        [
+          "skin-fe643065d84b"
+        ],
+        [
+          "skin-2b99573c887b"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-gods-and-monsters",
+      "name": "The Gods and Monsters Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_gods_and_monsters.c66f30b18e90e05e6a727c5cda23912ffe49ffaf.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-db0becc8452a",
+          "skin-df8f2056f525"
+        ],
+        [
+          "skin-89ea65b63946",
+          "skin-68c8a5bf2c2a"
+        ],
+        [
+          "skin-ad324799f97c"
+        ],
+        [
+          "skin-8af685c49feb"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-stmarc",
+      "name": "The St. Marc Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_stmarc.00c570e3e140452c95e68bfa4868c9ce1c5dc1c4.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-5a552bf64f59",
+          "skin-4644eea45e85",
+          "skin-99182adaafd6",
+          "skin-5b9bb3d791e6"
+        ],
+        [
+          "skin-7684f58afc31",
+          "skin-f78ee5dc6e7e",
+          "skin-05b6726350df"
+        ],
+        [
+          "skin-b85595a826a7"
+        ],
+        [
+          "skin-921a5a81c48a"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-dust-2-2021",
+      "name": "The 2021 Dust 2 Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_dust_2_2021.318944ebb9e3dae51cd87d38b5d3584a2fa9425f.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-8d6ad2c220f9",
+          "skin-38eda175bd2a",
+          "skin-844716d091ce",
+          "skin-dc1a0332945f"
+        ],
+        [
+          "skin-c14e09c62ca0",
+          "skin-294fc9bca944",
+          "skin-af29d4349bcd"
+        ],
+        [
+          "skin-f0ba928c4c15",
+          "skin-8610195a9f7f"
+        ],
+        [
+          "skin-58267df1cb9f"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-mirage-2021",
+      "name": "The 2021 Mirage Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_mirage_2021.f1c9b5169b9fb9d6e0933baba0514dd34d6c9e19.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-08730cd85d09",
+          "skin-f9bef4ddaca3",
+          "skin-a67615da8679",
+          "skin-7f4d0f478610"
+        ],
+        [
+          "skin-bd7cf4e7165b",
+          "skin-838f75720b22",
+          "skin-a848a7d8862e"
+        ],
+        [
+          "skin-169fc42e8d8a",
+          "skin-4d9b6a2f7a10"
+        ],
+        [
+          "skin-6c02d562ff70"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-vertigo-2021",
+      "name": "The 2021 Vertigo Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_vertigo_2021.611413bf4d18e0c888054707dff98c612049f097.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-f4a679a04e0b",
+          "skin-560a56662f2d",
+          "skin-8ef9f19f48fd",
+          "skin-58ad413e99d2"
+        ],
+        [
+          "skin-807c0ef26d8e",
+          "skin-4d690457f5c0",
+          "skin-3f9b068b6276"
+        ],
+        [
+          "skin-7ee34568efd6",
+          "skin-d67bf60c0699"
+        ],
+        [
+          "skin-5b5a4da33e83"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-canals",
+      "name": "The Canals Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_canals.56ae4549ece13ec63d017e7fa24dc0283572670f.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-5eb6229ab854",
+          "skin-148a2a524ba9",
+          "skin-077ca0be4b1f",
+          "skin-13d1c82e4d8d"
+        ],
+        [
+          "skin-895e721a640e",
+          "skin-ed43fbef2a5f",
+          "skin-ee24d57e2f5d"
+        ],
+        [
+          "skin-3146353a788f"
+        ],
+        [
+          "skin-549330dac6c0"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-kimono",
+      "name": "The Rising Sun Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_kimono.eec9d131eed8efec7910f137cf0cadb710e576c8.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-6dc36be1c90e",
+          "skin-74686c262656",
+          "skin-c097b349041f"
+        ],
+        [
+          "skin-bbc154da8876",
+          "skin-aaeb9db13c75",
+          "skin-dff5f10fed23",
+          "skin-695797b5acd6"
+        ],
+        [
+          "skin-cde9a27f0dd5"
+        ],
+        [
+          "skin-6f4ba747e1a4"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-op10-t",
+      "name": "The Havoc Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_op10_t.18b6dd49906d15a5f44f1477ca6139c7ab491197.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-e63e9d7401f5",
+          "skin-3190df4f462d",
+          "skin-2c61427e2101",
+          "skin-62bb5a38a96d"
+        ],
+        [
+          "skin-10a21c802ec1",
+          "skin-4be502157e9f",
+          "skin-028e0476ad38"
+        ],
+        [
+          "skin-584e1dbd3391",
+          "skin-97cabeaedccd"
+        ],
+        [
+          "skin-354b68a4149b"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-op10-ct",
+      "name": "The Control Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_op10_ct.aaf2dd57a339a610de6f4514a76eb1e846647cc0.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-bb64064419aa",
+          "skin-1bd56f994f59",
+          "skin-6e56f8710eff",
+          "skin-433c273a49c2"
+        ],
+        [
+          "skin-d73f5bc23efd",
+          "skin-72c4240d9c33",
+          "skin-cbc1eac9444c"
+        ],
+        [
+          "skin-fa4306cae873",
+          "skin-144ddd95becd"
+        ],
+        [
+          "skin-8fbcba8495ae"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-op10-ancient",
+      "name": "The Ancient Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_op10_ancient.e90a2018381216be882d96c9e6c314d99f5097fa.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-41f176a064d2",
+          "skin-07b30f648b35",
+          "skin-4f5a5aa33496",
+          "skin-2d48a6eb741e"
+        ],
+        [
+          "skin-e95b5ddb7a37",
+          "skin-b21f4fbf965a",
+          "skin-c682eedb501e"
+        ],
+        [
+          "skin-1dd39fb89c94",
+          "skin-2faa35fd1c44"
+        ],
+        [
+          "skin-f448735cd1c2"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-chopshop",
+      "name": "The Chop Shop Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_chopshop.b6ed206d7164f48594212559a70312123a12f9b5.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-ee40f2adf026",
+          "skin-2be72384c68f",
+          "skin-7eec94171de3",
+          "skin-b40e5d3bf2ff",
+          "skin-5f1ca8e9f44f"
+        ],
+        [
+          "skin-4a300bc642bc",
+          "skin-195edfb272ee"
+        ],
+        [
+          "skin-0926fb5dddc9",
+          "skin-7562e4bd91c7"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-bank",
+      "name": "The Bank Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_bank_png.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-3b1a5d288858",
+          "skin-8019620598a2",
+          "skin-5fc8e75d4fa5"
+        ],
+        [
+          "skin-08d8e5941dfe"
+        ],
+        [
+          "skin-eb2bf672505f"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-assault",
+      "name": "The Assault Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_assault_png.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-0eafc66d4417",
+          "skin-25d91e72e4d5"
+        ],
+        [
+          "skin-da5da69785da",
+          "skin-34b6af4ce537"
+        ],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-dust",
+      "name": "The Dust Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_dust_png.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-e4b705357181",
+          "skin-5f61bd5eec0a",
+          "skin-9459e126b14a"
+        ],
+        [
+          "skin-e30d23329629",
+          "skin-6d947a849473",
+          "skin-cf0d243b1b14"
+        ],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-dust-2",
+      "name": "The Dust 2 Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_dust_2_png.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-891034135d58",
+          "skin-2d90d1532701",
+          "skin-473110a625aa"
+        ],
+        [
+          "skin-1faf71e7b6fe"
+        ],
+        [
+          "skin-4429b6507c58"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-mirage",
+      "name": "The Mirage Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_mirage_png.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-e716148d4001",
+          "skin-80f4bc7a2010",
+          "skin-045414110f51"
+        ],
+        [
+          "skin-b7fa0b0519bd"
+        ],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-italy",
+      "name": "The Italy Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_italy_png.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-4e5b581684d4",
+          "skin-16044409b9f9",
+          "skin-5399c334e3b4"
+        ],
+        [
+          "skin-ec9d6cd13e48"
+        ],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-cache",
+      "name": "The Cache Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_cache.1bdc24f9fbd7532a2eb3e26d6ac33e52fc4a0efc.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-c35e4824fa14",
+          "skin-f93016c04c3b",
+          "skin-46ba27249a98",
+          "skin-9f0f8f333aaa",
+          "skin-e7703810e2d0"
+        ],
+        [
+          "skin-91ecab26594d",
+          "skin-81dd750d8bc9"
+        ],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-baggage",
+      "name": "The Baggage Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_baggage_png.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-74b1243eefd1",
+          "skin-7599996181be",
+          "skin-8667828828a0"
+        ],
+        [
+          "skin-37e8f87eff72",
+          "skin-d13cfff64bcd"
+        ],
+        [
+          "skin-2e785b354884"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-overpass",
+      "name": "The Overpass Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_overpass.3b85a46ee2d4424367831a3f5994bf59f19f08bd.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-3a57219a9579",
+          "skin-993020f09ddf",
+          "skin-11ddb95a9bd7"
+        ],
+        [
+          "skin-665b5d16532c",
+          "skin-d7d145b204a5"
+        ],
+        [
+          "skin-5e983b2fc436"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-nuke",
+      "name": "The Nuke Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_nuke_png.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-2ce369af670c"
+        ],
+        [
+          "skin-cad695fe4530",
+          "skin-89f5d50a2ec7"
+        ],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-inferno",
+      "name": "The Inferno Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_inferno_png.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-ddc4aeda27ca",
+          "skin-62fc4feb5c7c"
+        ],
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-anubis",
+      "name": "The Anubis Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_anubis_png.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-80cb7aad6895",
+          "skin-05f333baf59c",
+          "skin-29609fc133b0",
+          "skin-7c46ff3046d0"
+        ],
+        [
+          "skin-9967f102e7ca",
+          "skin-0fbe9304a4d2",
+          "skin-2c6b76cc25a1"
+        ],
+        [
+          "skin-3c42ea1dd98c",
+          "skin-d9c0a296a5e5"
+        ],
+        [
+          "skin-bc3cce11bb11"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-overpass-2024",
+      "name": "The Overpass 2024 Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_overpass_2024.svg",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-0df7ea666c3d",
+          "skin-4d819a5e4be2",
+          "skin-791e6727b6a9",
+          "skin-45d74b83b2a0"
+        ],
+        [
+          "skin-6e1eac6f1a57",
+          "skin-0ac8d26ea3c5",
+          "skin-0e56be318449"
+        ],
+        [
+          "skin-97b0720f09ea",
+          "skin-91147006443a"
+        ],
+        [
+          "skin-16430ed7568b"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-train-2021",
+      "name": "The 2021 Train Collection",
+      "image": "https://cdn.steamstatic.com/apps/730/icons/econ/set_icons/set_train_2021.a000b6d4ae1978aeced8ec31aa8ef5a0014dae29.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-be36aa1159cb",
+          "skin-d89f3dc16ecd",
+          "skin-4214342c6e7b",
+          "skin-dfbb0ed38678",
+          "skin-5168e8b91374",
+          "skin-f74957f8857b",
+          "skin-6cccc7b762e4"
+        ],
+        [
+          "skin-4984403ab0c0",
+          "skin-4775500ef0bb",
+          "skin-a1675608a64c",
+          "skin-af317ab7f2af",
+          "skin-fefcd20ccc3b"
+        ],
+        [
+          "skin-072c06d710fc",
+          "skin-ff4f93793484",
+          "skin-47bca40182d8"
+        ],
+        [
+          "skin-b1ff8720cf58",
+          "skin-0fc89d8cca2d",
+          "skin-2479da1a5f04",
+          "skin-45d3638f698c",
+          "skin-a841a452bb30",
+          "skin-95749d3887bc"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-realism-camo",
+      "name": "The Sport & Field Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_realism_camo.svg",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-6aaf237dc6ae",
+          "skin-c97106696572",
+          "skin-ad8878d8dfca",
+          "skin-7d2a2ccef9f1"
+        ],
+        [
+          "skin-277f6e42830d",
+          "skin-209298d0eb05",
+          "skin-8ea306517618"
+        ],
+        [
+          "skin-12720387d19a",
+          "skin-6e6550613810"
+        ],
+        [
+          "skin-81eee26a1c31"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-graphic-design",
+      "name": "The Graphic Design Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_graphic_design.svg",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-643580f5e594",
+          "skin-67dfc7fef62f",
+          "skin-9527d46c449f",
+          "skin-36f03d5a542f"
+        ],
+        [
+          "skin-d2082b23439a",
+          "skin-efc5c4835241",
+          "skin-b5bc3553f7e1"
+        ],
+        [
+          "skin-544a3d0462c1",
+          "skin-150eda31902a"
+        ],
+        [
+          "skin-1c7cbe2db8f1"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "collection-set-inferno-2",
+      "name": "The 2018 Inferno Collection",
+      "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/set_icons/set_inferno_2_png.png",
+      "kind": "collection",
+      "nonMarketable": true,
+      "pools": [
+        [
+          "skin-c0a577a1a5b2",
+          "skin-ff8258cd7dac",
+          "skin-a2c7bfcb6607",
+          "skin-f1e77412769d"
+        ],
+        [
+          "skin-9cd9ae26b864",
+          "skin-7036be1d6dd2",
+          "skin-d721d2a6a01c"
+        ],
+        [
+          "skin-248559e8b343",
+          "skin-a7e309c3d23a"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "special-contraband",
+      "name": "Contraband Archive (Bot Custom)",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afVSKP-EAm6extF6ueZhW2exwkl2tmTXwt39eCiUPQR2DMN4TOVetUK8xoLgM-K341eM2otDnC6okGoXufBz_TAB",
+      "kind": "collection",
+      "nonMarketable": true,
+      "tradeUp": false,
+      "pools": [
+        [],
+        [],
+        [],
+        [
+          "skin-8aacf99e7f2f"
+        ],
+        []
+      ]
+    }
+  ],
+  "skins": {
+    "skin-994f496c1e81": {
+      "name": "P2000 | Chainmail",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL5lYayrXIL0POjV6dlIfmdA2aZzdF6ueZhW2fqxU4k6znTn434JHnEPA9yWcR2TLIJ4UK4w9e2Nbjr4QbX2owXnyr7kGoXuSuECNR4",
+      "min": 0,
+      "max": 0.22,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-cobblestone"
+    },
+    "skin-bb430e7deeba": {
+      "name": "MP9 | Dark Age",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f_C9k4ve6aahSKf6fD36vzedxuPUnG3uwxxkk6jnWmdqsJy-UbFV0DZV4FLRctUXqwIWyNb_r5Qbdg4lGzzK-0H2q-xqNvQ",
+      "min": 0,
+      "max": 0.22,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-cobblestone"
+    },
+    "skin-eb5c3a076134": {
+      "name": "CZ75-Auto | Chalice",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLyhMG1_B1a4s28Z71sLM-fB2CY1aBzsrQ5HnyyzBh25jzcyI3_dyqXaFcmC8ByReBZuxi-lYXlMei05FSPlcsbmsOlfuvI",
+      "min": 0,
+      "max": 0.1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-cobblestone"
+    },
+    "skin-dcb95b6f2246": {
+      "name": "Desert Eagle | Hand Cannon",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7uORYKVjJPOSAGmfz9F6ueZhW2eww0t-6mrUn977cinDZ1IgD8YiTeUIthjpk9zkYem04wTXj4oRnCv7kGoXuTIzWSlA",
+      "min": 0.01,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-cobblestone"
+    },
+    "skin-7678cc4af1fb": {
+      "name": "M4A1-S | Knight",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_GeMWqV1e96o95lRi67gVNwsWTQzdn4JHyQZ1QhWMZyQe5YsxK-ktPnZOiwtVDcjo9ExS393ytB8G81tGXpYjdX",
+      "min": 0,
+      "max": 0.1,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-cobblestone"
+    },
+    "skin-4f8d99d09ded": {
+      "name": "AWP | Dragon Lore",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqYaF7IfysCnWRxuF4j-B-Xxa_nBovp3Pdwtj9cC_GaAd0DZdwQu9fuhS4kNy0NePntVTbjYpCyyT_3CgY5i9j_a9cBkcCWUKV",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-cobblestone"
+    },
+    "skin-80d93cecc826": {
+      "name": "SCAR-20 | Brass",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLinZfyr3Jk7uORarZsM-OsAm6Xyfo457MwH3zlzEwh6mXWw9qpdniQO1MmCJZ5QeBe5xa5wdfvZO234lOI3pUFk3uBClMh1w",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-norse"
+    },
+    "skin-f489d119026b": {
+      "name": "CZ75-Auto | Emerald Quartz",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLyhMG1_B1a4s2ter1-NPGfAm6KxOpJt_NsSieMmRQguynLyNivIn6XPFUnXsYmFuNbukK6ltfiYeux5A2M2dgXyCqo2igY7yhutfFCD_SCQHbp0w",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-norse"
+    },
+    "skin-1322679348a3": {
+      "name": "XM1014 | Frost Borre",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk7v-RY6piNOOsHW6c1-tkj-1gSCGn20V05W2Dw9v8ICjGbQMkWJd4TedZtRGxkNDnNOjqsgGN34MXxX76jH9XrnE82FMLyIU",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-norse"
+    },
+    "skin-4c2dd0cc0324": {
+      "name": "MAC-10 | Copper Borre",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1a4s2lZqt5M8-RHGiHz9F6ueZhW2eywBwhsWmAz9-peSjFalQmCJFyTeEC4UO5kNTjNOy0sgXa3oxNzC36kGoXufH8E8DI",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-norse"
+    },
+    "skin-24b4ae2fefde": {
+      "name": "AUG | Flame Jörmungandr",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf_C9k5f28ZZtiMvGdCWKvzedxuPUnTn7glkly423Xy4yoJHOWaFR0A5YlQrNc5xXrm93hZejntQWN3YNCzzK-0H2szzSoFw",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-norse"
+    },
+    "skin-3efd2f4af3ac": {
+      "name": "Desert Eagle | Emerald Jörmungandr",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7v-RYqt_Lc-UHGKVz9F6ueZhW2fqzB51sGiGzNqrJXqWbAYmCpJ0RuYDshm_xNPmZuy07wDY3YwXni6okGoXuekvMmaE",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-norse"
+    },
+    "skin-791ee8bfc7fa": {
+      "name": "P90 | Astral Jörmungandr",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf_C9k5f28ZZtvLOWWMWuZxuZi_rJtFiziwkom4GXTyNqrIC-TPVMgApAkE-EMtUS-xoCzNry35Fff3t5bjXKprRMe7_8",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-norse"
+    },
+    "skin-fe643065d84b": {
+      "name": "Negev | Mjölnir",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_m5Hl6x1c_M2gbaNoNs-HBmiC_uJ_t-l9AXDhxRsi62yEmYqrdSmSbQMhWcN3EO8KshHpw4LmP-Oz51bcjNgXn3ngznQe6IKqifc",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-norse"
+    },
+    "skin-2b99573c887b": {
+      "name": "AWP | Gungnir",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf-jFk7uW-V6N4LvedB3WvzedxuPUnHnjnzUl0sWrdztitI3rDZgJzAsZ1QOFY4UPqldDgMO_l41HXit9AmTK-0H227dAsvQ",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-norse"
+    },
+    "skin-db0becc8452a": {
+      "name": "UMP-45 | Minotaur's Labyrinth",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkk4a0qB1Y-s2iaaZ0MvmdGm-vzedxuPUnHSiwwUUh5jndn939dC2QaVApXJdwR7Ncsxe8xtWyMrmwtAWIjohGzzK-0H1h0wYN6w",
+      "min": 0,
+      "max": 0.39,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-gods-and-monsters"
+    },
+    "skin-df8f2056f525": {
+      "name": "MP9 | Pandora's Box",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f_CNk__OgbKt_Ic-fB2CY1aAv5LE9Hyu1wUtx5WTUyYmrcHiUbgIlCcF5Q7RZtUKwlNDiZL7q4QTblcsbmlthBLtr",
+      "min": 0,
+      "max": 0.3,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-gods-and-monsters"
+    },
+    "skin-89ea65b63946": {
+      "name": "G3SG1 | Chronos",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2zYXnrB1Y-s2tYLZiLv-AMWDD0uknj-1gSCGn20R1sG3dyt2qdyiWbwB2A8R0QeJcska6x9znNurrsgWNjooWxX37iyhXrnE8dtReaHc",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-gods-and-monsters"
+    },
+    "skin-68c8a5bf2c2a": {
+      "name": "M4A1-S | Icarus Fell",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_iKMW6TwPxjo95lRi67gVN_smmHyor9eHyUZwImDpJzEeZf4xS6kN2zY77i7wPdjtgXn3msin4b8G81tDwr8lc2",
+      "min": 0,
+      "max": 0.1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-gods-and-monsters"
+    },
+    "skin-ad324799f97c": {
+      "name": "M4A4 | Poseidon",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0OKhe6FkJP-dMWuZxuZi_uM9Sn23xkx_sG3VyNyqcnnFZgchDMYjQuMJtRHuw9PvZuPjtlCI3d9bjXKpHL2aoaM",
+      "min": 0,
+      "max": 0.33,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-gods-and-monsters"
+    },
+    "skin-8af685c49feb": {
+      "name": "AWP | Medusa",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqfbdsH_GEHlicyOl-pK85TC23wk12tWSGnNr6JXqRPVUnA5J5RLIKshS-l4HuYbji7lfajdgU02yg2bOcOBD3",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-gods-and-monsters"
+    },
+    "skin-5a552bf64f59": {
+      "name": "UMP-45 | Day Lily",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkk4a0qB1T9s2sZKtiLc-BC2OvzedxuPUnGHDmxEl-5mWGzYysdiifP1dzDZMmQe9ZsBnrl9yzZOPrtQTaj9lAxDK-0H1hFDwwPA",
+      "min": 0,
+      "max": 0.55,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-stmarc"
+    },
+    "skin-4644eea45e85": {
+      "name": "Five-SeveN | Crimson Blossom",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRYL1SIuWXMXWVxdF6ueZhW2ewkE5162rRnNerIy6WagApDptyRuVZshbql9DuMOPj71CI2YoRzyqokGoXufqVyZvA",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-stmarc"
+    },
+    "skin-99182adaafd6": {
+      "name": "MP7 | Teal Blossom",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsHf7jJk7eeqV6N_JfWdMWuZxuZi_uAwTnC1zE1zsWTSy936di-fb1AnCMYlTeINsBbrm9S1Mr7r5gKLi9lbjXKpdi5Lf9g",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-stmarc"
+    },
+    "skin-5b9bb3d791e6": {
+      "name": "FAMAS | Sundown",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1I_82-aahgH-OGAHSV1dF6ueZhW2frzEQhsWrRzNqoIHjCbgR1C5ZxRuIPsUO9l9XiYrnh7lPdj90Uni__kGoXuWBgr_h1",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-stmarc"
+    },
+    "skin-7684f58afc31": {
+      "name": "SSG 08 | Sea Calico",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1T9s2oZKt6JeKAMXSEzO9ks95lRi67gVMl5DuEm9ereCmVawImWZMhRLIDu0a7ktKzN7nq5lePi41Bn3r83H8b8G81tNArbz2X",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-stmarc"
+    },
+    "skin-f78ee5dc6e7e": {
+      "name": "Glock-18 | Synth Leaf",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1T9s2ibaVrH_KfG2KvzedxuPUnGnuywx4h52nQzomsInmVbw8mCZAhR-UP4BHpldXhZevn7wXc2dkUnjK-0H1CafWWiA",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-stmarc"
+    },
+    "skin-05b6726350df": {
+      "name": "AUG | Midnight Lily",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf_C9k7f6hZ6lSIvyGC1icyOl-pK8-FnDrlE8k62uAytipeSqRaFcoC8BwQbIM5xjtwdWzMr6ztAPd2YNA02yg2RS7P3lf",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-stmarc"
+    },
+    "skin-b85595a826a7": {
+      "name": "MP9 | Wild Lily",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f_jdk4uL3V61-LPGdCliWzeFkse1WQyC0nQlp4WuHz4mpcCrDZ1QhCcR5FrUJtkK9lNPuYezh4gDf2ItNxCr8iypJujErvbjAJv0dlg",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-stmarc"
+    },
+    "skin-921a5a81c48a": {
+      "name": "AK-47 | Wild Lotus",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlV61-LPGdCliWzeFkse1WQyC0nQlpsDuGyt-pdnyRPA4hDcYkR-QPuhi-wdPuYbyx5AaMidkQnC_-2ilIuzErvbi4ijV5Mw",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-stmarc"
+    },
+    "skin-8d6ad2c220f9": {
+      "name": "P250 | Black & Tan",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwipC0Pare6F_NM-eG2uEyO13vd5lRi67gVMm5GrTyN-ueH6fO1MlDMd2RLQC50Trw4fvMuPns1eLj9hHzCn4j3lK8G81tJittFNq",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-dust-2-2021"
+    },
+    "skin-38eda175bd2a": {
+      "name": "Nova | Quick Sand",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwipC0OaheqpSI_GeAViAwOd4pPJWQyC0nQlp5GSGwt-tJXvEblMlCpQmFuVc4ELqm9TiMuPr4Fbaj90Tnimohn5J7DErvbgkcpg0tA",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-dust-2-2021"
+    },
+    "skin-844716d091ce": {
+      "name": "G3SG1 | New Roots",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2zYXnrB1I_82jZ7ZiH_OSHHGZz-lJvOhuRz2xmQgijDGMnYftby2eOgEiDsMmReUDs0G5m4fhM7zm4ADY2d9FzyT_33kfvylp4utQV6E7uvqAlSn4mj4",
+      "min": 0,
+      "max": 0.55,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-dust-2-2021"
+    },
+    "skin-dc1a0332945f": {
+      "name": "Galil AR | Amber Fade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0POvV6JsJPWsA2KEwOJ6ueJWQyC0nQlp52uGm9yodC3GZ1d0CMdyQeJctRDqmtayY-Kz71fW2IIUziz8intK6TErvbiZh4dEMQ",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-dust-2-2021"
+    },
+    "skin-c14e09c62ca0": {
+      "name": "USP-S | Orange Anolis",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSIf2sAm6KwPxyj_NsSxa_nBovp3OHn4qqcX3FbQMgD5okQeFYtBbsktLmMeux5leLjIIXxXn4i3wdvC9s_a9cBikK0tGN",
+      "min": 0,
+      "max": 0.37,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-dust-2-2021"
+    },
+    "skin-294fc9bca944": {
+      "name": "M4A4 | Red DDPAT",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwipC0PaqeKV5H-WBDGae_vxztN5lRi67gVNxsT_SmYv8InrDblQhDJN2R7ZZ4RW7m9azYb_n5gLZ391AnCj92y8c8G81tFE6rC2P",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-dust-2-2021"
+    },
+    "skin-af29d4349bcd": {
+      "name": "MAC-10 | Case Hardened",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1a_s2hYahoJM-fB2CY1aAituJtTnvjkUx3tziGmd6hJy-VZlAoWZtwFLRZ5EbpwNLvYb-zsgOKlcsbmn9_3b1O",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-dust-2-2021"
+    },
+    "skin-f0ba928c4c15": {
+      "name": "UMP-45 | Fade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkk4a0qB1a7s2oaaBoH-WeHlicyOl-pK8_HHzmzU52sTjWntegc32faAR2DMEkELMI4xmxw4G1Yrnn4FCM3d4Q02yg2U-vv27j",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-dust-2-2021"
+    },
+    "skin-8610195a9f7f": {
+      "name": "SSG 08 | Death Strike",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1Y-s29e6M9eM-ADWiC0ed5vt5lRi67gVMh6jjTn9ygJSieaAEiAsB2F7Jfshe-xtHkPuvisQLXgt8UmCz523lM8G81tFON4mQ2",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-dust-2-2021"
+    },
+    "skin-58267df1cb9f": {
+      "name": "AK-47 | Gold Arabesque",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiVI0POlPPNSJ_-fCliR0-90tfJ4WiyMmRQguynLntmvICieOARzCpMhF-BYsRe-xoHvYu_g5lSNj4NDyy2viCwY6Hlu5_FCD_Q1jEqYuQ",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-dust-2-2021"
+    },
+    "skin-08730cd85d09": {
+      "name": "USP-S | Purple DDPAT",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSIf2sCmOAwPpJoPR7XyW2qhEutDWR1N-rcHPBPFMiDZUkF-9Z4ETtxtDkYu3js1ffg94Tnn2o3yMavH0957ocEf1yWMwziKM",
+      "min": 0,
+      "max": 0.55,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-mirage-2021"
+    },
+    "skin-f9bef4ddaca3": {
+      "name": "MP9 | Music Box",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f_C9k4vu8aaNoH_afAXCV0_1JveR9TiW6liIrujqNjsGtcCmeOw8gAptyFLVb4BaxmtGyML_n5QXW2owUm3j5hi4dvHlr57sET-N7rSSys4ef",
+      "min": 0,
+      "max": 0.55,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-mirage-2021"
+    },
+    "skin-a67615da8679": {
+      "name": "M249 | Humidor",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8zMK5wjFL0P-heqtSI_GBGG6extF0pfNnWxa_nBovp3OGnomhc3-ROFInDJclReQOtkS_xNO0MLuwtVCL3Y9DxSqr3y9Lunxq_a9cBnmfuyfW",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-mirage-2021"
+    },
+    "skin-7f4d0f478610": {
+      "name": "SG 553 | Desert Blossom",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1a7s2qbbdoMuSsDGufzuNJsvNgSCGnqhEutDWR1N_8JXPBagZ0WZUiRu4PukaxxNDjNb_mtQCPiYwRyymt2yhIuyc46-kcEf1yx7sEwjI",
+      "min": 0,
+      "max": 0.49,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-mirage-2021"
+    },
+    "skin-bd7cf4e7165b": {
+      "name": "XM1014 | Elegant Vines",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk7v-RZat_L8-HC3-EyOJzj-N7Ri67gSIrujqNjsGqJX3BagJxDcFwROJbtkLpltHlNOPi4AyLjN8UxX33hypK6Hw_se0GT-N7rUzICquq",
+      "min": 0,
+      "max": 0.37,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-mirage-2021"
+    },
+    "skin-838f75720b22": {
+      "name": "Glock-18 | Pink DDPAT",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1T9s2qbLRsNM-DB2mb_uJ_t-l9ASi2lBgjsmjSm4ugeX6WO1AoCsElFuEIuhC6xta2Zbmw5gCMjtlAni3gznQeU26CORw",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-mirage-2021"
+    },
+    "skin-a848a7d8862e": {
+      "name": "AUG | Sand Storm",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf-jFk7uepV7dsLvSsHXOf0-NJvOhuRz39kxtzt2jcyNqsdy2TawElApolF7Zf50bsl9fvZuq05waMi44XyX3-2zQJsHjlDs_LaQ",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-mirage-2021"
+    },
+    "skin-169fc42e8d8a": {
+      "name": "MP5-SD | Oxide Oasis",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsPz-R1c_M2jePFSLvWcAFiWzet9pOB7QRa_nBovp3OAmYr_cnLFOlN0A5d4Qu4KtRi6lYG2Mr7n4QCLg48Tm3_-3yxOvSdj_a9cBsgSaNGx",
+      "min": 0,
+      "max": 0.55,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-mirage-2021"
+    },
+    "skin-4d9b6a2f7a10": {
+      "name": "Desert Eagle | Fennec Fox",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk6OGRbKFsJ_yWMWGVz-Bzs95lRi67gVN14GvRyt77cnKfagRyXsMiTeUNtRO5kYWyYr7i4lfZgoIUzX722CpO8G81tMpbNfMB",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-mirage-2021"
+    },
+    "skin-6c02d562ff70": {
+      "name": "AWP | Desert Hydra",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf-jFk7uW-V6x0JOKSMWuZxuZi_uA7Syu2w0Ry4mqGzYypeH3DaAEnCpt0FuAK4RjrkoDgMb7mtFfcit5bjXKpX4RFZcA",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-mirage-2021"
+    },
+    "skin-f4a679a04e0b": {
+      "name": "AK-47 | Green Laminate",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wipC0POlPPNhIf2sCXWVxOBJvOhuRz39xUgj4WmByIuqInLCag8jWZJ3F-AL4xi6wd22Ne3rtQLZjYNEnHj92zQJsHgD_GLtVg",
+      "min": 0.02,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-vertigo-2021"
+    },
+    "skin-560a56662f2d": {
+      "name": "P90 | Schematic",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf9Ttk-fe8fK1qL_eWAVicyOl-pK89HXrjwhh_sGWDz4yrcn-eZlR1XMAkFOYIshTqlIXlMbnk7lHWiIlE02yg2XF_CACM",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-vertigo-2021"
+    },
+    "skin-8ef9f19f48fd": {
+      "name": "Nova | Interlock",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwipC0OSrerBkJ_-aAmuF0ud5vt5wSiW_mgoYvzSCkpu3dXOTPw5xDcQkROde4Ra6x4biZOi3tQLfiIJMyCz72ihA63tt5esFWb1lpPMXduS-Jw",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-vertigo-2021"
+    },
+    "skin-58ad413e99d2": {
+      "name": "Negev | Infrastructure",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_m5Hl6x1T9s24bbZ5KfecHXeCwPdJvOhuRz39zU9w4m3RmdmqdSiSa1BxDJMiQ-4NsELqwYHgMujm5lHbg9gRxHqo2DQJsHghIlc9AQ",
+      "min": 0,
+      "max": 0.49,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-vertigo-2021"
+    },
+    "skin-807c0ef26d8e": {
+      "name": "Galil AR | CAUTION!",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0OG-V6NsLPmfMWSR1Pp_v-9WQyC0nQlpsmnQwoqgIHuWa1QnC5EjRuJcsRi6lNfvPuvi7wPajo9Bziys23xIujErvbiCbfcatA",
+      "min": 0,
+      "max": 0.55,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-vertigo-2021"
+    },
+    "skin-4d690457f5c0": {
+      "name": "MAG-7 | Prism Terrace",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5G3wipC0PWrZ6loNOKaDViD1etmo955SiihmSIrujqNjsGrcX3GbAB2AsdyQLMOsESxktPgMOKw7wOMgt4WmSv5jS1M63lpsedRT-N7rVBJ5qCN",
+      "min": 0,
+      "max": 0.37,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-vertigo-2021"
+    },
+    "skin-3f9b068b6276": {
+      "name": "P250 | Digital Architect",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwiNa0OSrerBkJ_-UC2ivz-t5vt5lRi67gVMk4mXQntr7JC_GPQNxApFxF7NethXqktfvMuLktAaKjd9Cyy_9iH8f8G81tGeD0jsi",
+      "min": 0,
+      "max": 0.49,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-vertigo-2021"
+    },
+    "skin-7ee34568efd6": {
+      "name": "Five-SeveN | Fall Hazard",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRa7FSNvWBGm6XztFwufdsXCylkBMYvzSCkpu3Ii-QbQ51XJpzQ-8PsUOwmoLvZLm3sQfb3tkTxHj-hytBv35jt7wFBL1lpPNwauo7lw",
+      "min": 0.01,
+      "max": 0.52,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-vertigo-2021"
+    },
+    "skin-d67bf60c0699": {
+      "name": "SG 553 | Hazard Pay",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1Y-s29b_E4c8-QD3KEyOF4j-1gSCGn20Qj52vXw9z6c32RbAV2XpF1Q-UN4Ra7x4bkPuy0tFTciYpCxC37jC1XrnE8Zorh1bo",
+      "min": 0,
+      "max": 0.48,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-vertigo-2021"
+    },
+    "skin-5b5a4da33e83": {
+      "name": "M4A1-S | Imminent Danger",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_eAMWrEwL9JpuR7WyC0miIrujqNjsGpciiVZgIpCpAjEOUPuhXuw93kZOzm4laPi4IRyij-2H9P6yc65rwCT-N7rc1sfRJu",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-vertigo-2021"
+    },
+    "skin-5eb6229ab854": {
+      "name": "P90 | Baroque Red",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf_C9k-fegbbBiH-KWClicyOl-pK8_Gi3qlEp2sjvSzomhIi_CalByW5shQuNcuhm8m9GzMePg5gLW2IxC02yg2WEL1Rk5",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-canals"
+    },
+    "skin-148a2a524ba9": {
+      "name": "G3SG1 | Violet Murano",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2zYXnrB1a4s2jfbZsLv-sGG6fzetij-1gSCGn2050tmuDn9v8JXmXPwclD5txROII40G-l9S1Mb-04lGIit5Mm3qt2HtXrnE8WK3_Jks",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-canals"
+    },
+    "skin-077ca0be4b1f": {
+      "name": "Dual Berettas | Emerald",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1a4c2rZaF_IfyXMWuZxuZi_uBrF3u3zE5xsWjTzIr7eHKeaVIpCpd5QOIC5xi_w9PjY-2x4QDd3opbjXKpzqjop3Y",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-canals"
+    },
+    "skin-13d1c82e4d8d": {
+      "name": "SSG 08 | Orange Filigree",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1T9s28bapSL-KSAGCV_uJ_t-l9AXy3l093sjnSn9_6cnjBPAEhDMNwR-FbtEKwldzkM--05Afej4JGmSzgznQeBdxl634",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-canals"
+    },
+    "skin-895e721a640e": {
+      "name": "MP9 | Stained Glass",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f_C9k_OavYapoJM-UAmaD0tF6ueZhW2ewkUxysDjUz42hdS6XagQjXMZxELQC5BS4koGxYevm4QKLgt8Wzy36kGoXuTMoqxid",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-canals"
+    },
+    "skin-ed43fbef2a5f": {
+      "name": "MAC-10 | Red Filigree",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1a4s28bapSMvWXMWuZxuZi_rk6F3DixUt_5W3Vn96odS-fO1N0D8MkQu4NukG4kdbiN7yw5gyLjdpbjXKp1e3DB44",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-canals"
+    },
+    "skin-ee24d57e2f5d": {
+      "name": "Nova | Baroque Orange",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwiNW0OSrZqF5L6KsAm6Xyfo4tbI6F3zhkB9ztj7XmYmocXjGagJ1XMEiE-FctBe8k9K1N7zmtgyNiJUFk3sHO4PBUg",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-canals"
+    },
+    "skin-3146353a788f": {
+      "name": "MAG-7 | Cinquedea",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5G3wiVI0P-vb_NSJ_ySHXSvzedxuPUnSijmlh9x4D-BnNyuJ3LCbAVzAsdxFuRe5EPpw9XiMbvh5lHYiYwQyjK-0H3Th2Gpiw",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-canals"
+    },
+    "skin-549330dac6c0": {
+      "name": "AWP | The Prince",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf-jFk7uW-V6FjIf2WAlicyOl-pK9qHXHkw093sGvTw4uqJSnDPQAkCsNyEbZcshiwxtK0Yumz4gbX2o9C02yg2f5NtC8l",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-canals"
+    },
+    "skin-6dc36be1c90e": {
+      "name": "Galil AR | Aqua Terrace",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0POjV6NoL_2WGnWZwtFlpOR5XBa_nBovp3Pdzo6hcH6Ta1RxWZslRuYC4xG9x4bgP-zj4wfY2YoQzyT43XhA7Shq_a9cBkjd5CSZ",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-kimono"
+    },
+    "skin-74686c262656": {
+      "name": "MAG-7 | Counter Terrace",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5G3wipC0PWrZ6loNOKaDViD1etmo95uXSy2myIrujqNjsH6InKeOAIgX5smTbMLtka-loflYe7n5wDZjt5AySX7hyhNuns547wBT-N7rTTigBkB",
+      "min": 0,
+      "max": 0.65,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-kimono"
+    },
+    "skin-c097b349041f": {
+      "name": "Tec-9 | Terrace",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLlm5W5wipC0PWrZ6loNOKaDViD1etmo95wSiW_mgoYvzSCkpu3eHySPQUmCsF5EeYMu0PuwNe1Nby25AHejY5Myn_5jnxL6S864OoLAL1lpPNSa1bCHA",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-kimono"
+    },
+    "skin-bbc154da8876": {
+      "name": "Five-SeveN | Neon Kimono",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRYL1SK_meAWmf_up_sexmQS2gqhEutDWR1In4di-TagIkXMMiF-Vcthm5kNbvML604Ffdgt4WzCj22ikau35q4OwcEf1ySWJgvKc",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-kimono"
+    },
+    "skin-aaeb9db13c75": {
+      "name": "Desert Eagle | Sunset Storm 壱",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7v-Re6FsM-ScHGqvw-J5v-VWQyC0nQlp52nQn434cC7EblUmCpQmFONYtxCwxIW0Zrvk4ASIiI8UxHn82ika7zErvbhCT1u8fA",
+      "min": 0,
+      "max": 0.75,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-kimono"
+    },
+    "skin-dff5f10fed23": {
+      "name": "Desert Eagle | Sunset Storm 弐",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7v-Re6FsM-ScHGqv0uZ5uu5WQyC0nQlp4DiDyov6JH7FZgAmX5N5F-RZ5hntw9HlNuPkswLa2d1NzCv63S0cvTErvbieIVxaew",
+      "min": 0,
+      "max": 0.75,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-kimono"
+    },
+    "skin-695797b5acd6": {
+      "name": "M4A4 | Daybreak",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiNW0PmnZatjL8-AG2mCyP1zj-1gSCGn2xgl5mjRzd2qeXmeO1coDZpxEeUJsxnrwYaxY7-w4wTb2NpGz3762yxXrnE8iKAzA8Q",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-kimono"
+    },
+    "skin-cde9a27f0dd5": {
+      "name": "AK-47 | Hydroponic",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiNW0PCvZaZiL8-ZG2mXzetJvOhuRz39lk0m4Dncztz7Jy2fagIoC5t5QeNbskW6xNLgZu-24AXZgt4Xyi_4izQJsHjOr8RS6A",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-kimono"
+    },
+    "skin-6f4ba747e1a4": {
+      "name": "AUG | Akihabara Accept",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf_jdk7vynZaFSIeWUMWuZxuZi_rZvSXDgzUV_tWWAydyqI3mQbVMiWJolTLQOtBS4w4a1MuznsVHa3YlbjXKpUc8HttI",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-kimono"
+    },
+    "skin-e63e9d7401f5": {
+      "name": "Desert Eagle | Night Heist",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7v-RYKFkM-SsHmuRz_1JoPR7XyW2qhEutDWR1I6uJH-RPQInXJB0F-Vb50bqxt3kN-Kw4VCMjYxCyXmvj3hO6X05t-8cEf1yxd2V6Eg",
+      "min": 0,
+      "max": 0.65,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-t"
+    },
+    "skin-3190df4f462d": {
+      "name": "Negev | Phoenix Stencil",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_m5Hl6x1T9s2-YKtoLvmLMXORxv1JouRtcCW6khUz_WzTy96heC-VbwMkDJB0FLMPtBi7x9XlN76x5VfYg98UySv3h35A7yd1o7FV05NZ2dU",
+      "min": 0,
+      "max": 0.65,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-t"
+    },
+    "skin-2c61427e2101": {
+      "name": "P90 | Tiger Pit",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf_C9k-_upbbZ-H_KBAXCe_uJ_t-l9AX6wxERy4W_UyYytIn2RPQYjDpp2F-Vc4xi8x9e1Pu7n5gfcjYoWzCrgznQeZAcpQ5E",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-t"
+    },
+    "skin-62bb5a38a96d": {
+      "name": "P250 | Bengal Tiger",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwipC0OL8PfRSNPmUC3WvzedxuPUnSX7llhghsGjQnNv7I36SZlAjDZMmE-VYskS_kYfkNO2w4QffiItNyjK-0H3QIgynUA",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-t"
+    },
+    "skin-10a21c802ec1": {
+      "name": "Galil AR | Phoenix Blacklight",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0OG-V7RlL_WdB3-v1e9xo955WjujmRgYvzSCkpu3JyqTblQhX5dxTeMJ40Pux4C2MOyw51DXjYtAyH7_jy9JuCk45LpWWL1lpPNjwyLnRw",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-op10-t"
+    },
+    "skin-4be502157e9f": {
+      "name": "SG 553 | Hypnotic",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1a7s24bbZ5KfecMWuZxuZi_rJrF3DlkEUl5GTdy4yudHyRZgYnWZskFucO4RO_kIK0PuOxtVPb2d5bjXKpAmuHKUk",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-op10-t"
+    },
+    "skin-028e0476ad38": {
+      "name": "Glock-18 | Franklin",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1Y-s2jZ6poOc-UAmiTytF6ueZhW2eww0wmtz6Hz92hd3iUPwIhWZtzQ7UP5ha7kd22N-7j4gTZ345BnH_5kGoXuXiKVoel",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-op10-t"
+    },
+    "skin-584e1dbd3391": {
+      "name": "AWP | Silk Tiger",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_C9k-_upbbZ-H_KfG2KvzedxuPUnTXywkU1x4DvXztz_dH2WZlQkXMEhFrFY5BDrm9HhMurq4AfdiYxAnDK-0H0fPMTeBA",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-op10-t"
+    },
+    "skin-97cabeaedccd": {
+      "name": "MAC-10 | Hot Snakes",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1c_M2jaac8cM-AAGabxNF6ueZhW2fhlEwk4DmDzYr9dnvGbgFzDJojFrYMsBS7m9PhMLjh5APZ2IlCnC2qkGoXufthzYDr",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-op10-t"
+    },
+    "skin-354b68a4149b": {
+      "name": "AK-47 | X-Ray",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlV7x_IemsAm6Xyfo44OQ_Tn3il08k4GzVyo2qeSnDaQAlXpF1RuZZsUO4kNLjNO2w51HWjJUFk3tTkVsnkA",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-op10-t"
+    },
+    "skin-bb64064419aa": {
+      "name": "M4A4 | Global Offensive",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0PG9b6tSI_GeAVicyOl-pK89HijjkU534mTRw478IirEOgUhXpshQrMK4xW9x4biYrvnsgDd3ohA02yg2Z7zUK8D",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-ct"
+    },
+    "skin-1bd56f994f59": {
+      "name": "SSG 08 | Threat Detected",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1a4s2nZrBoLPyaCWKewutJv_NoQS62qhEutDWR1ImuJy_BagUgDMR1ROVbthK6xofvNrnk5lHditpByCz3iC9M7Cdv4ekcEf1ytraGvsY",
+      "min": 0,
+      "max": 0.65,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-ct"
+    },
+    "skin-6e56f8710eff": {
+      "name": "P2000 | Dispatch",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL5lYayrXIL0POjV6p4LfKWHHSv0-tyj-NlWiyMmRQguynLm4mscyqXOAJ1DpAjQuML5BDpxN22NuPgsVeN3YpCn3mr3ypB7S455_FCD_SVmRFKPQ",
+      "min": 0,
+      "max": 0.65,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-ct"
+    },
+    "skin-433c273a49c2": {
+      "name": "SCAR-20 | Magna Carta",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLinZfyr3Jk5-uRabF5KP-BB3OJ_v5jovFlSha_nBovp3PVzdr8cHnBbAcnXsAmR-UOsRHsktTmYb_ns1CNg4JCzSX_iiNKvS0__a9cBnHoQ9ul",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-ct"
+    },
+    "skin-d73f5bc23efd": {
+      "name": "FAMAS | Prime Conspiracy",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1a4s2gfalvJeKAMWqRxut4pOBWQyC0nQlp5m7Tmd39cSmSZwUlDZJwTLFZsUW5kIKyNbji71aLj4pDxX38h3wfuDErvbhergaiXw",
+      "min": 0,
+      "max": 0.55,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-op10-ct"
+    },
+    "skin-72c4240d9c33": {
+      "name": "Five-SeveN | Berries And Cherries",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRaaVSJvGXC1iCxOpJsu18Sha_nBovp3OEmY2vIi_FagEoDMMjQuMKthDqm9TjP-O3sVSLio0Qnnr22i0f7C9t_a9cBnO-dw69",
+      "min": 0,
+      "max": 0.1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-op10-ct"
+    },
+    "skin-cbc1eac9444c": {
+      "name": "UMP-45 | Crime Scene",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkk4a0qB1Y-s27ZbRSI-KaA2Kv0u1zvuRWQyC0nQlpt2SEmdiheHiUalMnCJd4FuFb5xHul4LjMu3q5gPX2N0QyC-siXsY7DErvbhN2TV12A",
+      "min": 0,
+      "max": 0.75,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-op10-ct"
+    },
+    "skin-fa4306cae873": {
+      "name": "USP-S | Target Acquired",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSIf2sB2mExOJ6ueZsQSq2qhAmtDiLjo7GLSLANkI-XpZxE-4MtxW5ldeyZbvq51PXid9EzSr6iSof7y1t47lQAqRxrvCEjxaBb-PT-N1SiA",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-op10-ct"
+    },
+    "skin-144ddd95becd": {
+      "name": "M4A1-S | Blue Phosphor",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_GeMWrEwL9lj-NlWiygmBIstgKJk4jxNWWeOg5xDJR2Q-5b5BGwxIDuP7uw4ALa3ohMz3n3iypLvyc55-pQUKct5OSJ2OKlF5Nn",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-op10-ct"
+    },
+    "skin-8fbcba8495ae": {
+      "name": "AWP | Fade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_CNk7uW-V6JsJPWsAm6Xyfo45-c5GXDnwB534DuEwtuoIHOfaAYiAsYjF-QItUaxmoC0MO_h5ALcjJUFk3sEzfdk4w",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-op10-ct"
+    },
+    "skin-41f176a064d2": {
+      "name": "Tec-9 | Blast From the Past",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLlm5W5wipC0POga61oLuSsGm6cxP1JoORoTCGMmRQguynLm4qpJ3PDaQ9zXpIjQ-AJ4xawlNOzMrjktVPZ349AmS323Xga534-tvFCD_QT7Lx_Ug",
+      "min": 0,
+      "max": 0.65,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-ancient"
+    },
+    "skin-07b30f648b35": {
+      "name": "AUG | Carved Jade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf_C9k5fOqbZthKfebGimWkLlytrI5TXrlwBx-sGyGw9-gcC-fZgAhCpRwQbRbtxe4kdSxP7vm-UWA3MgZU-ku",
+      "min": 0,
+      "max": 0.2,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-ancient"
+    },
+    "skin-4f5a5aa33496": {
+      "name": "Galil AR | Dusk Ruins",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0Pq3V7Z4Kf6AMXWVxdF6ueZhW2fnlBkl427dno2rcXLBagYjDMN0Qu8Ls0a9wIK0PrvhtlHYgogTyy_5kGoXuQFMiuDz",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-ancient"
+    },
+    "skin-2d48a6eb741e": {
+      "name": "FAMAS | Dark Water",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1a4s20baZ_Ic-XD3Wb_uJ_t-l9ASywkUsmsjzdmdiqIiqXaQ4oDJF0RuNZukO-ltflNu_mslffg9gTnC3gznQeYZiQwTg",
+      "min": 0.1,
+      "max": 0.26,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-op10-ancient"
+    },
+    "skin-e95b5ddb7a37": {
+      "name": "XM1014 | Ancient Lore",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk7v-RaapuKfWdGliHwPx7j-1gSCGn204k626ByIqteX-TbAQjCcAhRbFcsUK5ktbhYb_j5VePi4JMnyX4in5XrnE8pNPbCik",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-op10-ancient"
+    },
+    "skin-b21f4fbf965a": {
+      "name": "MAC-10 | Gold Brick",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1a4s2pZ6hpH_KBB2Sb_uJ_t-l9AX2wwhl35jzRw4yodymWO1R0X5V0FrRc4Bi-m4DuY-2xsgzY39oRmSTgznQe6Q1Q_KE",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-op10-ancient"
+    },
+    "skin-c682eedb501e": {
+      "name": "USP-S | Ancient Visions",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSM-CsD2mTyOt4pN5rXSC0nQkYvzSCkpu3eHiSOAB0DsMkTOcJtRjtwNG1ZOvq4wDe2t1AzCuojy1JvSpp4ewKVr1lpPOm90TY1A",
+      "min": 0,
+      "max": 0.45,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-op10-ancient"
+    },
+    "skin-1dd39fb89c94": {
+      "name": "P90 | Run and Hide",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf_jdk5fOpfaV_H-DKXlicyOl-pK85H36xlEsmtT_SmN2geSqVOAMkCJpwQOQP5BOxlNHiYruwtgXajI0X02yg2YhNEJOA",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-op10-ancient"
+    },
+    "skin-2faa35fd1c44": {
+      "name": "AK-47 | Panthera onca",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlV65sJ-WSHFicyOl-pK9sSS-2wEV25z_Qw4mqcn3EOgclCpJ3TbRctELtm9HmNLix4wHc3o5H02yg2Q50xEQx",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-op10-ancient"
+    },
+    "skin-f448735cd1c2": {
+      "name": "M4A1-S | Welcome to the Jungle",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_OGMWrEwL9Jo-9oRCyMmRQguynLzYqgInjGZlcnX5ciE-IPthLrkN3hYu_ltQPW3Y1NzSn-jCpJ6ydpsvFCD_TdxQe8NQ",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-op10-ancient"
+    },
+    "skin-ee40f2adf026": {
+      "name": "MAC-10 | Fade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1a7s2oaaBoH_yaCW-Ej-h347AwHyzqx04l4WvSyI77cCjCbQEhW8MjE-NcthG8loXlMujh7g3Ay9USCa6Cs30",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-chopshop"
+    },
+    "skin-2be72384c68f": {
+      "name": "P250 | Whiteout",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwjFU0OWmYbBoL-WHMWuZxuZi_rJqTCq1wUUh6mSBntaqdHyTPFdzXJQjTeMLskTrk9zlN-7lsgyM34lbjXKp2HY6z6k",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-chopshop"
+    },
+    "skin-7eec94171de3": {
+      "name": "MP7 | Full Stop",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsHf9Ttk-fO8YadsLf-sHGKU_uJ_t-l9AS3nlhhx5W7Xyo6vJHPDagQpC5d4TO4IsRWwmtSxYuzi5FfciY9CxH_gznQebimdppU",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-chopshop"
+    },
+    "skin-b40e5d3bf2ff": {
+      "name": "Five-SeveN | Nitro",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRe6tSL-KSAGCV_u91s-RnWzqMmRQguynLy9ugci3EZlUpDMYjTOID4EPrxNTvZO224QWM3o9NniWs23lP5nw9tfFCD_Qs49oXvw",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-chopshop"
+    },
+    "skin-5f1ca8e9f44f": {
+      "name": "CZ75-Auto | Emerald",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLyhMG1_B1a4c2rZaF_IfyXMWuZxuZi_rNsFyzqzUhy4zzWmdqvdnPFbQYoCpolQeMOuxHum4HnMbjl4FCM2I1bjXKpBQcUgmo",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-chopshop"
+    },
+    "skin-4a300bc642bc": {
+      "name": "SG 553 | Bulldozer",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1I4M23bahhL-esAm6Xyfo44rZsF3jmwU53tmyDzYv6cHnCalQhXMckEe9Y5kXplIC0NrzrtAfcipUFk3th3T45rw",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-chopshop"
+    },
+    "skin-195edfb272ee": {
+      "name": "Dual Berettas | Duelist",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1c_M2jZ7BlJeKsAWGv0et3ou1WSiW6gRgYvzSCkpu3dn-RaFdzDZV4F-RZtxW7w9fgM--x5geNjooUyH3-iS5K53pq47wLUr1lpPNOmOBZwg",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-chopshop"
+    },
+    "skin-0926fb5dddc9": {
+      "name": "Glock-18 | Twilight Galaxy",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1a4s2vebFsH_afC2Sb0tF6ueZhW2e3zR9-5mjcztv8cnjBbQMiA8ZzFLUKtBbsl4LuY77q4AHdj4pNmCz-kGoXudhVSAZp",
+      "min": 0,
+      "max": 0.2,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-chopshop"
+    },
+    "skin-7562e4bd91c7": {
+      "name": "M4A1-S | Hot Rod",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_GdMXWVxdF75OA4XBa_nBovp3PXyt2uJ32QaQciDZUhReUM5hLskdy2Pu_n4wLe2doXm3j-2i5A7X5i_a9cBuWkb97d",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-chopshop"
+    },
+    "skin-3b1a5d288858": {
+      "name": "Desert Eagle | Meteorite",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7v-Ra7Z0M-SSAmuZ2-tyj-VoXSKMmRQguynLyN-qIH3Daw4mCZR3EeBbsUO-l4a2Prvm7gzWg4MXnymq2H8Yui9usfFCD_RyA7Mmlw",
+      "min": 0,
+      "max": 0.18,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-bank"
+    },
+    "skin-8019620598a2": {
+      "name": "Galil AR | Tuxedo",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0OGhV6t_I_GsAm6Xyfo45ONqGHC2kE1y42jWz9uscXmfbQQlCsZzFOACuxawl4GxMevj4QPfg5UFk3uvmVba9Q",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-bank"
+    },
+    "skin-5fc8e75d4fa5": {
+      "name": "CZ75-Auto | Tuxedo",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLyhMG1_B1I4M2heqdsH_yaCW-Ej7lz6Oc9GXC3zEwh4D_VzY36eHvDaQYkXJV3FLMJtEG_kNHiZLmxtAPAy9USE1srPao",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-bank"
+    },
+    "skin-08d8e5941dfe": {
+      "name": "AK-47 | Emerald Pinstripe",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0OKnZrd5MvmDC1iRyrohj-1gSCGn20t-422Bn4v6eH_FaFcpWcFyRrRbsRK9xN3lNOK0tFPX2YJBmS_4iytXrnE8zwmR9Cc",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-bank"
+    },
+    "skin-eb2bf672505f": {
+      "name": "P250 | Franklin",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwiFO0P-hZqF0H_yaCW-Ej70htLhtF3Dgx0Vz5WrWwtf4JCjEPA8oDZF4FrRZ5xnulNy1Zrvn5wHAy9USTWvgE_Q",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-bank"
+    },
+    "skin-0eafc66d4417": {
+      "name": "Negev | Anodized Navy",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_m5Hl6x1a4c2gabJ0H_yaCW-Ej7cu4rJrSXzikUh04G2Em9yteS-SagAkDsQlEOMP4RexldKzM7ix4lPAy9USZWBsgPo",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-assault"
+    },
+    "skin-25d91e72e4d5": {
+      "name": "AUG | Hot Rod",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf_Cxk_feqV6hkJ_iHQDCVkuxz5bY_H3znlhtz5jzTztigeXLBbwRyD8ckTOZbt0G8wNOyZuL8p1uJa1KD__k",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-assault"
+    },
+    "skin-da5da69785da": {
+      "name": "Glock-18 | Fade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1a7s2oaaBoH_yaCW-Ej-8u5bZvHnq1w0Vz62TUzNj4eCiVblMmXMAkROJeskLpkdXjMrzksVTAy9US8PY25So",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-assault"
+    },
+    "skin-34b6af4ce537": {
+      "name": "MP9 | Bulldozer",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f7i1k9veiZKt6H_yaCW-Ej-tztbQ5Hy2wxklw5TiDnt_4eC_GOFR1XJdzQ-AMskXswNbvNuvq4wPAy9USwXKj73o",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-assault"
+    },
+    "skin-e4b705357181": {
+      "name": "AUG | Copperhead",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf9Ttk7P2-eKF_KPWSClicyOl-pK9oTCvmk0hw5TzXytqodXzEOgYlCsMjQ7YDshG_wdbkNLjltgPb39pM02yg2WdB2M5V",
+      "min": 0.12,
+      "max": 0.38,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-dust"
+    },
+    "skin-5f61bd5eec0a": {
+      "name": "AWP | Snake Camo",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf7jJk_PyvY6FSLPmUBnPexb10sbk8HXixk09-smqEyIytci7GPwFxCZt0RLMLtBG4xNHuPr-3tRue1dy_ONei3w",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-dust"
+    },
+    "skin-9459e126b14a": {
+      "name": "Sawed-Off | Copper",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLin4Hl-S1d6c2veZtuL-CDC3WvzedxuPUnHirik0x1smnTnN76dC3Dbg8nA8NxROcNsBW9lNTiMurh4wLYj9gRmzK-0H1mwe_z3Q",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-dust"
+    },
+    "skin-e30d23329629": {
+      "name": "Desert Eagle | Blaze",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7vORbqhsLfWAMWuZxuZi_uI_TX6wxxkjsGXXnImsJ37COlUoWcByEOMOtxa5kdXmNu3htVPZjN1bjXKpkHLRfQU",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-dust"
+    },
+    "skin-6d947a849473": {
+      "name": "P2000 | Scorpion",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL5lYayrXIL0POjV7duL-KDB2ie_v4k4LE5cCW6khUz_T-GmNyuc3uTbgZ1CcNzR-8DtkS6wYLvMLzj7wHaid5DnHmthiJK5n51o7FVTAH3Dhg",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-dust"
+    },
+    "skin-cf0d243b1b14": {
+      "name": "Glock-18 | Brass",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1a_s2seqV-M8-fB2CY1aAu5-c_HirjzExxtTnSntb_JSnBaVIpCJojFLUMs0GwwIDjMeOztVeIlcsbmrw2c4EA",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-dust"
+    },
+    "skin-891034135d58": {
+      "name": "PP-Bizon | Brass",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLzl4zv8x1a_s2seqV-M8-fB2CY1aAl5LhsTnuxlEV24WncyI74IiqQZ1IpCsZxQuAP5xa5xIXuM7635gHYlcsbmmbf3gmt",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-dust-2"
+    },
+    "skin-2d90d1532701": {
+      "name": "M4A1-S | VariCamo",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_iKMXGR0-d1sexmcCW6khUz_WjSw9qgd32TaAV1DMAlRrNcuhG7xt2yM-_ktlHW2tlHxHqs2iJI7yZ1o7FVeF8MW04",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-dust-2"
+    },
+    "skin-473110a625aa": {
+      "name": "SG 553 | Damascus Steel",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1a_s2qaalsM_OGHViDxrsj495lRi67gVMj4miGzteseXjBbAJxXsEjEOQK50axk9C1ZuPi4wbX39gRnC33iipJ8G81tD-xNff9",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-dust-2"
+    },
+    "skin-1faf71e7b6fe": {
+      "name": "P2000 | Amber Fade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL5lYayrXIL0POvV6JsJPWsA2KEwOJ6ueJWQyC0nQlpsjvcmd_7dHyVZgdxAsB1QeRZ5BPqlYbmNuvr5lTW2o1Myyyt3ykY7DErvbib25P3aA",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-dust-2"
+    },
+    "skin-4429b6507c58": {
+      "name": "R8 Revolver | Amber Fade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLjm4Dv8TRe_c2vaZtrIfSWMWqV1e96vOhqcDu2gxIrpTiXpYPwJiPTcAIpDJckF-9cuhfqltDuZujgs1DZj4hDy338jnhM73xusOcKVaos-qPJz1aW9R0yRq8",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-dust-2"
+    },
+    "skin-e716148d4001": {
+      "name": "MP9 | Hot Rod",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f_Cxk_feqV6hkJ_iHQD7Cl7ou5rlsGyi2wBgh4WyDytmqcC6fbQAhC8chEeZZtRLrw4LlNLz8p1uJeM3XA-E",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-mirage"
+    },
+    "skin-80f4bc7a2010": {
+      "name": "UMP-45 | Blaze",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkk4a0qB1a7s2oZKVgJeOsAm6Xyfo4srhvSi21wUoi4j_Xzt7_di6RaQ4mA5YhRuIMtEbswIDmMbzg5ACN35UFk3uW8e_n9A",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-mirage"
+    },
+    "skin-045414110f51": {
+      "name": "MAC-10 | Amber Fade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1a7s2oaaBoH_2WGmaczed1j-1gSCGn20QlsWqAz4z8d3yfP1IpW8QkQeIN5hXtldTkMuqzsQyNjNgUxX6vjCpXrnE8FVzqUc8",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-mirage"
+    },
+    "skin-b7fa0b0519bd": {
+      "name": "MAG-7 | Bulldozer",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5G3wjFU0OurZKhiN8-fB2CY1aAn4bMxFijqzB5z4WjdnI2vc3nFbFcpCpomR-8NtxK_x9W2MO_k5VDYlcsbmtRYf5JR",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-mirage"
+    },
+    "skin-4e5b581684d4": {
+      "name": "Glock-18 | Candy Apple",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1I4M28baBSLPmUBnPelb93teA-FivjzB5wsjzTyI2pIn_CPAMoW8N3ROJZshm5w9zgNbnk5xue1dyMA9ZU_Q",
+      "min": 0,
+      "max": 0.3,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-italy"
+    },
+    "skin-16044409b9f9": {
+      "name": "MP7 | Anodized Navy",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsHf_Cxk4fO4cZthKfebGinIw-0v5-cxS33kwEh2tz-HyYugJC7FZwVyXJZ2FO4CtBa4xtPkN-nn-UWA3HYryggq",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-italy"
+    },
+    "skin-5399c334e3b4": {
+      "name": "Sawed-Off | Full Stop",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLin4Hl-S1d6c2mcZt7IeKaDWadztFkteVWQyC0nQlp42yEyIr7cX6TaVN0XJsiQeYJ5BTplYDjYrnj7wPX3opHnHr93CJN7zErvbhNR0v1hQ",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-italy"
+    },
+    "skin-ec9d6cd13e48": {
+      "name": "AWP | Pit Viper",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf9Ttk_PyvY6F-K_mdMWuZxuZi_rQ_GS3mxRwk4jvTyNv6eC-RPQV1W5AlTOZb4xLtw9fuNriw51Hd3otbjXKp4cSTTIs",
+      "min": 0.08,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-italy"
+    },
+    "skin-c35e4824fa14": {
+      "name": "Glock-18 | Reactor",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1a4s2gfadhJfGBMXeR1fpzou84cC6_mh4sjDGMnYftb3yTbAQjA5NxR-4MtRjumtzkM-yzsVDegtkWyyX43ytBvC9tsrpRAKE7uvqAUKOQcp4",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-cache"
+    },
+    "skin-f93016c04c3b": {
+      "name": "MP9 | Setting Sun",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f9Ttk4eetZKFsMs-DD3OExPx44t5kX3CMmRQguynLyIqvdXiVbFN2CZMhQLRZ4RbumtXhPrji4gzfio5MyCr4in4a7nk_4PFCD_TmMRwm0Q",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-cache"
+    },
+    "skin-46ba27249a98": {
+      "name": "XM1014 | Bone Machine",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk7v-RZrFuLPWSHFiDyvt6vPI4cDG-xE125wKJk4jxNWWSbgApXpBzRbFfsEXrlNyyMOKx5lSNgt5FySSohy9OvCZr5uYHA_F35OSJ2NlEZ-xJ",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-cache"
+    },
+    "skin-9f0f8f333aaa": {
+      "name": "MAC-10 | Nuclear Garden",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1a4s2gfadhJfGBMXSb1OJ6o7JWQiiwxE0YvzSCkpu3Ii_COw4jDsMkEbYJsxe5xNezPu-3swCN3dhEz3_33XlA63lo6-8DWL1lpPMiXZ_jZw",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-cache"
+    },
+    "skin-e7703810e2d0": {
+      "name": "Tec-9 | Toxic",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLlm5W5wipC0Py7a6hoIeKsHWyFzeJl5d59SirqqhEutDWR1N2pc3PFbgYgDMF5TbVZ5hfsk93hP7u2tQzf2t0RxSuviiJN5ydo5bwcEf1yPyH7PX0",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-cache"
+    },
+    "skin-91ecab26594d": {
+      "name": "FAMAS | Styx",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1a4s2gfadhJfGBMXSb1OJ6o7NWSSi-lA4YvzSCkpu3dnvGPQAkCsMkRLQL5hW6ktC1Pu_h7lHWjY5Fznr-inkY6SxpsO5XAr1lpPPtc2FJkw",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-cache"
+    },
+    "skin-81dd750d8bc9": {
+      "name": "Galil AR | Cerberus",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0PG7V6doMvKBG3Svxu96ue1WQyC0nQlpsTjVzdb8IH-UOw8lX8B5EeYJ40a8k4XnPuvqsgzYjt0QnCyqh3wb7DErvbjusqqqdw",
+      "min": 0,
+      "max": 0.9,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-cache"
+    },
+    "skin-74b1243eefd1": {
+      "name": "Sawed-Off | First Class",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLin4Hl-S1d6c2tfZtqMvWWAFicxO9iuOR7cDqyghgjvDuDpYPwJiPTcA9yXpB0QOQPsEW_l9DlY-3m4gaK3YtDyS_7jCpB7S9vtuwDUfck8qHJz1aWiwWPy5U",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-baggage"
+    },
+    "skin-7599996181be": {
+      "name": "XM1014 | Red Leather",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk7OeRZKFsNPiWHFiIzL8m4bVWQyC0nQlp4WTQytf_IHqRagInCJN5QOYD50W_w9XnZeLm5wWLgt5FnCmoin8b7jErvbjJCtb1Lg",
+      "min": 0,
+      "max": 0.56,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-baggage"
+    },
+    "skin-8667828828a0": {
+      "name": "USP-S | Business Class",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSI-WsAnKXxu9xtd58XDn-hiIrujqNjsGvJSjDPQ4nW5d1EO5btka6x9y1Me7ktgWM2oMWn3irjn8Y5ils5rxWT-N7rQDu-iuk",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-baggage"
+    },
+    "skin-37e8f87eff72": {
+      "name": "AK-47 | First Class",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0PW8baFjH_yWD3OYxPxJseo9GBa_nBovp3PXmNmpdymUZwMnX8EhEeBbtBnrk4LjZLzi7wbe3opNmCn8iH8YvX5i_a9cBikeWj5H",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-baggage"
+    },
+    "skin-d13cfff64bcd": {
+      "name": "Desert Eagle | Pilot",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7uOReK1hL-SsCmKRxuJzj-1gSCGn2x8jtWncyIupJH2TPwYlCJZyF-Rct0XplNfiYuy2tAeIiItEz36ointXrnE8Ks-4_Fs",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-baggage"
+    },
+    "skin-2e785b354884": {
+      "name": "AK-47 | Jet Set",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0OWrZKhSNOKSGGKcxOpJseo9GBa_nBovp3ODydescy_FbVcoDZMkReYP4xC8w93jY7u35AeK2IhMmC__2itN73pv_a9cBpGGBr1j",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-baggage"
+    },
+    "skin-3a57219a9579": {
+      "name": "XM1014 | VariCamo Blue",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk5-uRfqV_KfOSA2ivw-Jjtd5lRi67gVN0tmTdyN-gJy2fb1AjCcFzFOYDu0btxNDkYr_k4APXg4JNxXn32n5L8G81tKBcQXWQ",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-overpass"
+    },
+    "skin-993020f09ddf": {
+      "name": "SSG 08 | Detour",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1T9s29e6M9eM-eD3WbxPxJvOhuRz39lxsm6m_XmdugcnOXaFMlD5ImEbQP5kW4kICyM-vj5wXc2dkUzHqoiDQJsHjAk3eMVA",
+      "min": 0,
+      "max": 0.43,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-overpass"
+    },
+    "skin-11ddb95a9bd7": {
+      "name": "CZ75-Auto | Nitro",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLyhMG1_B1I4M2heqVjJ_WsD2STxOBio7NWQyC0nQlptWvXw9_7I3zCaVB1C5YkTeAIsRC8m9a1MePg5VGLiI9CnH772C9AuDErvbi4qlLcDQ",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-overpass"
+    },
+    "skin-665b5d16532c": {
+      "name": "AWP | Pink DDPAT",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf9Ttk6_a-abBSMPmdBVicyOl-pK9qHXC2zUpz5DiBn9arJCmXOFd0DZpxQOUDtBC6wNK0MOzl4wXWjYpG02yg2c9nQ1pb",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-overpass"
+    },
+    "skin-d7d145b204a5": {
+      "name": "USP-S | Road Rash",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSI-WsG3SA_v13vuV5Tjm2hxgjjDGMnYftby2UaFcmCsF1R-cLsBS4mtLmM7nmsVbfiNlHxSuriypAvytisuhQWPY7uvqAwrOwBmU",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-overpass"
+    },
+    "skin-5e983b2fc436": {
+      "name": "M4A1-S | Master Piece",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_OGMWrEwL87o956RiW2mx4ijDGMnYftby3FbFdyXpZxQ-AP5hi7wILkZOzg5ASNgt4WmCv833hKuntvsLxWAKE7uvqATAFok6E",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-overpass"
+    },
+    "skin-2ce369af670c": {
+      "name": "M4A4 | Radiation Hazard",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFL0Py7Y6F-NOKaHmKvzvx3vuZscCW6khUz_WqGyI34dy6SbgcnWMN2QLNZu0GxkNznMbjn5lbbgtlGyCuviyJNu311o7FVcM-jMdQ",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-nuke"
+    },
+    "skin-cad695fe4530": {
+      "name": "P250 | Nuclear Threat",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwjFL0Py7Y6F-NOKaHmKvxvxzte9WQyC0nQlp5mrRztyuIy3GbQF1WMN2QbFetBfulNbnPruz7lGKit4UyS6vjn9K5jErvbiRPSOzZg",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-nuke"
+    },
+    "skin-89f5d50a2ec7": {
+      "name": "Tec-9 | Nuclear Threat",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLlm5W5wjFL0Py7Y6F-NOKaHmKvxvxzte9WWyywzCIrujqNjsGtIyjEbQR1A8Z1QLVZtha_k9HvNbu04wTei4sWxCX93SJP7nw_4rtWT-N7rTdwfM9W",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-nuke"
+    },
+    "skin-ddc4aeda27ca": {
+      "name": "Dual Berettas | Anodized Navy",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1a4c2gabJ0H_yaCW-Ej7ci4blsTi_kwkki62yAnN6tcHLGZg4iAsF1FLULuhPuxtTiMOnn4gzAy9USUx32_HM",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-inferno"
+    },
+    "skin-62fc4feb5c7c": {
+      "name": "Tec-9 | Brass",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLlm5W5wiNK0PC8abd-H_yaCW-Ej-91tuQ7Sy3gzB9x4m_Vy9b8dy-SaFcjDZchQ-IL5EHqxtzhP7y34ADAy9USp8n4eRk",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-inferno"
+    },
+    "skin-80cb7aad6895": {
+      "name": "AK-47 | Steel Delta",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiVI0POlPPNSM-SBAWmV_uJ_t-l9AXqyk0hy5GWEyduhdC2TPAEjDptzQbRf5EHrmoWyZu22sQLciokQyyzgznQesAEGx_A",
+      "min": 0,
+      "max": 0.73,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-anubis"
+    },
+    "skin-05f333baf59c": {
+      "name": "AWP | Black Nile",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf-jFk7uW-V7d5Mv-dC1icyOl-pK89Gyvhlhsit2-BwoyrICmWPQcmDpEkQOdeskOxwNKzN7vm4VeP2oMR02yg2Z2CmmVC",
+      "min": 0,
+      "max": 0.75,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-anubis"
+    },
+    "skin-29609fc133b0": {
+      "name": "Tec-9 | Mummy's Rot",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLlm5W5wiFO0Oara_1SLeWeA36vzedxuPUnS3_jlEUm5muAzd6qcXiRaw9yWZciRuQItUHpxNXnP--27lGL2d5CyzK-0H1vVdbZoA",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-anubis"
+    },
+    "skin-7c46ff3046d0": {
+      "name": "MAG-7 | Copper Coated",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5G3wiVI0P-vb_NSJ_-cAmOvzedxuPUnHXDilhh1sGzQy4yscXPCbAcgXpNwE-UJuhjqkNW0Zrm05VDdjIoXyDK-0H3aMMdvcg",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-anubis"
+    },
+    "skin-9967f102e7ca": {
+      "name": "Glock-18 | Ramese's Reach",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1Y-s2pZKtuK8-BD2qKxP1JvOhuRz39kUkk42TcztmuIHOVb1cpCcZ1EeBY5BLtkIDgNOqwtALXjI0Un3r4jDQJsHidobtL7w",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-anubis"
+    },
+    "skin-0fbe9304a4d2": {
+      "name": "Nova | Sobek's Bite",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwiVI0PyhfqVSM_-RC2yvzedxuPUnGX22wR9y5jvQz436IH_BPQ4nW8FwFuUDskO_lt3gMu_i71GNiNkWyjK-0H21VCFkHA",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-anubis"
+    },
+    "skin-2c6b76cc25a1": {
+      "name": "P90 | ScaraB Rush",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf_jdk_6v-V7duIeKSDFifx9FhufJtQCSMmRQguynLmYmrdCnGPAUkD5BxQuYC5hO8wdK0Y-_nsgbciNhMyn6v238cuy1jsPFCD_S-VwnSrw",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-anubis"
+    },
+    "skin-3c42ea1dd98c": {
+      "name": "FAMAS | Waters of Nephthys",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1Y-s2oaalsM8-bAWuf_uF1teBncCW6khUz_W3WmYv_JSmSZgZ0WJRwEeRbtUS5kIKyZejmsQHciN5AxHj8intK6il1o7FV74niokA",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-anubis"
+    },
+    "skin-d9c0a296a5e5": {
+      "name": "P250 | Apep's Curse",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwiVI0OL8PfRSIeCWHlicyOl-pK87HCjkxR9ztj-Dzdv8di2TPFchDptyTbEIthTsl9znY77r5Qzc2YwR02yg2XoGglyv",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-anubis"
+    },
+    "skin-bc3cce11bb11": {
+      "name": "M4A4 | Eye of Horus",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiVI0P_6afBSMvGsAm6Xyfo46eU5H3DnlxlytTyDwtr_JHmQZw4hC5R5RrRbtRO5xtCyZrzktgCI2ZUFk3sFC5kC3A",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-anubis"
+    },
+    "skin-0df7ea666c3d": {
+      "name": "Galil AR | Metallic Squeezer",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0OG-V6t7JeKDD3SD_v53ue99cDm2myIqtimElrD1KCzPKhh1W5N4EeQJ4ELuwNXgYu3r7gHe2ItExC_3hitL6C1o6-sEB6J0q_eBkUifZqkJVocB",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-overpass-2024"
+    },
+    "skin-4d819a5e4be2": {
+      "name": "MAC-10 | Pipsqueak",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1Y-s2hfqF_MPGAHViD0PtzsepWQiiwxE0YvzSCkpu3eXiQOlMkDpAhEeELuhi8x9DmM-uw4VCL2YlAzSn223tL7idp67wDUL1lpPNy-DeiVw",
+      "min": 0,
+      "max": 0.9,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-overpass-2024"
+    },
+    "skin-791e6727b6a9": {
+      "name": "Nova | Wurst Hölle",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwiFO0P24bbZ9IeOAMXCF0_1ij-9mWSiMmRQguynLytutd33BbgV1DpdwEOYC5hSwwNPjYr_ksVHdjotGxH742yNL5yk6sfFCD_SvUSZNdg",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-overpass-2024"
+    },
+    "skin-45d74b83b2a0": {
+      "name": "Glock-18 | Teal Graf",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1T9s2hfqF_MPGAHViEwOlxteVWWyyymSIrujqNjsGueXyfaVN0X5N5Ru4O5he_k9XkM-7ltlPe2YJExX2tiXlN5yo6474LT-N7rZcNkc7T",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-overpass-2024"
+    },
+    "skin-6e1eac6f1a57": {
+      "name": "Dual Berettas | Sweet Little Angels",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1Y-s2hfqF_MPGAHViSwOxvj-V8TiW6kA4YvzSCkpu3dHrEag8oCMd2EeMCtRa5xIbkZuuxtVbb2IhHz3_7hywavH1s6-lTB71lpPNncouquQ",
+      "min": 0,
+      "max": 0.82,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-overpass-2024"
+    },
+    "skin-0ac8d26ea3c5": {
+      "name": "XM1014 | Monster Melt",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk7OeRZ7JoMuCSHXSvzOF4o_VsXTqMjRAYvzSCkpu3JXqTOg8gDcYhROQDsxPux9bjYezm5waM2YlGnHn22y1BuiY45ewCBL1lpPOtgL12Pw",
+      "min": 0,
+      "max": 0.75,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-overpass-2024"
+    },
+    "skin-0e56be318449": {
+      "name": "AUG | Eye of Zapems",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf_jdk4OSrerRsM-OsCXWRx9F3peZWQyC0nQlp6m7WyNescHuQOlIiXMd3F7UMtxfuwdSxMunh5waMjdhAzSutj3hBvTErvbhjFS7Ncw",
+      "min": 0,
+      "max": 0.85,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-overpass-2024"
+    },
+    "skin-97b0720f09ea": {
+      "name": "AWP | Crakow!",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4OSrerRsM-OsDXWRyuFhj-B-Xxa_nBovp3OAyd34cC2VOgUoCZYmF7UCthm_kdGyMry05wHa3t0XxH_23XhP7y9q_a9cBncOjtH9",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-overpass-2024"
+    },
+    "skin-91147006443a": {
+      "name": "Zeus x27 | Dragon Snore",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLln4Xl7x1Y-s2hfqF_MPGAHViU0-9xv-9WVSymhiIrujqNjsH6dH7FOA8pXJZ0Q-MPshe-lte0Pu6z7lbXio5GmSv83yNJ73k54rlWT-N7rWv6YDXa",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-overpass-2024"
+    },
+    "skin-16430ed7568b": {
+      "name": "AK-47 | B the Monster",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0P24bbZ9IeOAMWqfz_1itfNWTiLnwiIrujqNjsGocC6QPQNyA8FxReZYtEHrw4ezMe_nsgbWjYIXni782ipA5yxv5OkET-N7rajaE730",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-overpass-2024"
+    },
+    "skin-be36aa1159cb": {
+      "name": "Desert Eagle | Sputnik",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk_OKRe7RsI_WBD2SV_ux6peRWQyC0nQlp5W6Hydz_In7CPQMjWcYmQrZZ5xLumtCxZrnhsQ2I3dkTmCz5jyoaujErvbhRuDcF4A",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-d89f3dc16ecd": {
+      "name": "M4A1-S | Fizzy POP",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H-ODMXOVwuZ4v_ZoXRahkBkYvzSCkpu3JyqVagUhX5Z2QOYMs0a4lYHmMOjn7gCN2YwQyX6r3HhO5i464b1RA71lpPPi0vWs1A",
+      "min": 0,
+      "max": 0.57,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-4214342c6e7b": {
+      "name": "SSG 08 | Spring Twilly",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1T9s26eqVkLvGBDW-Z1et1pN5uXSy2myIrujqNjsGpeCjCOlMgWJZ0E7JfthfuktPmY-Pk7lON2Y5AyCr-iCtOuitr5O1RT-N7rXhDFbfv",
+      "min": 0,
+      "max": 0.55,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-dfbb0ed38678": {
+      "name": "AUG | Amber Fade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf_CNk6fOqbZtgJeSSAmuZwtF6ueZhW2fizUlwsmuEytmvJHzGaQJyXMclEbYCuhPtkdHmPrvqsVaL3osTmyj6kGoXuZFFysy6",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-5168e8b91374": {
+      "name": "UMP-45 | Full Stop",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkk4a0qB1T9s24abZkI_GeAViCxOpJvOhuRz39zBwi6zvUm4ypdXrDOAUkDMF2ELJf5BG4k9DuMenh4VOMgo1DzCT4jDQJsHiJeUvUrw",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-f74957f8857b": {
+      "name": "Tec-9 | Safety Net",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLlm5W5wipC0P-re6xSM_GVC3OJzvx3vuZscCW6khUz_WnSyIytcXPBPw8oDpMkQeIPuxjtxoWyYuOztVTX3okXyy3_2y9N6Xp1o7FVepitb8I",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-6cccc7b762e4": {
+      "name": "R8 Revolver | Blaze",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLjm4Dv8TRe_c2vaZtrLPGeC3SvzedxuPUnTCznkR9xsGiHzomgIn-UPwN1DZZyELNe5xDrlNTgY-jm5FeM3tkUnDK-0H3jUXrCJQ",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-4984403ab0c0": {
+      "name": "CZ75-Auto | Syndicate",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLyhMG1_B1c_M26eqVkLs-QFDDF_uJ_t-l9ASjglxhw52rQy974IirCa1UiC5R4RbJbsxjrk9SxMb7k4lfZ2o9AzirgznQeG7VwMmI",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-4775500ef0bb": {
+      "name": "AWP | POP AWP",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf9Ttk-_etYKpiN_GBMXWHw9F6ueZhW2fikxgjtmjTzd-ucXOXbgEiCZN1QOcKtka_l9PgY7jrswbe2t5NyC_6kGoXuXrlRr9k",
+      "min": 0,
+      "max": 0.44,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-a1675608a64c": {
+      "name": "P2000 | Space Race",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL5lYayrXIL0POvV7d9IfOWHGaTxNF5ouBnSCyMmRQguynLzNirI32Ua1dzDpVzQLMKtUGww4LhMejh4FTY34wWyyv-3ylO7S5i4vFCD_Qear_SSQ",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-af317ab7f2af": {
+      "name": "MP5-SD | Autumn Twilly",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsPz-R1T9s26eqVkLvGBDW-Z1et1pN5lRi67gVMj5DiAw9avcn-XOlQoDMEjFrYOsETpkIfuYb-x7gaNj9pMzX74inwb8G81tAuAxr4i",
+      "min": 0,
+      "max": 0.58,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-fefcd20ccc3b": {
+      "name": "Nova | Red Quartz",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwiNW0PG8cbd5IfyfB32VxdF6ueZhW2ewxEVy4j6GzI6rIHLFZlMlCZZ3RLZe50O4kNPmYuvgtVfd3o5CxSn6kGoXuWu5UcUF",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-072c06d710fc": {
+      "name": "FAMAS | Meltdown",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1a4s2gfadhJfGBMXeR1fpzou89cC-ymBw0jDGMnYftb3rDPQMhXppwRudet0O4xNLhMu7r7leMiY9Cmy34i39L7C9ssucBAvA7uvqAFyvbTO4",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-ff4f93793484": {
+      "name": "MAC-10 | Propaganda",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1Y-s2jaac8cM-DHGiAwOl3vuVocCW6khUz_T_WzN6hcHOQaQIgCZIlFrEPtUS7wdW0Ne6wtFTYj9pAzyr-3SxP6n11o7FVcf1yckU",
+      "min": 0,
+      "max": 0.62,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-47bca40182d8": {
+      "name": "USP-S | Whiteout",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSM_-sGW-Z1et5pfVWXSCjgRQjtgKJk4jxNWXCbQQpCJF1QLINsUbrlofgNunj5lSLg4sXnCT8jS5Oun445O8CUqUt5OSJ2Dgwztii",
+      "min": 0.06,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-b1ff8720cf58": {
+      "name": "Glock-18 | Gamma Doppler",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1a4s2paalgIc-XAXeAzetkj_FhTjq2wSIgvzKGkbD1KCzPKhhxC5FyRbII4Ua_ltDhY-Ln41fW2I1Ayn_9ii5P7Xpr5ekHV6Mg__HekUifZpA8glcU",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-train-2021",
+      "phase": "Phase 4"
+    },
+    "skin-0fc89d8cca2d": {
+      "name": "Glock-18 | Gamma Doppler",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1a4s2paalgIc-XAXeAzetkj_FhTjq2xiIgvzKGkbD1KCzPKhgmWcN0FLJYtUK7k4DgMuOx7g3ajNhAyH37iygc6ypt5-pQUassqaCFkUifZvBAXI_s",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-train-2021",
+      "phase": "Phase 3"
+    },
+    "skin-2479da1a5f04": {
+      "name": "Glock-18 | Gamma Doppler",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1a4s2paalgIc-XAXeAzetkj_FhTjq2xyIgvzKGkbD1KCzPKhgnC5pwTLNYsRLrlNXlMe-05gDZ3toWyCmqhyhP5y9r6udQWKIk__XUkUifZoShMfFw",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-train-2021",
+      "phase": "Phase 2"
+    },
+    "skin-45d3638f698c": {
+      "name": "Glock-18 | Gamma Doppler",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1a4s2paalgIc-XAXeAzetkj_FhTjq2xCIgvzKGkbD1KCzPKhhzD5d3QORbuxjrk4C1NLzm5Abcj44Uyi342HlI6ixi5edRAKp0-KGBkUifZrIv8MDM",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-train-2021",
+      "phase": "Phase 1"
+    },
+    "skin-a841a452bb30": {
+      "name": "Glock-18 | Gamma Doppler",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1a4s2rZaF_IfyXMWqR0-x6tehzSi2MkhEosDa6lob-KT-JPwZzA5J4F-8Mt0a-ktTvNeyws1PfjIsQyiX9h3gYvSpr5bwFWash-7qX0V9IgS2WPw",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-train-2021",
+      "phase": "Emerald"
+    },
+    "skin-95749d3887bc": {
+      "name": "M4A4 | The Coalition",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiVI0P_6afBSI_-SAm6EyOF4j-1gSCGn200jt2_XnIuseX_GaFR0XpEhReULtUKxlIWzP-_gs1HZjI1NzSutiClXrnE8e4r3Ge8",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-train-2021"
+    },
+    "skin-6aaf237dc6ae": {
+      "name": "SSG 08 | Zeno",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1c_PGmV75oLv-sHXSXkbZJvOhuRz39xhkitW-Hzduvc3zEPQJxWZMhR7NZ4xOwm9DjN7mx41GM2IoUzSmsijQJsHibvaeasA",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-realism-camo"
+    },
+    "skin-c97106696572": {
+      "name": "P250 | Small Game",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwjFU7PqRYLFjNPWBMWWcwPRzj_E7GnmMmRQguynLzdv4JCrGalRzCpZzQLUD5BG5wdPkZuqx51OLjt4Uyiv52CJL6ipssfFCD_QcHDx_gA",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-realism-camo"
+    },
+    "skin-ad8878d8dfca": {
+      "name": "Nova | Yorkshire",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwiVI0OCneLRhJc-dAXGR_uJ_t-l9AXHqx0l0526Bwtz7IHzDaFJxDsAhRbQDuxPtltTiYe234g3fg4xEzH7gznQe4s_Y0gw",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-realism-camo"
+    },
+    "skin-7d2a2ccef9f1": {
+      "name": "USP-S | Alpine Camo",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSJ-OQBliS0-dxuPVWTCi-miIyoC26lob-KT-JaVIpXpRxFuIMtRe4x9PjYrni7wfejYpFnn3-jCNB6C4_5u4FU6It8rqX0V8gYmZtWA",
+      "min": 0,
+      "max": 0.68,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-realism-camo"
+    },
+    "skin-277f6e42830d": {
+      "name": "Five-SeveN | Heat Treated",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRabVSI_GAC1iYwPxyte9sSxa1nAsioDiTn4HGLSLANkI-D5pxEbIDu0btkoXlNuO24wDZ2YhDmH7923tI7ClrsblWAqMj-KPRiBaBb-NawNZy0w",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-realism-camo"
+    },
+    "skin-209298d0eb05": {
+      "name": "MP9 | Arctic Tri-Tone",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f-jFk7uCtfK1uH_2DV1icyOl-pK86HHrrwE5ztWSGydv_eCifOAF2DMB5Fu5etEK9lt3hMuLh5gWPitgX02yg2dKG9WA-",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-realism-camo"
+    },
+    "skin-8ea306517618": {
+      "name": "UMP-45 | Crimson Foil",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkk4a0qB1c_PGmV7d9L-KHMXKd0bojj-1gSCGn20V2tm_Sn9irdX3EZwUkA5B1R-IL5Ebsk9O2MOni4AKIgogUmH333SlXrnE8E6oIYXY",
+      "min": 0,
+      "max": 0.68,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-realism-camo"
+    },
+    "skin-12720387d19a": {
+      "name": "Galil AR | Rainbow Spoon",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0PO_V7BkNPGdB3Kd_vx3ue9rQD6MkhwrujGEiLD1KCzPKhhxCMclQeAPtUK-xoWxPrvkslOKg4tHzXn-3Xsbvyo647sLVqoh_6XekUifZrx5Pjj5",
+      "min": 0,
+      "max": 0.554422,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-realism-camo"
+    },
+    "skin-6e6550613810": {
+      "name": "Glock-18 | AXIA",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1c_PGmV6V1KfGsCWufwuVJvOhuRz39lh93sDmDytj6InjCaQ52ApF1EeIMuxC9wNPmNe3k7wLfjIJGm32o2zQJsHgd3ZW3tg",
+      "min": 0,
+      "max": 0.7,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-realism-camo"
+    },
+    "skin-81eee26a1c31": {
+      "name": "M4A1-S | Fade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_GSMWGRxetJvbVoHjqMmRQguynLm92pci2WagEkC5Z5Q7VetkbukIXjNrnm5QPbjt8WxS-vii4b5i5v4fFCD_TfxF4xWg",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-realism-camo"
+    },
+    "skin-643580f5e594": {
+      "name": "SCAR-20 | Wild Berry",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLinZfyr3Jk7OeRa6xoNuKcAFiDwu9k4rFWQyC0nQlpsmnTyNf8dy-fZlIoDZd1F7MI4xbuw4e0NLm0sgaP3tpNn37_h3gf6jErvbhxX_RFLw",
+      "min": 0,
+      "max": 0.65,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-graphic-design"
+    },
+    "skin-67dfc7fef62f": {
+      "name": "SG 553 | Berry Gel Coat",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1c_M2mabR9Oc-BC2Ov0ukj5bdWQyC0nQlp42vXn4mrIy2VagRzXJJxFOYJsxG4koLgP-zktVbf3oJMmSX43SIf6jErvbj113ptXQ",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-graphic-design"
+    },
+    "skin-9527d46c449f": {
+      "name": "AK-47 | Crossfade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0PW8abRlKfOsAXGV0-J3qd5oRH3kqhEutDWR1N6vdi2Wb1IjA5V5FrUPuhW6ldGzMe7htQTd2YoRzyn83HhPvys65eocEf1y0nVviGs",
+      "min": 0,
+      "max": 0.5,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-graphic-design"
+    },
+    "skin-36f03d5a542f": {
+      "name": "XM1014 | Halftone Shift",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk5-aRe6xsMPWAMX-dkL4n5N5lRi67gVN24GnSm9b9cHrGOg8hCpMmRLMC4xftwdPkYbvq5gzZio4UnC_6iy5L8G81tJrSBQ92",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-graphic-design"
+    },
+    "skin-d2082b23439a": {
+      "name": "CZ75-Auto | Slalom",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLyhMG1_B1Y-s2vard5MvGQGliHyeditd5qVRa_nBovp3Pdzt3_eSqUOA4hDpB1EbQPshXqkdPmPrm04APXjdhExXis2C1N7io9_a9cBtMaUZjs",
+      "min": 0,
+      "max": 0.57,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-graphic-design"
+    },
+    "skin-efc5c4835241": {
+      "name": "P90 | Attack Vector",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf_jdk__2icZt7Kf-fC3Ov0bcmj-1gSCGn20QhtW_Vm9r8InmVbFJyDJMkE-IJsEOwm9G1Mu3jswSP2t1Hyy-s3yJXrnE8K5R_WCY",
+      "min": 0,
+      "max": 0.55,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-graphic-design"
+    },
+    "skin-b5bc3553f7e1": {
+      "name": "M4A4 | Polysoup",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFU4M2-Z6h0M_-GHlidle8ij-1gSCGn2x904j7dntz4eX6UOlcmCZFwQLIL4Ri7ktexMePg4Q3ZiIIQmyv6inxXrnE8bylol6Q",
+      "min": 0,
+      "max": 0.64,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-graphic-design"
+    },
+    "skin-544a3d0462c1": {
+      "name": "Desert Eagle | Starcade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7OeRb6hkNOSWHFiUxO9xvORWQyC0nQlpsD_SnN79JX2WbQ8pXMNwRO5ZsRK8lt21Nb7r4wPXgtgWmCz7hylJ6jErvbgNUrm8Kg",
+      "min": 0,
+      "max": 0.75,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-graphic-design"
+    },
+    "skin-150eda31902a": {
+      "name": "AUG | Lil' Pig",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf-jFk4_uieK1qH_GGCVicyOl-pK84TXCwxRhx627SmNj6J3PFaQV2X5R1R7JctBixldfvY7u24ATY2owX02yg2cUR6r7A",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-graphic-design"
+    },
+    "skin-1c7cbe2db8f1": {
+      "name": "AWP | CMYK",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf-jFk5vyqbbRoLvSWMWaH0dF6ueZhW2e1zElxtmzQmIv8J3qQalRzW5t0RrYOsBCwlte2Mbmw5AbXiYlAnnn4kGoXuYBQOb0Q",
+      "min": 0,
+      "max": 0.8,
+      "stattrak": false,
+      "rarity": "Covert",
+      "collectionId": "collection-set-graphic-design"
+    },
+    "skin-c0a577a1a5b2": {
+      "name": "SSG 08 | Hand Brake",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1c_M29e6M9eM-QBmKTyutkj-1gSCGn2xtwtzzWmNagIH3CP1V2C5dxR7QLsES_m9PvY7nj4QPd2ohHy3r4hypXrnE8MesmkS4",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-inferno-2"
+    },
+    "skin-ff8258cd7dac": {
+      "name": "M4A4 | Converter",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwipC0OCrbJtlJeisAm6Xyfo46OAxFnHixEhztzuAyo79eCqfb1VyXpclTONctxS6w9KxMbi25Fbd2ZUFk3t2_C2R8Q",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-inferno-2"
+    },
+    "skin-a2c7bfcb6607": {
+      "name": "USP-S | Check Engine",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSM-CsA2KDydFlsedsWzChkBkYvzSCkpu3Iy6RbQYnXJZ2F7QN4UPqkIfmNeni5laNit1Dyiz42C5JvCdo57xQA71lpPMz6iO7bg",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-inferno-2"
+    },
+    "skin-f1e77412769d": {
+      "name": "Sawed-Off | Brake Light",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLin4Hl-S1d6c2vaZt7JeKHB2Cf_vxztN5lRi67gVMj5T_Ry9yhcS-XaFUiDpVwEe4D4Bi9lta1Yb_m5FfdiYxNmS_3j35A8G81tL5T7kT_",
+      "min": 0,
+      "max": 0.08,
+      "stattrak": false,
+      "rarity": "Mil-Spec Grade",
+      "collectionId": "collection-set-inferno-2"
+    },
+    "skin-9cd9ae26b864": {
+      "name": "P250 | Vino Primo",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwiVI0OL8PfRSI_iWDWyV09F6ueZhW2eyxR9x6m3SydqqcinFPQN2CcF4F-5buhi9w9PgYem25AKNj40Wzy2rkGoXuZ9g813e",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-inferno-2"
+    },
+    "skin-7036be1d6dd2": {
+      "name": "MP7 | Fade",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsHf_CNk6fOqbZtgMKesAm6Xyfo45LQ7Fy3rzR536j6HyYn6J3zFaAcjA5RwQ-9fs0O5m93nMe2x5QHfjZUFk3sMNd5yQw",
+      "min": 0,
+      "max": 0.25,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-inferno-2"
+    },
+    "skin-d721d2a6a01c": {
+      "name": "AK-47 | Safety Net",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wipC0P-re6xSM_GVC3OJzvx3vuZscCW6khUz_W3RyI2tdyjFaAUlW5J5QeNc4BS_xoKzYePi4QSIgoJDynn4jS9Mvyh1o7FVeAmr1N8",
+      "min": 0,
+      "max": 0.6,
+      "stattrak": false,
+      "rarity": "Restricted",
+      "collectionId": "collection-set-inferno-2"
+    },
+    "skin-248559e8b343": {
+      "name": "Dual Berettas | Twin Turbo",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1Y-s2qfaVhH_WfB3OV0tFkse1lVha_nBovp3OHytv8JCnBbAF1X5MjR7UPsBfrmoHuNr7nsgbfjdlAxSr63CIfuChr_a9cBiuNovOB",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-inferno-2"
+    },
+    "skin-a7e309c3d23a": {
+      "name": "SG 553 | Integrale",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1Y-s29b_E4c8-BD2uc2NF6ueZhW2e2wkV14m2DzditcnmQOA4gWcYlQOcDs0a7moLvZLiw5geP3dgRnnj2kGoXuQPBQAH6",
+      "min": 0,
+      "max": 1,
+      "stattrak": false,
+      "rarity": "Classified",
+      "collectionId": "collection-set-inferno-2"
+    },
+    "skin-8aacf99e7f2f": {
+      "name": "M4A4 | Howl",
+      "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afVSKP-EAm6extF6ueZhW2exwkl2tmTXwt39eCiUPQR2DMN4TOVetUK8xoLgM-K341eM2otDnC6okGoXufBz_TAB",
+      "min": 0,
+      "max": 0.4,
+      "stattrak": true,
+      "rarity": "Contraband",
+      "collectionId": "special-contraband",
+      "tradeUp": false
+    }
+  }
+}

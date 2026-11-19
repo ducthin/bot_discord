@@ -1,52 +1,31 @@
-const { Client, GatewayIntentBits, REST, Routes, EmbedBuilder, MessageFlags } = require('discord.js');
-const { loadCommands, getCommandsData } = require('./utils/commandLoader');
-const { checkDNSConnection } = require('./utils/youtubeUtils');
-const { isGuildAllowed, logGuildInfo } = require('./utils/guildUtils');
 require('dotenv').config();
+const { setTimeout: delay } = require('node:timers/promises');
+const { Client, GatewayIntentBits, Partials, REST, Routes, Events, MessageFlags } = require('discord.js');
+const { loadCommands, getCommandsData } = require('./utils/commandLoader');
+const { isFeatureEnabled, isDisabledComponent } = require('./utils/features');
+const { checkDNSConnection } = require('./utils/youtubeUtils');
+const { isGuildAllowed, getAllowedGuilds, logGuildInfo } = require('./utils/guildUtils');
+const { commandNeedsVoice, getVoiceAccessError } = require('./utils/voiceAccess');
+const { musicData, disconnectMusic } = require('./utils/musicUtils');
+const { createHealthServer, startHealthServer, watchLauncher } = require('./utils/runtime');
+const priceSnapshot = require('./utils/cs2PriceSnapshot');
+const blueGemPrices = require('./utils/cs2BlueGemPrices');
+const database = require('./utils/database');
+const { createAdminHandler } = require('./utils/adminWeb');
+const { createPlayerHandler } = require('./utils/playerWeb');
 
-// Kiểm tra DNS ngay khi khởi động
-async function initializeDNS() {
-    console.log('🔍 Checking DNS connection...');
-    const dnsOk = await checkDNSConnection();
-    if (!dnsOk) {
-        console.log('⚠️ DNS issues detected, but continuing...');
-    }
-}
-
-// Gọi DNS check
-initializeDNS();
-
-// Health check server để tránh sleep trên Render
-const express = require('express');
-const app = express();
-
-app.get('/', (req, res) => {
-    res.json({
-        status: 'online',
-        bot: client.user ? client.user.tag : 'Starting...',
-        uptime: process.uptime(),
-        timestamp: new Date().toISOString()
-    });
-});
-
-app.get('/health', (req, res) => {
-    res.json({ 
-        status: 'healthy',
-        guilds: client.guilds ? client.guilds.cache.size : 0,
-        uptime: process.uptime()
-    });
-});
-
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-    console.log(`🌐 Health check server running on port ${PORT}`);
-});
-
+const managementEnabled = isFeatureEnabled('serverManagement');
+const greetingsEnabled = managementEnabled && require('./utils/memberGreetings').memberGreetingsEnabled();
 const client = new Client({
+    allowedMentions: { parse: [], repliedUser: false },
     intents: [
         GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildVoiceStates
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.DirectMessages,
+        ...(greetingsEnabled ? [GatewayIntentBits.GuildMembers] : [])
     ],
+    partials: [Partials.Message, Partials.Channel, ...(greetingsEnabled ? [Partials.GuildMember] : [])],
     // Thêm timeout và retry options
     ws: {
         version: 10,
@@ -59,751 +38,255 @@ const client = new Client({
     }
 });
 
-// Load tất cả commands
 const commands = loadCommands();
+let shuttingDown = false;
+const httpHandlers = [
+    createAdminHandler({ client, commands, isShuttingDown: () => shuttingDown }),
+    createPlayerHandler({ client, isShuttingDown: () => shuttingDown, sessionStore: database })
+].filter(Boolean);
+const healthServer = createHealthServer(client, {
+    handler: async (req, res) => { for (const handler of httpHandlers) if (await handler(req, res)) return true; return false; }
+});
+let stopWatching = () => {};
+let stopAnnouncements = () => {};
 
-client.once('ready', async () => {
-    console.log(`🎵 ${client.user.tag} đã sẵn sàng phát nhạc!`);
-    
-    // Đăng ký slash commands cho nhiều guild
-    const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
-    
+function restoreHomBattles(guild) {
+    void commands.get('hom').restoreBattleResults(guild)
+        .catch(error => console.error('Lỗi khôi phục kết quả Battle:', error.message));
+}
+
+client.once(Events.ClientReady ?? 'ready', async () => {
+    console.log('🎵 ' + client.user.tag + ' đã sẵn sàng phát nhạc!');
+    if (managementEnabled) stopAnnouncements = require('./utils/announcements').startAnnouncementScheduler(client);
+    for (const guild of client.guilds.cache.values()) {
+        if (guild.available && isGuildAllowed(guild.id)) {
+            if (managementEnabled) void require('./utils/tempRooms').reconcileRooms(guild).catch(error => console.error('Lỗi khôi phục phòng thoại tạm:', error.message));
+            void commands.get('tiembanh').resume(guild).catch(error => console.error('Lỗi khôi phục bàn Tiệm Bánh Mây:', error.message));
+            restoreHomBattles(guild);
+        }
+    }
+
     try {
-        console.log('Đang đăng ký slash commands...');
-        
-        // Lấy danh sách guild IDs
-        const guildIds = process.env.GUILD_IDS 
-            ? process.env.GUILD_IDS.split(',').map(id => id.trim())
-            : [process.env.GUILD_ID];
-        
-        // Đăng ký commands cho từng guild
+        const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
+        const data = getCommandsData(commands);
+        const guildIds = getAllowedGuilds();
+        let registered = 0;
         for (const guildId of guildIds) {
-            if (guildId) {
-                try {
-                    await rest.put(
-                        Routes.applicationGuildCommands(process.env.CLIENT_ID, guildId),
-                        { body: getCommandsData() }
-                    );
-                    console.log(`✅ Đã đăng ký commands cho guild: ${guildId}`);
-                } catch (guildError) {
-                    console.error(`❌ Lỗi đăng ký commands cho guild ${guildId}:`, guildError.message);
-                }
+            if (shuttingDown) return;
+            try {
+                await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, guildId), { body: data });
+                registered++;
+                console.log('✅ Đã đăng ký commands cho guild: ' + guildId);
+            } catch (error) {
+                console.error('❌ Lỗi đăng ký commands cho guild ' + guildId + ':', error.message);
             }
         }
-        
-        console.log('🎉 Hoàn thành đăng ký slash commands!');
-        
-        // Hiển thị thông tin guilds
-        setTimeout(() => logGuildInfo(client), 2000);
-        
+        console.log('Slash commands: ' + registered + '/' + guildIds.length + ' server đăng ký thành công.');
+        logGuildInfo(client);
     } catch (error) {
-        console.error('Lỗi đăng ký commands:', error);
+        console.error('Lỗi đăng ký commands:', error.message);
     }
 });
 
-client.on('interactionCreate', async interaction => {
-    // Kiểm tra guild permission
-    if (!isGuildAllowed(interaction.guildId)) {
-        console.log(`⚠️ Interaction từ guild không được phép: ${interaction.guildId}`);
-        if (interaction.isRepliable()) {
-            return interaction.reply({
-                content: '❌ Bot không được phép hoạt động trên server này!',
-                ephemeral: true
-            });
-        }
+client.on(Events.InteractionCreate, async interaction => {
+    if (!interaction.isRepliable()) return;
+    if (shuttingDown) {
+        await interaction.reply({ content: 'Bot đang khởi động lại. Bạn thử lại sau vài giây nhé.', flags: MessageFlags.Ephemeral }).catch(() => {});
         return;
     }
-
-    // Xử lý slash commands
-    if (interaction.isChatInputCommand()) {
-        const command = commands.get(interaction.commandName);
-
-        if (!command) {
-            console.error(`Không tìm thấy command ${interaction.commandName}.`);
-            return;
+    try {
+        if (isDisabledComponent(interaction.customId)) {
+            return await interaction.reply({ content: '❌ Tiện ích này không còn khả dụng. Dùng /help để xem tính năng hiện tại.', flags: MessageFlags.Ephemeral });
         }
-
-        try {
+        if (interaction.isButton() && interaction.customId.startsWith('mg_roomreq_')) {
+            return await commands.get('room-request').button(interaction);
+        }
+        if (!isGuildAllowed(interaction.guildId)) {
+            return await interaction.reply({ content: '❌ Bot không được phép hoạt động trên server này!', flags: MessageFlags.Ephemeral });
+        }
+        if (interaction.isChatInputCommand()) {
+            const command = commands.get(interaction.commandName);
+            if (!command) return await interaction.reply({ content: '❌ Lệnh này không còn khả dụng. Dùng /help để xem lệnh hiện tại.', flags: MessageFlags.Ephemeral });
+            if (commandNeedsVoice(interaction)) {
+                const error = getVoiceAccessError(interaction.member, musicData.get(interaction.guildId));
+                if (error) return await interaction.reply({ content: error, flags: MessageFlags.Ephemeral });
+            }
             await command.execute(interaction);
-        } catch (error) {
-            console.error('Lỗi khi thực thi command:', error);
-            
-            const errorMessage = '❌ Đã xảy ra lỗi khi thực thi command!';
-            
-            if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({ content: errorMessage, flags: MessageFlags.Ephemeral });
-            } else {
-                await interaction.reply({ content: errorMessage, flags: MessageFlags.Ephemeral });
+        } else if (interaction.isStringSelectMenu()) {
+            if (interaction.customId === 'mg_hom_select' || interaction.customId.startsWith('mg_hom_battle-') ||
+                interaction.customId.startsWith('mg_hom_upgrade:') ||
+                interaction.customId.startsWith('mg_hom_inventory-select_') ||
+                interaction.customId.startsWith('mg_hom_inventory-sort_') ||
+                interaction.customId.startsWith('mg_hom_market-select_') ||
+                interaction.customId.startsWith('mg_hom_tradeup-sort_') ||
+                interaction.customId.startsWith('mg_hom_tradeup-group_') || interaction.customId.startsWith('mg_hom_tradeup-items_')) {
+                await commands.get('hom').select(interaction);
             }
+            else await require('./handlers/interactionHandler').handleStringSelectMenu(interaction);
+        } else if (interaction.isButton()) {
+            const id = interaction.customId;
+            if (id.startsWith('mg_room_')) await commands.get('room').button(interaction);
+            else if (id.startsWith('mg_case_')) await commands.get('cases').button(interaction);
+            else if (id === 'mg_ticket_open' || id === 'mg_ticket_close') await commands.get('ticket').button(interaction);
+            else if (id.startsWith('mg_lfg_')) await commands.get('lfg').button(interaction);
+            else if (id.startsWith('mg_suggest_')) await commands.get('suggest').button(interaction);
+            else if (id.startsWith('mg_taixiu_')) await commands.get('tiembanh').button(interaction);
+            else if (id.startsWith('mg_hom_')) await commands.get('hom').button(interaction);
+            else if (id.startsWith('mg_announce_')) await commands.get('announce').button(interaction);
+            else if (id === 'mg_greeting_preview') await commands.get('setup').greetingPreview(interaction);
+            else await require('./handlers/interactionHandler').handleButton(interaction);
+        } else if (interaction.isModalSubmit() && interaction.customId.startsWith('mg_roomform_')) {
+            await commands.get('room').modal(interaction);
+        } else if (interaction.isModalSubmit() && interaction.customId.startsWith('mg_greeting_text_')) {
+            await commands.get('setup').saveGreetingText(interaction);
+        } else if (interaction.isModalSubmit() && interaction.customId.startsWith('mg_taixiu_bet_')) {
+            await commands.get('tiembanh').modal(interaction);
+        } else if (interaction.isModalSubmit() && (interaction.customId.startsWith('mg_hom_order_') ||
+            interaction.customId.startsWith('mg_hom_open-form_') ||
+            interaction.customId.startsWith('mg_hom_upgrade:') ||
+            interaction.customId.startsWith('mg_hom_battle-') ||
+            interaction.customId.startsWith('mg_hom_market-price_') || interaction.customId.startsWith('mg_hom_market-filter-form_') ||
+            interaction.customId.startsWith('mg_hom_terminal-cap-form_'))) {
+            await commands.get('hom').modal(interaction);
+        }
+    } catch (error) {
+        console.error('Lỗi xử lý tương tác:', error.message);
+        const payload = { content: '❌ Đã xảy ra lỗi khi xử lý yêu cầu!', flags: MessageFlags.Ephemeral };
+        if (interaction.deferred && (interaction.isChatInputCommand() || interaction.isModalSubmit())) {
+            await interaction.editReply({ content: payload.content }).catch(() => {});
+        } else {
+            const method = interaction.replied || interaction.deferred ? 'followUp' : 'reply';
+            await interaction[method](payload).catch(() => {});
         }
     }
-    
-    // Xử lý String Select Menu interactions
-    if (interaction.isStringSelectMenu()) {
-        const { initGuildMusicData, playMusic } = require('./utils/musicUtils');
-        const guildData = initGuildMusicData(interaction.guild.id);
-        
+});
+
+client.on(Events.GuildAvailable, guild => {
+    if (shuttingDown || !client.isReady() || !isGuildAllowed(guild.id)) return;
+    if (managementEnabled) void require('./utils/tempRooms').reconcileRooms(guild).catch(error => console.error('Lỗi khôi phục phòng thoại tạm:', error.message));
+    void commands.get('tiembanh').resume(guild).catch(error => console.error('Lỗi khôi phục bàn Tiệm Bánh Mây:', error.message));
+    restoreHomBattles(guild);
+});
+
+function recoverTaixiuBoard(guild, ids) {
+    if (shuttingDown || !guild || !isGuildAllowed(guild.id)) return;
+    void commands.get('tiembanh').recoverDeleted(guild, ids)
+        .catch(error => console.error('Lỗi khôi phục tin nhắn Tiệm Bánh Mây:', error.message));
+}
+
+client.on(Events.MessageDelete, message => recoverTaixiuBoard(message.guild, new Set([message.id])));
+client.on(Events.MessageBulkDelete, (messages, channel) => recoverTaixiuBoard(channel.guild, new Set(messages.keys())));
+
+if (managementEnabled) {
+    client.on(Events.VoiceStateUpdate, (oldState, newState) => {
+        if (shuttingDown || !isGuildAllowed(newState.guild.id)) return;
+        void require('./utils/tempRooms').onVoiceChange(oldState, newState).catch(error => console.error('Lỗi quản lý kênh thoại:', error.message));
+    });
+}
+
+if (greetingsEnabled) {
+    const greet = (member, joined) => {
+        if (!shuttingDown) {
+            void require('./utils/memberGreetings').sendMemberGreeting(member, joined).catch(error => console.error('Lỗi gửi lời chào thành viên:', error.message));
+        }
+    };
+    client.on(Events.GuildMemberAdd, member => greet(member, true));
+    client.on(Events.GuildMemberRemove, member => greet(member, false));
+}
+
+// Cộng xu của chủ bot qua tin nhắn riêng.
+client.on(Events.MessageCreate, async message => {
+    if (shuttingDown || message.author.bot || !client.user || message.guildId) return;
+    try {
+        await commands.get('tiembanh').handlePrivateMessage(message);
+    } catch (error) {
+        console.error('Lỗi xử lý yêu cầu Tiệm Bánh Mây qua tin nhắn riêng:', error.message);
+        await message.reply('❌ Chưa thể xác nhận yêu cầu. Hãy kiểm tra ví trước khi gửi lại.').catch(() => {});
+    }
+});
+
+client.on(Events.Error, error => console.error('Discord client error:', error.message));
+client.on(Events.ShardError, error => console.error('Discord gateway error:', error.message));
+process.on('unhandledRejection', error => console.error('Unhandled rejection:', error?.message ?? String(error)));
+
+async function shutdown(reason, code = 0) {
+    if (shuttingDown) return;
+    shuttingDown = true;
+    stopWatching();
+    stopAnnouncements();
+    console.log('Dừng bot: ' + reason);
+    const closeHealth = new Promise(resolve => healthServer.close(resolve));
+    healthServer.closeAllConnections();
+    await Promise.race([commands.get('hom')?.waitForOpenings({ finishBattles: true }), delay(20_000, undefined, { ref: false })]);
+    const timeout = setTimeout(() => process.exit(code), 4000);
+    await Promise.allSettled([closeHealth, priceSnapshot.stop(), blueGemPrices.stop(), ...Array.from(musicData.values(), data => disconnectMusic(data))]);
+    await client.destroy();
+    await database.close();
+    clearTimeout(timeout);
+    process.exit(code);
+}
+
+for (const signal of ['SIGINT', 'SIGTERM', 'SIGHUP', 'SIGBREAK']) {
+    process.on(signal, () => void shutdown(signal));
+}
+
+async function start() {
+    const port = Number(process.env.PORT || 3001);
+    const host = process.env.HTTP_HOST?.trim() || undefined;
+    if (!Number.isInteger(port) || port < 0 || port > 65535) {
+        console.error('PORT phải là số từ 0 đến 65535.');
+        return shutdown('cấu hình PORT không hợp lệ', 78);
+    }
+    stopWatching = watchLauncher(process.env.DISCORD_BOT_LAUNCHER_PID, () => void shutdown('launcher đã dừng'));
+    try {
+        await database.initialize();
+    } catch (error) {
+        console.error('Không kết nối được PostgreSQL:', error.code ?? error.message);
+        return shutdown('kiểm tra DATABASE_URL và dịch vụ PostgreSQL', 78);
+    }
+    try {
+        await startHealthServer(healthServer, port, 3000, host);
+    } catch (error) {
+        if (error.code === 'EADDRINUSE') {
+            console.error('Cổng ' + port + ' đang được sử dụng. Hãy kiểm tra bản bot cũ trong Task Scheduler hoặc dùng netstat -ano để xác định tiến trình giữ cổng.');
+            return shutdown('trùng cổng', 78);
+        }
+        console.error('Không mở được health server:', error.message);
+        return shutdown('lỗi health server', 78);
+    }
+    if (shuttingDown) return;
+    healthServer.on('error', error => {
+        console.error('Health server error:', error.message);
+        void shutdown('lỗi health server', 1);
+    });
+    console.log('🌐 Health check server running on port ' + healthServer.address().port);
+    if (process.env.ADMIN_ENABLED === 'true') console.log('🛠️ Trang quản trị đã bật tại ' + process.env.ADMIN_ORIGIN + '/admin/');
+    if (process.env.PLAYER_ENABLED === 'true') console.log('🎁 Web mở hòm đã bật tại ' + (process.env.PLAYER_ORIGIN || process.env.ADMIN_ORIGIN) + '/play/');
+    await priceSnapshot.start();
+    await blueGemPrices.start();
+    if (shuttingDown) return;
+    void checkDNSConnection().catch(error => console.warn('DNS check:', error.message));
+
+    for (let attempt = 1; attempt <= 3 && !shuttingDown; attempt++) {
         try {
-            switch (interaction.customId) {
-                case 'select_song':
-                    if (!guildData.queue || guildData.queue.length === 0) {
-                        return interaction.reply({ content: '❌ Queue hiện tại đang trống!', flags: MessageFlags.Ephemeral });
-                    }
-
-                    const selectedIndex = parseInt(interaction.values[0]);
-                    const selectedSong = guildData.queue[selectedIndex];
-                    
-                    if (!selectedSong) {
-                        return interaction.reply({ content: '❌ Bài hát không tồn tại!', flags: MessageFlags.Ephemeral });
-                    }
-
-                    // Di chuyển bài được chọn lên đầu queue
-                    guildData.queue.splice(selectedIndex, 1);
-                    guildData.queue.unshift(selectedSong);
-
-                    const embed = new EmbedBuilder()
-                        .setColor('#00ff00')
-                        .setTitle('🎵 Đã chọn bài để phát tiếp theo')
-                        .setDescription(`**${selectedSong.title}**`)
-                        .addFields(
-                            { name: 'Vị trí cũ', value: `#${selectedIndex + 1}`, inline: true },
-                            { name: 'Vị trí mới', value: '#1 (Tiếp theo)', inline: true }
-                        )
-                        .setThumbnail(selectedSong.thumbnail);
-
-                    await interaction.update({ 
-                        embeds: [embed], 
-                        components: [] // Xóa select menu
-                    });
-
-                    // Nếu không đang phát, bắt đầu phát ngay
-                    if (!guildData.isPlaying) {
-                        const { createMusicConnection } = require('./utils/musicUtils');
-                        createMusicConnection(interaction.member, guildData);
-                        playMusic(guildData);
-                    }
-                    break;
-
-                default:
-                    interaction.reply({ content: '❌ Select menu không hợp lệ!', flags: MessageFlags.Ephemeral });
-            }
-        } catch (error) {
-            console.error('Lỗi khi xử lý select menu:', error);
-            
-            if (interaction.isRepliable() && !interaction.replied && !interaction.deferred) {
-                try {
-                    await interaction.reply({ content: '❌ Đã xảy ra lỗi!', flags: MessageFlags.Ephemeral });
-                } catch (replyError) {
-                    console.log('⚠️ Không thể reply interaction:', replyError.message);
-                }
-            }
-        }
-    }
-    
-    // Xử lý button interactions
-    if (interaction.isButton()) {
-        // Kiểm tra nếu interaction đã expired hoặc invalid
-        if (!interaction.isRepliable()) {
-            console.log('⚠️ Button interaction đã expired, bỏ qua...');
-            return;
-        }
-        
-        const { initGuildMusicData, playMusic, removeButtons } = require('./utils/musicUtils');
-        const guildData = initGuildMusicData(interaction.guild.id);
-        
-        try {
-            switch (interaction.customId) {
-                case 'pause_music':
-                    if (!guildData.player) {
-                        return interaction.reply({ content: '❌ Không có nhạc nào đang phát!', flags: MessageFlags.Ephemeral });
-                    }
-                    guildData.player.pause();
-                    interaction.reply({ content: '⏸️ Đã tạm dừng nhạc!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'resume_music':
-                    if (!guildData.player) {
-                        return interaction.reply({ content: '❌ Không có nhạc nào đang phát!', flags: MessageFlags.Ephemeral });
-                    }
-                    guildData.player.unpause();
-                    interaction.reply({ content: '▶️ Đã tiếp tục phát nhạc!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'skip_music':
-                    if (!guildData.player || guildData.queue.length === 0) {
-                        return interaction.reply({ content: '❌ Không có nhạc nào để bỏ qua!', flags: MessageFlags.Ephemeral });
-                    }
-                    
-                    // Lưu thông tin bài hiện tại trước khi skip
-                    const currentSongTitle = guildData.currentSong ? guildData.currentSong.title : 'Unknown';
-                    
-                    // Xóa buttons ngay lập tức
-                    if (guildData.currentSong && guildData.currentMessage) {
-                        await removeButtons(guildData, currentSongTitle);
-                    }
-                    
-                    // Dừng player (sẽ trigger handleSongEnd)
-                    guildData.player.stop();
-                    
-                    interaction.reply({ content: '⏭️ Đã bỏ qua bài hát!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'stop_music':
-                    if (!guildData.player) {
-                        return interaction.reply({ content: '❌ Không có nhạc nào đang phát!', flags: MessageFlags.Ephemeral });
-                    }
-                    // Xóa buttons của bài hiện tại
-                    if (guildData.currentSong) {
-                        await removeButtons(guildData, guildData.currentSong.title);
-                    }
-                    guildData.queue = [];
-                    guildData.player.stop();
-                    interaction.reply({ content: '⏹️ Đã dừng phát nhạc và xóa danh sách!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'show_queue':
-                    if (guildData.queue.length === 0) {
-                        return interaction.reply({ content: '📭 danh sách trống!', flags: MessageFlags.Ephemeral });
-                    }
-
-                    const queueList = guildData.queue.slice(0, 10).map((song, index) => {
-                        const status = index === 0 ? '🎵 ' : `${index + 1}. `;
-                        return `${status}**${song.title}** - ${song.duration}`;
-                    }).join('\n');
-
-                    const queueEmbed = new EmbedBuilder()
-                        .setColor('#0099ff')
-                        .setTitle('🎵 Danh sách phát')
-                        .setDescription(queueList)
-                        .setFooter({ text: `Tổng cộng ${guildData.queue.length} bài hát` });
-
-                    interaction.reply({ embeds: [queueEmbed], flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'show_lyrics':
-                    if (guildData.queue.length === 0 || !guildData.currentSong) {
-                        return interaction.reply({ content: '❌ Không có bài hát nào đang phát!', flags: MessageFlags.Ephemeral });
-                    }
-
-                    const { getLyrics } = require('./utils/lyricsUtils');
-                    
-                    // Defer reply vì lyrics có thể mất thời gian fetch
-                    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
-                    
-                    try {
-                        const lyrics = await getLyrics(guildData.currentSong.title);
-                        
-                        if (!lyrics) {
-                            return interaction.editReply({ content: '❌ Không tìm thấy lời bài hát!' });
-                        }
-
-                        const lyricsEmbed = new EmbedBuilder()
-                            .setColor('#ff9900')
-                            .setTitle(`🎤 ${guildData.currentSong.title}`)
-                            .setDescription(lyrics.length > 4000 ? lyrics.substring(0, 4000) + '...' : lyrics)
-                            .setFooter({ text: 'Lời bài hát từ Genius' });
-
-                        interaction.editReply({ embeds: [lyricsEmbed] });
-                    } catch (error) {
-                        console.error('Lỗi khi lấy lyrics:', error);
-                        interaction.editReply({ content: '❌ Đã xảy ra lỗi khi tìm lời bài hát!' });
-                    }
-                    break;
-
-                // Quick Select buttons
-                case 'select_song_0':
-                case 'select_song_1':
-                case 'select_song_2':
-                case 'select_song_3':
-                case 'select_song_4':
-                    const songIndex = parseInt(interaction.customId.split('_')[2]);
-                    
-                    if (!guildData.queue || guildData.queue.length <= songIndex) {
-                        return interaction.reply({ content: '❌ Bài hát không tồn tại!', flags: MessageFlags.Ephemeral });
-                    }
-
-                    if (songIndex === 0) {
-                        return interaction.reply({ content: '❌ Bài này đang được phát!', flags: MessageFlags.Ephemeral });
-                    }
-
-                    const selectedSong = guildData.queue[songIndex];
-                    // Di chuyển bài được chọn lên đầu queue (sau bài đang phát)
-                    guildData.queue.splice(songIndex, 1);
-                    guildData.queue.splice(1, 0, selectedSong);
-
-                    const selectEmbed = new EmbedBuilder()
-                        .setColor('#00ff00')
-                        .setTitle('✅ Đã chọn bài tiếp theo')
-                        .setDescription(`**${selectedSong.title}** sẽ phát sau bài hiện tại`)
-                        .setThumbnail(selectedSong.thumbnail);
-
-                    await interaction.reply({ embeds: [selectEmbed], flags: MessageFlags.Ephemeral });
-                    break;
-
-                // Control panel buttons
-                case 'music_pause':
-                    if (!guildData.player) {
-                        return interaction.reply({ content: '❌ Không có nhạc nào đang phát!', flags: MessageFlags.Ephemeral });
-                    }
-                    guildData.player.pause();
-                    guildData.isPlaying = false;
-                    interaction.reply({ content: '⏸️ Đã tạm dừng nhạc!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'music_resume':
-                    if (!guildData.player) {
-                        return interaction.reply({ content: '❌ Không có nhạc nào để tiếp tục!', flags: MessageFlags.Ephemeral });
-                    }
-                    guildData.player.unpause();
-                    guildData.isPlaying = true;
-                    interaction.reply({ content: '▶️ Đã tiếp tục phát nhạc!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'music_skip':
-                    if (!guildData.player || guildData.queue.length === 0) {
-                        return interaction.reply({ content: '❌ Không có nhạc nào để bỏ qua!', flags: MessageFlags.Ephemeral });
-                    }
-                    guildData.player.stop();
-                    interaction.reply({ content: '⏭️ Đã bỏ qua bài hát!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'music_stop':
-                    if (!guildData.player) {
-                        return interaction.reply({ content: '❌ Không có nhạc nào đang phát!', flags: MessageFlags.Ephemeral });
-                    }
-                    guildData.queue = [];
-                    guildData.player.stop();
-                    guildData.isPlaying = false;
-                    interaction.reply({ content: '⏹️ Đã dừng nhạc và xóa queue!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'music_shuffle':
-                    if (!guildData.queue || guildData.queue.length <= 2) {
-                        return interaction.reply({ content: '❌ Cần ít nhất 3 bài để trộn!', flags: MessageFlags.Ephemeral });
-                    }
-                    
-                    // Giữ bài đang phát, trộn phần còn lại
-                    const currentSong = guildData.queue.shift();
-                    for (let i = guildData.queue.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [guildData.queue[i], guildData.queue[j]] = [guildData.queue[j], guildData.queue[i]];
-                    }
-                    guildData.queue.unshift(currentSong);
-                    
-                    interaction.reply({ content: '🔀 Đã trộn danh sách phát!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                // Volume controls
-                case 'volume_down':
-                    guildData.volume = Math.max(0, (guildData.volume || 50) - 10);
-                    if (guildData.resource) {
-                        guildData.resource.volume.setVolume(guildData.volume / 100);
-                    }
-                    interaction.reply({ content: `🔉 Âm lượng: ${guildData.volume}%`, flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'volume_up':
-                    guildData.volume = Math.min(100, (guildData.volume || 50) + 10);
-                    if (guildData.resource) {
-                        guildData.resource.volume.setVolume(guildData.volume / 100);
-                    }
-                    interaction.reply({ content: `🔊 Âm lượng: ${guildData.volume}%`, flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'volume_mute':
-                    guildData.volume = 0;
-                    if (guildData.resource) {
-                        guildData.resource.volume.setVolume(0);
-                    }
-                    interaction.reply({ content: '🔇 Đã tắt tiếng!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'volume_max':
-                    guildData.volume = 100;
-                    if (guildData.resource) {
-                        guildData.resource.volume.setVolume(1);
-                    }
-                    interaction.reply({ content: '📢 Âm lượng tối đa!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'volume_reset':
-                    guildData.volume = 50;
-                    if (guildData.resource) {
-                        guildData.resource.volume.setVolume(0.5);
-                    }
-                    interaction.reply({ content: '🔄 Đã reset âm lượng về 50%!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                // Queue management
-                case 'show_full_queue':
-                    if (guildData.queue.length === 0) {
-                        return interaction.reply({ content: '📭 Queue đang trống!', flags: MessageFlags.Ephemeral });
-                    }
-
-                    const fullQueueList = guildData.queue.slice(0, 25).map((song, index) => {
-                        const status = index === 0 ? '🎵 ' : `${index + 1}. `;
-                        return `${status}**${song.title}**`;
-                    }).join('\n');
-
-                    const fullQueueEmbed = new EmbedBuilder()
-                        .setColor('#0099ff')
-                        .setTitle('📋 Toàn bộ Queue')
-                        .setDescription(fullQueueList)
-                        .setFooter({ text: `Hiển thị ${Math.min(25, guildData.queue.length)}/${guildData.queue.length} bài` });
-
-                    interaction.reply({ embeds: [fullQueueEmbed], flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'show_nowplaying':
-                    if (!guildData.currentSong) {
-                        return interaction.reply({ content: '❌ Không có bài nào đang phát!', flags: MessageFlags.Ephemeral });
-                    }
-
-                    const nowPlayingEmbed = new EmbedBuilder()
-                        .setColor('#ff6600')
-                        .setTitle('🎵 Đang phát')
-                        .setDescription(`**${guildData.currentSong.title}**`)
-                        .addFields(
-                            { name: '⏱️ Thời lượng', value: guildData.currentSong.duration || 'Không xác định', inline: true },
-                            { name: '👤 Yêu cầu bởi', value: guildData.currentSong.requester, inline: true },
-                            { name: '🔊 Âm lượng', value: `${guildData.volume || 50}%`, inline: true }
-                        )
-                        .setThumbnail(guildData.currentSong.thumbnail);
-
-                    interaction.reply({ embeds: [nowPlayingEmbed], flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'loop_toggle':
-                    guildData.loop = !guildData.loop;
-                    const loopStatus = guildData.loop ? 'BẬT' : 'TẮT';
-                    const loopEmoji = guildData.loop ? '🔁' : '▶️';
-                    interaction.reply({ content: `${loopEmoji} Đã ${loopStatus} chế độ lặp!`, flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'quick_select':
-                    // Gọi lại quick select command
-                    const quickSelectCommand = require('./commands/quickselect');
-                    await quickSelectCommand.execute(interaction);
-                    break;
-
-                case 'clear_queue':
-                    if (guildData.queue.length <= 1) {
-                        return interaction.reply({ content: '❌ Queue đã trống hoặc chỉ có bài đang phát!', flags: MessageFlags.Ephemeral });
-                    }
-                    
-                    const removedCount = guildData.queue.length - 1;
-                    guildData.queue = guildData.queue.slice(0, 1); // Giữ lại bài đang phát
-                    interaction.reply({ content: `🗑️ Đã xóa ${removedCount} bài khỏi queue!`, flags: MessageFlags.Ephemeral });
-                    break;
-
-                case 'leave_voice':
-                    if (guildData.connection) {
-                        guildData.connection.destroy();
-                        guildData.connection = null;
-                        guildData.player = null;
-                        guildData.isPlaying = false;
-                    }
-                    interaction.reply({ content: '👋 Đã rời khỏi voice channel!', flags: MessageFlags.Ephemeral });
-                    break;
-
-                // Recommendation buttons
-                case 'recommend_add_all':
-                    if (!guildData.recommendations || guildData.recommendations.length === 0) {
-                        return interaction.reply({ content: '❌ Không có gợi ý nào để thêm!', flags: MessageFlags.Ephemeral });
-                    }
-                    
-                    // Thêm tất cả gợi ý vào queue
-                    for (const song of guildData.recommendations) {
-                        song.requestedBy = interaction.user.id;
-                        guildData.queue.push(song);
-                    }
-                    
-                    interaction.reply({ 
-                        content: `✅ Đã thêm ${guildData.recommendations.length} bài gợi ý vào queue!`, 
-                        flags: MessageFlags.Ephemeral 
-                    });
-                    
-                    // Bắt đầu phát nếu chưa phát
-                    if (!guildData.isPlaying) {
-                        const { createMusicConnection } = require('./utils/musicUtils');
-                        createMusicConnection(interaction.member, guildData);
-                        playMusic(guildData);
-                    }
-                    break;
-
-                case 'recommend_refresh':
-                    const recommendCommand = require('./commands/recommend');
-                    await recommendCommand.execute(interaction);
-                    break;
-
-                case 'recommend_close':
-                    guildData.recommendations = null;
-                    await interaction.update({ content: '❌ Đã đóng gợi ý nhạc.', embeds: [], components: [] });
-                    break;
-
-                // Music Quiz buttons
-                case 'quiz_start':
-                    if (!guildData.musicQuiz) {
-                        return interaction.reply({ content: '❌ Quiz đã kết thúc!', flags: MessageFlags.Ephemeral });
-                    }
-                    
-                    const quizCommand = require('./commands/musicquiz');
-                    await quizCommand.showQuestion(interaction, guildData);
-                    break;
-
-                case 'quiz_answer_0':
-                case 'quiz_answer_1':
-                case 'quiz_answer_2':
-                case 'quiz_answer_3':
-                    if (!guildData.musicQuiz || !guildData.musicQuiz.isActive) {
-                        return interaction.reply({ content: '❌ Quiz đã kết thúc!', flags: MessageFlags.Ephemeral });
-                    }
-
-                    const answerIndex = parseInt(interaction.customId.split('_')[2]);
-                    const quiz = guildData.musicQuiz;
-                    const question = quiz.currentQuestion;
-                    
-                    if (!question) {
-                        return interaction.reply({ content: '❌ Không có câu hỏi nào!', flags: MessageFlags.Ephemeral });
-                    }
-
-                    const isCorrect = answerIndex === question.correctIndex;
-                    const userId = interaction.user.id;
-                    
-                    if (!quiz.score[userId]) {
-                        quiz.score[userId] = 0;
-                    }
-                    
-                    if (isCorrect) {
-                        quiz.score[userId] += 10;
-                        await interaction.reply({ 
-                            content: `✅ Đúng rồi! +10 điểm! Tổng: ${quiz.score[userId]} điểm`, 
-                            flags: MessageFlags.Ephemeral 
-                        });
-                    } else {
-                        await interaction.reply({ 
-                            content: `❌ Sai rồi! Đáp án đúng là: ${question.answers[question.correctIndex].title}`, 
-                            flags: MessageFlags.Ephemeral 
-                        });
-                    }
-
-                    // Chuyển câu tiếp theo
-                    setTimeout(() => {
-                        quiz.currentRound++;
-                        const quizCmd = require('./commands/musicquiz');
-                        quizCmd.showQuestion(interaction, guildData);
-                    }, 2000);
-                    break;
-
-                case 'quiz_skip':
-                    if (guildData.musicQuiz) {
-                        guildData.musicQuiz.currentRound++;
-                        const quizCmd = require('./commands/musicquiz');
-                        await quizCmd.showQuestion(interaction, guildData);
-                    }
-                    break;
-
-                case 'quiz_stop':
-                    if (guildData.musicQuiz) {
-                        const quizCmd = require('./commands/musicquiz');
-                        await quizCmd.endQuiz(interaction, guildData);
-                    }
-                    break;
-
-                case 'quiz_cancel':
-                    delete guildData.musicQuiz;
-                    await interaction.update({ content: '❌ Đã hủy music quiz.', embeds: [], components: [] });
-                    break;
-
-
-                // Visualizer buttons
-                case 'visualizer_pause':
-                case 'visualizer_style':
-                case 'visualizer_speed':
-                case 'visualizer_stop':
-                    const visualizerCommand = require('./commands/visualizer');
-                    await visualizerCommand.handleVisualizerButton(interaction, interaction.customId, guildData);
-                    break;
-
-                // Stats buttons
-                case 'stats_personal':
-                case 'stats_server':
-                case 'stats_top_songs':
-                case 'stats_top_users':
-                    const statsCommand = require('./commands/stats');
-                    const statsType = interaction.customId.split('_')[1];
-                    await statsCommand.execute({
-                        ...interaction,
-                        options: {
-                            getString: () => statsType
-                        }
-                    });
-                    break;
-
-                // Recommend play buttons
-                default:
-                    if (interaction.customId.startsWith('recommend_play_')) {
-                        const songIndex = parseInt(interaction.customId.split('_')[2]);
-                        
-                        if (guildData.recommendations && guildData.recommendations[songIndex]) {
-                            const song = guildData.recommendations[songIndex];
-                            song.requestedBy = interaction.user.id;
-                            guildData.queue.push(song);
-                            
-                            interaction.reply({ 
-                                content: `✅ Đã thêm "${song.title}" vào queue!`, 
-                                flags: MessageFlags.Ephemeral 
-                            });
-                            
-                            if (!guildData.isPlaying) {
-                                const { createMusicConnection } = require('./utils/musicUtils');
-                                createMusicConnection(interaction.member, guildData);
-                                playMusic(guildData);
-                            }
-                        }
-                    }
-                    // Trending buttons
-                    else if (interaction.customId.startsWith('trending_')) {
-                        switch (interaction.customId) {
-                            case 'trending_play_now':
-                                if (!guildData.isPlaying && guildData.queue.length > 0) {
-                                    const { createMusicConnection } = require('./utils/musicUtils');
-                                    createMusicConnection(interaction.member, guildData);
-                                    playMusic(guildData);
-                                }
-                                interaction.reply({ content: '▶️ Đã bắt đầu phát nhạc trending!', flags: MessageFlags.Ephemeral });
-                                break;
-
-                            case 'trending_shuffle':
-                                if (guildData.queue.length > 1) {
-                                    // Trộn queue (giữ bài đang phát)
-                                    const current = guildData.queue.shift();
-                                    for (let i = guildData.queue.length - 1; i > 0; i--) {
-                                        const j = Math.floor(Math.random() * (i + 1));
-                                        [guildData.queue[i], guildData.queue[j]] = [guildData.queue[j], guildData.queue[i]];
-                                    }
-                                    guildData.queue.unshift(current);
-                                    interaction.reply({ content: '🔀 Đã trộn danh sách trending!', flags: MessageFlags.Ephemeral });
-                                } else {
-                                    interaction.reply({ content: '❌ Cần ít nhất 2 bài để trộn!', flags: MessageFlags.Ephemeral });
-                                }
-                                break;
-
-                            case 'trending_more':
-                                const trendingCommand = require('./commands/trending');
-                                // Re-execute với 10 bài thêm
-                                const newInteraction = {
-                                    ...interaction,
-                                    options: {
-                                        getString: (name) => name === 'region' ? 'VN' : null,
-                                        getInteger: (name) => name === 'count' ? 10 : null
-                                    }
-                                };
-                                await trendingCommand.execute(newInteraction);
-                                break;
-
-                            case 'trending_refresh':
-                                const refreshCommand = require('./commands/trending');
-                                await refreshCommand.execute(interaction);
-                                break;
-                        }
-                    }
-                    // Auto-trending region buttons
-                    else if (interaction.customId.startsWith('autotrending_')) {
-                        const region = interaction.customId.split('_')[1];
-                        
-                        if (region === 'off') {
-                            guildData.autoTrending = { enabled: false };
-                            await interaction.update({ 
-                                content: '❌ Đã tắt auto-trending.', 
-                                embeds: [], 
-                                components: [] 
-                            });
-                        } else {
-                            const regionMap = {
-                                'vn': 'VN',
-                                'kr': 'KR', 
-                                'us': 'US',
-                                'global': 'GLOBAL',
-                                'asia': 'ASIA'
-                            };
-                            
-                            const selectedRegion = regionMap[region] || 'VN';
-                            guildData.autoTrending = {
-                                enabled: true,
-                                region: selectedRegion,
-                                lastFetch: null,
-                                count: 0
-                            };
-                            
-                            const autoTrendingCommand = require('./commands/autotrending');
-                            const regionName = autoTrendingCommand.getRegionDisplayName(selectedRegion);
-                            
-                            await interaction.update({ 
-                                content: `✅ Đã chọn auto-trending: ${regionName}`, 
-                                embeds: [], 
-                                components: [] 
-                            });
-                        }
-                    }
-                    else {
-                        interaction.reply({ content: '❌ Button không hợp lệ!', flags: MessageFlags.Ephemeral });
-                    }
-            }
-        } catch (error) {
-            console.error('Lỗi khi xử lý button:', error);
-            
-            // Kiểm tra nếu interaction vẫn có thể reply
-            if (interaction.isRepliable() && !interaction.replied && !interaction.deferred) {
-                try {
-                    await interaction.reply({ content: '❌ Đã xảy ra lỗi!', flags: MessageFlags.Ephemeral });
-                } catch (replyError) {
-                    console.log('⚠️ Không thể reply interaction (có thể đã expired):', replyError.message);
-                }
-            }
-        }
-    }
-});
-
-// Error handling cho connection issues
-client.on('error', (error) => {
-    console.error('Discord client error:', error);
-    if (error.code === 'ENOTFOUND') {
-        console.log('🔄 Trying to reconnect in 5 seconds...');
-        setTimeout(() => {
-            client.login(process.env.DISCORD_TOKEN).catch(console.error);
-        }, 5000);
-    }
-});
-
-client.on('shardError', (error) => {
-    console.error('A websocket connection encountered an error:', error);
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-    console.log('Unhandled Rejection at:', promise, 'reason:', reason);
-});
-
-// DNS fallback function
-async function connectWithRetry() {
-    const maxRetries = 3;
-    for (let i = 0; i < maxRetries; i++) {
-        try {
-            console.log(`🔄 Attempting to connect to Discord... (${i + 1}/${maxRetries})`);
+            console.log('🔄 Đang kết nối Discord (' + attempt + '/3)...');
             await client.login(process.env.DISCORD_TOKEN);
-            console.log('✅ Successfully connected to Discord!');
-            break;
+            return;
         } catch (error) {
-            console.error(`❌ Connection attempt ${i + 1} failed:`, error.message);
-            if (i === maxRetries - 1) {
-                console.error('🚫 All connection attempts failed. Please check your internet connection and Discord token.');
-                process.exit(1);
+            console.error('Lỗi kết nối Discord:', error.message);
+            if (error.code === 'TokenInvalid') return shutdown('kiểm tra DISCORD_TOKEN', 78);
+            if (/used disallowed intents/i.test(error.message)) {
+                const reason = greetingsEnabled ? 'kiểm tra Server Members Intent trong Discord Developer Portal'
+                    : 'kiểm tra cấu hình Gateway Intents trong Discord Developer Portal';
+                return shutdown(reason, 78);
             }
-            console.log(`⏳ Waiting 5 seconds before retry...`);
-            await new Promise(resolve => setTimeout(resolve, 5000));
+            if (attempt === 3) return shutdown('không kết nối được Discord', 1);
+            await delay(5000);
         }
     }
 }
 
-// Start connection with retry
-connectWithRetry();
+void start().catch(error => {
+    console.error('Lỗi khởi động bot:', error.message);
+    void shutdown('khởi động thất bại', 1);
+});

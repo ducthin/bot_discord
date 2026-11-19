@@ -1,0 +1,12 @@
+{
+  "watch": ["index.js", "commands", "utils", "handlers"],
+  "ext": "js",
+  "ignore": [
+    "node_modules/*",
+    "data/*",
+    "tests/*",
+    "scratch_*.js",
+    "*.log"
+  ],
+  "delay": "500"
+}

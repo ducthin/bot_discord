@@ -1,0 +1,1 @@
+Review integrated web/play-react/main.jsx, cases.jsx, shared.jsx for serious runtime issues: stale navigation, opening lifecycle and repeat actions, audio/animation timing. Do not modify these files. Write concrete findings to outputs/skinclub-review/frontend-review.md. The root is browser testing. Static banner now explicitly allowlisted in playerWeb.js.

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { initGuildMusicData } = require('../utils/musicUtils');
+const { initGuildMusicData, createMusicConnection, jumpToSong } = require('../utils/musicUtils');
+const { canSkipImmediately } = require('../utils/skipVote');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -38,12 +39,14 @@ module.exports = {
         try {
             await interaction.deferReply();
 
-            // Lấy thông tin bài hát được chọn
-            const targetSong = guildData.queue[position - 1];
+            if (!canSkipImmediately(interaction.member)) {
+                return interaction.editReply('🗳️ Trong phòng có từ 3 người, chỉ DJ được dùng /skipto. Dùng /skip để bỏ phiếu.');
+            }
+            createMusicConnection(interaction.member, guildData);
+            guildData.textChannel = interaction.channel;
+            const targetSong = await jumpToSong(guildData, position);
+            if (!targetSong) return interaction.editReply('❌ Queue đã thay đổi. Vui lòng xem `/queue` rồi thử lại.');
             const skippedCount = position - 1;
-
-            // Xóa tất cả bài hát trước vị trí được chọn
-            guildData.queue.splice(0, skippedCount);
 
             const embed = new EmbedBuilder()
                 .setColor('#00ff00')
@@ -54,23 +57,9 @@ module.exports = {
                     { name: 'Bài đã skip', value: `${skippedCount} bài`, inline: true },
                     { name: 'Thời lượng', value: targetSong.duration || 'N/A', inline: true }
                 )
-                .setThumbnail(targetSong.thumbnail);
+                .setThumbnail(targetSong.thumbnail || null);
 
             await interaction.editReply({ embeds: [embed] });
-
-            // Nếu đang phát nhạc, stop và phát bài mới
-            if (guildData.player && guildData.isPlaying) {
-                guildData.player.stop();
-            }
-
-            // Bắt đầu phát bài được chọn
-            const { createMusicConnection, playMusic } = require('../utils/musicUtils');
-            
-            if (!guildData.connection) {
-                createMusicConnection(interaction.member, guildData);
-            }
-            
-            playMusic(guildData);
 
         } catch (error) {
             console.error('Lỗi skipto command:', error);

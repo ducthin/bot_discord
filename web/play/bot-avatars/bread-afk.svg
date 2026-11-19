@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="name">
+<title id="name">Bánh Mì AFK</title>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#493947"/><stop offset="1" stop-color="#171626"/></linearGradient></defs>
+<rect width="128" height="128" rx="28" fill="url(#bg)"/>
+<circle cx="65" cy="66" r="51" fill="#efb267" opacity=".08"/>
+<circle cx="16" cy="21" r="3" fill="#efb267" opacity=".6"/>
+<circle cx="111" cy="109" r="4" fill="#efb267" opacity=".3"/>
+
+<path d="M28 62c-13-14-1-36 13-36 9-15 36-13 43 0 20-1 29 23 17 36l-4 43H31Z" fill="#e7a869" stroke="#a56a44" stroke-width="4"/>
+<path d="M38 61c-13-18-3-28 8-27 7-14 31-12 35 1 16-1 23 13 13 28l-4 34H38Z" fill="#ffe6b3"/>
+<path d="M42 52q18-16 39-12m-35 29q16-13 35-12" fill="none" stroke="#e5b57c" stroke-width="4" stroke-linecap="round"/>
+<path d="M45 76h10m19 0h10" stroke="#5f4541" stroke-width="4" stroke-linecap="round"/>
+<path d="M59 87h12" stroke="#b57b64" stroke-width="4" stroke-linecap="round"/>
+<rect x="78" y="96" width="37" height="18" rx="5" fill="#7659be"/><text x="96.5" y="109" text-anchor="middle" fill="#fff3d5" font-size="10" font-weight="800" font-family="sans-serif">AFK</text>
+
+</svg>

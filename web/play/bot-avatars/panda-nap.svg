@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="name">
+<title id="name">Gấu Ngủ Gật</title>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#263f64"/><stop offset="1" stop-color="#171626"/></linearGradient></defs>
+<rect width="128" height="128" rx="28" fill="url(#bg)"/>
+<circle cx="65" cy="66" r="51" fill="#8ac8e7" opacity=".08"/>
+<circle cx="16" cy="21" r="3" fill="#8ac8e7" opacity=".6"/>
+<circle cx="111" cy="109" r="4" fill="#8ac8e7" opacity=".3"/>
+
+<circle cx="33" cy="36" r="18" fill="#252b45"/><circle cx="95" cy="36" r="18" fill="#252b45"/>
+<ellipse cx="64" cy="70" rx="43" ry="39" fill="#f5ecd9"/>
+<ellipse cx="43" cy="66" rx="14" ry="18" transform="rotate(25 43 66)" fill="#35364d"/>
+<ellipse cx="85" cy="66" rx="14" ry="18" transform="rotate(-25 85 66)" fill="#35364d"/>
+<path d="M35 67l13 3m31 0 14-3" stroke="#faf0e1" stroke-width="3" stroke-linecap="round"/>
+<path d="M58 80q6-4 12 0l-6 7Z" fill="#35364d"/><ellipse cx="65" cy="96" rx="5" ry="6" fill="#c68587"/>
+<path d="M99 15h10l-10 13h10m-25-16h7l-7 9h7" fill="none" stroke="#a4d9ff" stroke-width="3" stroke-linejoin="round"/>
+
+</svg>

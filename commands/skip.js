@@ -1,24 +1,15 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { initGuildMusicData, removeButtons } = require('../utils/musicUtils');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
+const { initGuildMusicData } = require('../utils/musicUtils');
+const { requestSkip } = require('../utils/skipVote');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('skip')
-        .setDescription('Bỏ qua bài hát hiện tại'),
+        .setDescription('Bỏ qua hoặc bỏ phiếu bỏ qua bài hát hiện tại'),
 
     async execute(interaction) {
-        const guildData = initGuildMusicData(interaction.guild.id);
-        
-        if (!guildData.player || guildData.queue.length === 0) {
-            return interaction.reply('❌ Không có nhạc nào để bỏ qua!');
-        }
-        
-        // Xóa buttons của bài hiện tại
-        if (guildData.currentSong) {
-            await removeButtons(guildData, guildData.currentSong.title);
-        }
-        
-        guildData.player.stop();
-        interaction.reply('⏭️ Đã bỏ qua bài hát!');
+        const guildData = initGuildMusicData(interaction.guildId);
+        const result = requestSkip(interaction.member, guildData);
+        return interaction.reply({ content: result.content, flags: result.private ? MessageFlags.Ephemeral : undefined });
     }
 };

@@ -1,8 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const fs = require('fs').promises;
-const path = require('path');
-
-const HISTORY_DIR = path.join(__dirname, '../data/history');
+const { readUserHistory, clearUserHistory } = require('../utils/historyStore');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -26,41 +23,19 @@ module.exports = {
         ),
 
     async execute(interaction) {
-        const { guild, member } = interaction;
         const subcommand = interaction.options.getSubcommand();
-        const userId = member.user.id;
-        const userHistoryDir = path.join(HISTORY_DIR, userId);
-
-        // Tạo thư mục nếu chưa có
-        try {
-            await fs.mkdir(userHistoryDir, { recursive: true });
-        } catch (error) {
-            // Thư mục đã tồn tại
-        }
-
-        switch (subcommand) {
-            case 'show':
-                await this.showHistory(interaction, userHistoryDir);
-                break;
-            case 'clear':
-                await this.clearHistory(interaction, userHistoryDir);
-                break;
-        }
+        const userId = interaction.user.id;
+        if (subcommand === 'clear') return this.clearHistory(interaction, userId);
+        return this.showHistory(interaction, userId);
     },
 
-    async showHistory(interaction, userHistoryDir) {
-        const historyPath = path.join(userHistoryDir, 'songs.json');
+    async showHistory(interaction, userId) {
         const limit = interaction.options.getInteger('limit') || 10;
-
         try {
-            const data = await fs.readFile(historyPath, 'utf8');
-            const history = JSON.parse(data);
+            const songs = await readUserHistory(userId);
+            if (!songs.length) return interaction.reply('📜 Lịch sử nhạc trống!');
 
-            if (!history.songs || history.songs.length === 0) {
-                return interaction.reply('📜 Lịch sử nhạc trống!');
-            }
-
-            const recentSongs = history.songs.slice(-limit).reverse();
+            const recentSongs = songs.slice(-limit).reverse();
             const songList = recentSongs.map((song, index) => {
                 const playedDate = new Date(song.playedAt).toLocaleDateString('vi-VN');
                 return `${index + 1}. **${song.title}**\n   ⏱️ ${song.duration} | 📅 ${playedDate}`;
@@ -70,7 +45,7 @@ module.exports = {
                 .setColor('#9932cc')
                 .setTitle('📜 Lịch sử nhạc')
                 .setDescription(songList)
-                .setFooter({ text: `Hiển thị ${recentSongs.length}/${history.songs.length} bài gần nhất` });
+                .setFooter({ text: `Hiển thị ${recentSongs.length}/${songs.length} bài gần nhất` });
 
             interaction.reply({ embeds: [embed] });
 
@@ -84,58 +59,13 @@ module.exports = {
         }
     },
 
-    async clearHistory(interaction, userHistoryDir) {
-        const historyPath = path.join(userHistoryDir, 'songs.json');
-
+    async clearHistory(interaction, userId) {
         try {
-            await fs.unlink(historyPath);
-            interaction.reply('🗑️ Đã xóa lịch sử nhạc!');
+            const removed = await clearUserHistory(userId);
+            return interaction.reply(removed ? '🗑️ Đã xóa lịch sử nhạc!' : '📜 Lịch sử nhạc đã trống!');
         } catch (error) {
-            if (error.code === 'ENOENT') {
-                interaction.reply('📜 Lịch sử nhạc đã trống!');
-            } else {
-                console.error('Lỗi khi xóa lịch sử:', error);
-                interaction.reply('❌ Lỗi khi xóa lịch sử nhạc!');
-            }
+            console.error('Lỗi khi xóa lịch sử:', error);
+            return interaction.reply('❌ Lỗi khi xóa lịch sử nhạc!');
         }
     }
 };
-
-// Utility function để thêm bài hát vào lịch sử
-async function addToHistory(userId, songInfo) {
-    const userHistoryDir = path.join(HISTORY_DIR, userId);
-    const historyPath = path.join(userHistoryDir, 'songs.json');
-
-    try {
-        await fs.mkdir(userHistoryDir, { recursive: true });
-
-        let history = { songs: [] };
-        try {
-            const data = await fs.readFile(historyPath, 'utf8');
-            history = JSON.parse(data);
-        } catch (error) {
-            // File không tồn tại, sử dụng history trống
-        }
-
-        // Thêm bài hát mới
-        history.songs.push({
-            title: songInfo.title,
-            url: songInfo.url,
-            duration: songInfo.duration,
-            thumbnail: songInfo.thumbnail,
-            playedAt: new Date().toISOString(),
-            requester: songInfo.requester
-        });
-
-        // Giữ tối đa 100 bài hát gần nhất
-        if (history.songs.length > 100) {
-            history.songs = history.songs.slice(-100);
-        }
-
-        await fs.writeFile(historyPath, JSON.stringify(history, null, 2));
-    } catch (error) {
-        console.error('Lỗi khi lưu lịch sử:', error);
-    }
-}
-
-module.exports.addToHistory = addToHistory;

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="name">
+<title id="name">Nấm Không Cay</title>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#423852"/><stop offset="1" stop-color="#171626"/></linearGradient></defs>
+<rect width="128" height="128" rx="28" fill="url(#bg)"/>
+<circle cx="65" cy="66" r="51" fill="#f593c4" opacity=".08"/>
+<circle cx="16" cy="21" r="3" fill="#f593c4" opacity=".6"/>
+<circle cx="111" cy="109" r="4" fill="#f593c4" opacity=".3"/>
+
+<path d="M48 62l-7 35q22 18 45 0l-8-35" fill="#f9e1c2" stroke="#c69f8c" stroke-width="3"/>
+<path d="M17 62q1-43 48-43 44 1 48 43-47 20-96 0Z" fill="#ec779f" stroke="#aa4d7d" stroke-width="3"/>
+<circle cx="40" cy="46" r="9" fill="#ffe5ce"/><circle cx="77" cy="33" r="7" fill="#ffe5ce"/><ellipse cx="93" cy="54" rx="8" ry="5" fill="#ffe5ce"/>
+<path d="M48 80q6 6 12 0m9 0q6 6 12 0" fill="none" stroke="#76545c" stroke-width="3" stroke-linecap="round"/>
+<path d="M59 93q6 4 12 0" fill="none" stroke="#b6747f" stroke-width="3" stroke-linecap="round"/>
+<path d="M20 93l3-6 3 6 7 1-5 4 1 7-6-3-6 3 1-7-5-4Z" fill="#f5ce6d"/>
+
+</svg>

@@ -1,11 +1,11 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { initGuildMusicData, playMusic, createMusicConnection } = require('../utils/musicUtils');
-const { getPlaylistVideos, isPlaylistUrl, isValidYouTubeUrl } = require('../utils/youtubeUtils');
+const { initGuildMusicData, playMusic, createMusicConnection, enqueueSongs } = require('../utils/musicUtils');
+const { getPlaylistVideos, isPlaylistUrl, isValidYouTubeUrl, isYouTubeMixUrl, MAX_PLAYLIST_TRACKS } = require('../utils/youtubeUtils');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('playlist')
-        .setDescription('Phát toàn bộ playlist từ YouTube')
+        .setDescription('Thêm playlist YouTube vào hàng đợi')
         .addStringOption(option =>
             option.setName('url')
                 .setDescription('URL playlist YouTube')
@@ -13,21 +13,18 @@ module.exports = {
         )
         .addIntegerOption(option =>
             option.setName('limit')
-                .setDescription('Số lượng bài hát tối đa (mặc định: 20)')
+                .setDescription(`Số bài tối đa (mặc định: ${MAX_PLAYLIST_TRACKS})`)
                 .setMinValue(1)
-                .setMaxValue(100)
+                .setMaxValue(MAX_PLAYLIST_TRACKS)
                 .setRequired(false)
         ),
 
-    async execute(interaction) {
+    async execute(interaction, playlistUrl = interaction.options.getString('url'), limit = interaction.options.getInteger('limit') ?? MAX_PLAYLIST_TRACKS, playNext = false) {
         const { guild, member, channel } = interaction;
         
         if (!member.voice.channel) {
             return interaction.reply('❌ Bạn cần vào voice channel trước!');
         }
-
-        const playlistUrl = interaction.options.getString('url');
-        const limit = interaction.options.getInteger('limit') || 20;
 
         // Kiểm tra URL hợp lệ
         if (!isValidYouTubeUrl(playlistUrl)) {
@@ -39,16 +36,20 @@ module.exports = {
             return interaction.reply('❌ URL này không phải là playlist! Sử dụng `/play` cho video đơn lẻ.');
         }
 
-        await interaction.deferReply();
+        const isMix = isYouTubeMixUrl(playlistUrl);
 
         const guildData = initGuildMusicData(guild.id);
-        guildData.textChannel = channel;
+        const queueEpoch = guildData.queueEpoch;
+        await interaction.deferReply();
 
         try {
             const playlistData = await getPlaylistVideos(playlistUrl, limit);
+            if (queueEpoch !== guildData.queueEpoch) return interaction.editReply('⏹️ Yêu cầu đã hủy vì hàng đợi vừa được dừng.');
             
             if (!playlistData || !playlistData.videos || playlistData.videos.length === 0) {
-                return interaction.followUp('❌ Không thể tải playlist hoặc playlist trống!');
+                return interaction.editReply(isMix
+                    ? '❌ Không đọc được YouTube Mix. Hãy mở một bài trong Mix rồi sao chép link có cả `v=` và `list=` để thử lại.'
+                    : '❌ Không đọc được bài nào trong playlist. Kiểm tra link và mở playlist trên YouTube mà không cần đăng nhập, rồi thử lại.');
             }
 
             // Thêm thông tin requester cho tất cả videos
@@ -60,9 +61,10 @@ module.exports = {
 
             // Kết nối voice channel nếu chưa kết nối
             createMusicConnection(member, guildData);
+            guildData.textChannel = channel;
 
             // Thêm tất cả videos vào queue
-            guildData.queue.push(...videosWithRequester);
+            const position = enqueueSongs(guildData, videosWithRequester, playNext);
 
             // Bắt đầu phát nếu chưa có nhạc đang phát
             if (!guildData.isPlaying) {
@@ -71,20 +73,27 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setColor('#0099ff')
-                .setTitle('✅ Đã thêm playlist vào queue')
+                .setTitle(playNext ? '⏭️ Đã đưa playlist lên phát tiếp' : '✅ Đã thêm playlist vào queue')
                 .setDescription(`**${playlistData.title}**`)
                 .addFields(
                     { name: 'Số bài hát', value: `${videosWithRequester.length}`, inline: true },
-                    { name: 'Tổng số video', value: `${playlistData.videoCount}`, inline: true },
-                    { name: 'Vị trí trong queue', value: `${guildData.queue.length - videosWithRequester.length + 1} - ${guildData.queue.length}`, inline: true }
+                    { name: 'Vị trí trong queue', value: `${position} - ${position + videosWithRequester.length - 1}`, inline: true }
                 )
                 .setFooter({ text: `Yêu cầu bởi ${member.user.username}` });
 
-            interaction.followUp({ embeds: [embed] });
+            if (!isMix && Number.isInteger(playlistData.videoCount)) {
+                embed.addFields({ name: 'Tổng số video trên YouTube', value: `${playlistData.videoCount}`, inline: true });
+                if (playlistData.videoCount > videosWithRequester.length) {
+                    embed.setFooter({ text: videosWithRequester.length === limit
+                        ? `Đã thêm tối đa ${limit} bài theo giới hạn của lệnh.`
+                        : `Đã thêm ${videosWithRequester.length} bài đọc được. Một số video có thể không khả dụng.` });
+                }
+            }
+            await interaction.editReply({ embeds: [embed] });
 
         } catch (error) {
             console.error('Lỗi khi tải playlist:', error);
-            interaction.followUp('❌ Đã xảy ra lỗi khi tải playlist!');
+            await interaction.editReply('❌ Đã xảy ra lỗi khi tải playlist!');
         }
     }
 };

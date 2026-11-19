@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="name">
+<title id="name">Capybara Chill</title>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#3b4c40"/><stop offset="1" stop-color="#171626"/></linearGradient></defs>
+<rect width="128" height="128" rx="28" fill="url(#bg)"/>
+<circle cx="65" cy="66" r="51" fill="#caab7d" opacity=".08"/>
+<circle cx="16" cy="21" r="3" fill="#caab7d" opacity=".6"/>
+<circle cx="111" cy="109" r="4" fill="#caab7d" opacity=".3"/>
+
+<ellipse cx="37" cy="37" rx="12" ry="14" fill="#b38a60"/><ellipse cx="92" cy="37" rx="12" ry="14" fill="#b38a60"/>
+<path d="M34 43q5-13 33-13 29 2 36 30l-3 34q-29 22-68 1-10-28 2-52Z" fill="#c69b6c" stroke="#917150" stroke-width="3"/>
+<ellipse cx="64" cy="81" rx="33" ry="23" fill="#d6b286"/>
+<path d="M39 61h14m25 0h14" stroke="#574b3e" stroke-width="4" stroke-linecap="round"/>
+<ellipse cx="59" cy="75" rx="8" ry="5" fill="#805c48"/><path d="M53 91h19" stroke="#a47b5c" stroke-width="3" stroke-linecap="round"/>
+<path d="M45 27q20-21 39 0" fill="#ffb349"/><path d="M66 15q5-12 15-7-4 10-15 7" fill="#7cbf6b"/>
+<path d="M105 81l12-5m-9 15 10 3" stroke="#c4deb1" stroke-width="3" stroke-linecap="round"/>
+
+</svg>

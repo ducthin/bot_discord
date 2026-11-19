@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
 const { initGuildMusicData } = require('../utils/musicUtils');
 const { getLyrics, parseArtistTitle } = require('../utils/lyricsUtils');
 
@@ -14,10 +14,10 @@ module.exports = {
 
     async execute(interaction) {
         const guildData = initGuildMusicData(interaction.guild.id);
-        const customSong = interaction.options.getString('song');
-        
+        const customSong = interaction.options?.getString('song');
+
         let songTitle, songArtist;
-        
+
         if (customSong) {
             // Nếu user nhập tên bài hát
             const parsed = parseArtistTitle(customSong);
@@ -28,17 +28,17 @@ module.exports = {
             if (!guildData.currentSong) {
                 return interaction.reply('❌ Không có bài hát nào đang phát! Sử dụng `/lyrics song:<tên bài hát>` để tìm lời bài hát cụ thể.');
             }
-            
+
             const parsed = parseArtistTitle(guildData.currentSong.title);
             songTitle = parsed.title;
             songArtist = parsed.artist;
         }
 
-        await interaction.deferReply();
+        await interaction.deferReply(interaction.isButton?.() ? { flags: MessageFlags.Ephemeral } : {});
 
         try {
             const lyricsData = await getLyrics(songTitle, songArtist);
-            
+
             if (!lyricsData.success) {
                 const errorEmbed = new EmbedBuilder()
                     .setColor('#ff0000')
@@ -48,8 +48,8 @@ module.exports = {
                         { name: 'Tìm kiếm cho', value: `${songArtist ? songArtist + ' - ' : ''}${songTitle}`, inline: false },
                         { name: 'Gợi ý', value: '• Thử với tên bài hát chính xác hơn\n• Thêm tên nghệ sĩ: `/lyrics song:Sơn Tùng - Lạc Trôi`\n• Một số bài hát có thể không có lời', inline: false }
                     );
-                
-                return interaction.followUp({ embeds: [errorEmbed] });
+
+                return interaction.editReply({ embeds: [errorEmbed] });
             }
 
             // Tạo embed hiển thị lyrics
@@ -61,7 +61,7 @@ module.exports = {
                     { name: 'Lời bài hát', value: lyricsData.lyrics, inline: false }
                 )
                 .setFooter({ text: 'Nguồn: Genius.com' });
-            
+
             if (lyricsData.thumbnail) {
                 lyricsEmbed.setThumbnail(lyricsData.thumbnail);
             }
@@ -75,14 +75,14 @@ module.exports = {
                         .setURL(lyricsData.url)
                 );
 
-            interaction.followUp({ 
-                embeds: [lyricsEmbed], 
-                components: [lyricsButton] 
+            interaction.editReply({
+                embeds: [lyricsEmbed],
+                components: [lyricsButton]
             });
 
         } catch (error) {
             console.error('Lỗi trong lyrics command:', error);
-            
+
             const errorEmbed = new EmbedBuilder()
                 .setColor('#ff0000')
                 .setTitle('❌ Lỗi hệ thống')
@@ -90,8 +90,8 @@ module.exports = {
                 .addFields(
                     { name: 'Tìm kiếm cho', value: `${songArtist ? songArtist + ' - ' : ''}${songTitle}`, inline: false }
                 );
-            
-            interaction.followUp({ embeds: [errorEmbed] });
+
+            interaction.editReply({ embeds: [errorEmbed] });
         }
     }
 };

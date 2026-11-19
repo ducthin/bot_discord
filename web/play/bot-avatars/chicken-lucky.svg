@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="name">
+<title id="name">Gà Vàng May Mắn</title>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#5c3227"/><stop offset="1" stop-color="#171626"/></linearGradient></defs>
+<rect width="128" height="128" rx="28" fill="url(#bg)"/>
+<circle cx="65" cy="66" r="51" fill="#ffcb64" opacity=".08"/>
+<circle cx="16" cy="21" r="3" fill="#ffcb64" opacity=".6"/>
+<circle cx="111" cy="109" r="4" fill="#ffcb64" opacity=".3"/>
+
+<path d="M41 35q-9-23 4-20 9 0 10 13 8-24 16-12 3 8-2 15 15-14 21-2-1 10-14 14" fill="#ee685b"/>
+<ellipse cx="64" cy="70" rx="36" ry="36" fill="#ffe29a" stroke="#c79550" stroke-width="3"/>
+<ellipse cx="48" cy="61" rx="6" ry="9" fill="#553e38"/><ellipse cx="81" cy="61" rx="6" ry="9" fill="#553e38"/>
+<circle cx="50" cy="58" r="2" fill="#fff"/><circle cx="83" cy="58" r="2" fill="#fff"/>
+<path d="M51 75l13-8 14 8-14 12Z" fill="#ffac42" stroke="#cb7f3f" stroke-width="2"/>
+<path d="M57 87q-3 16 6 16 11 0 9-17" fill="#ee685b"/>
+<path d="M17 44l4-8 4 8 9 1-7 6 2 9-8-5-8 5 2-9-7-6Z" fill="#ffcf4f"/>
+<circle cx="102" cy="93" r="13" fill="#e5b648" stroke="#ffe8a5" stroke-width="3"/><path d="M99 87h7l-8 13" fill="none" stroke="#8e6632" stroke-width="3"/>
+
+</svg>
